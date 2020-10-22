@@ -26,7 +26,8 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
      * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
      */
     public User getUserByName(String name) {
-        String sql = "SELECT * FROM User WHERE userName = ?";
+        // Case-sensitive SQL-query
+        String sql = "SELECT * FROM User WHERE BINARY userName = ?";
         User user = null;
         try {
             setupPreparedStatement(sql);
