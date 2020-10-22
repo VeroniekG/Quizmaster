@@ -6,10 +6,6 @@ import java.sql.SQLException;
 
 public class DBAccess {
 
-    private Connection connection;
-    private String databaseName;
-    private String mainUser;
-    private String mainUserPassword;
     private static final String SQL_EXCEPTION = "SQL Exception: ";
     private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String PREFIX_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
@@ -18,6 +14,10 @@ public class DBAccess {
             "&useJDBCCompliantTimezoneShift=true" +
             "&useLegacyDatetimeCode=false" +
             "&serverTimezone=UTC";
+    private Connection connection;
+    private String databaseName;
+    private String mainUser;
+    private String mainUserPassword;
 
     public DBAccess(String databaseName, String mainUser, String mainUserPassword) {
         super();
@@ -56,7 +56,23 @@ public class DBAccess {
         }
     }
 
-    public Connection getConnection()  {
+    /**
+     * Gets the JDBC connection object needed to create statements
+     *
+     * @return an object of type Connection
+     */
+    public Connection getConnection() {
+        if (connection == null) {
+            this.openConnection();
+        }
+        try {
+            if (connection.isClosed()) {
+                this.openConnection();
+            }
+        } catch (SQLException sqlFout) {
+            System.out.println("Connectie fout!");
+        }
         return connection;
     }
+
 }
