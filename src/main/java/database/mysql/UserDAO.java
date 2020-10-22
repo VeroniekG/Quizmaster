@@ -5,10 +5,10 @@ import model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 
 /**
  * Data Access Object voor gebruikers van de applicatie
+ *
  * @Author dleertouwer
  */
 public class UserDAO extends AbstractDAO implements GenericDAO<User> {
@@ -20,9 +20,10 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     /**
      * TODO: userName validatie case-sensitive!
      * Haalt een gebruiker op uit de database o.b.v. de gebruikersnaam.
+     *
      * @param name de gebruikersnaam als String
      * @return een object van het type User
-     * @exception SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
      */
     public User getUserByName(String name) {
         String sql = "SELECT * FROM User WHERE userName = ?";
@@ -34,47 +35,23 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             if (resultSet.next()) {
                 String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
-                user = new User(userName, password);
+                String role = resultSet.getString("role");
+                user = new User(userName, password, role);
                 user.setIdUser(resultSet.getInt("idUser"));
             } else {
                 System.out.println("Gebruiker '" + name + "' niet gevonden!");
             }
-        } catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
         }
         return user;
     }
 
     /**
-     * Haalt alle gebruikers in de database op
-     * @return een ArrayList met objecten van het type User
-     * @exception SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
-     */
-    @Override
-    public ArrayList<User> getAll() {
-        String sql = "Select * From Klant";
-        ArrayList<User> userslist = new ArrayList<>();
-        try {
-            setupPreparedStatement(sql);
-            ResultSet resultSet = executeSelectStatement();
-            User user;
-            while (resultSet.next()) {
-                String userName = resultSet.getString("userName");
-                String password = resultSet.getString("password");
-                user = new User(userName, password);
-                user.setIdUser(resultSet.getInt("idUser"));
-                userslist.add(user);
-            }
-        } catch (SQLException sqlException){
-            System.out.println("SQL error " + sqlException.getMessage());
-        }
-        return  userslist;
-    }
-
-    /**
      * Haalt een specifieke gebruiker op uit de database
+     *
      * @return een object van het type User
-     * @exception SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
      */
     @Override
     public User getOneById(int id) {
@@ -87,14 +64,14 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             if (resultSet.next()) {
                 String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
-                user = new User(userName, password);
+                String role = resultSet.getString("role");
+                user = new User(userName, password, role);
                 user.setIdUser(id);
             } else {
                 System.out.println("Gebruiker met id " + id + " niet gevonden!");
             }
 
-        }
-        catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
         }
         return user;
@@ -102,20 +79,50 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
 
     /**
      * Slaat een specifieke gebruiker op in de database
-     * @exception SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     *
+     * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
      */
     @Override
     public void storeOne(User type) {
-        String sql = "INSERT INTO User(userName, password) VALUES(?,?);";
+        String sql = "INSERT INTO User(userName, password, role) VALUES(?,?,?);";
         try {
             setupPreparedStatementWithKey(sql);
             preparedStatement.setString(1, type.getUserName());
             preparedStatement.setString(2, type.getPassword());
+            preparedStatement.setString(3, type.getRole());
             int id = executeInsertStatementWithKey();
             type.setIdUser(id);
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
         }
+    }
+
+    /**
+     * Haalt alle gebruikers in de database op
+     *
+     * @return een ArrayList met objecten van het type User
+     * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     */
+    @Override
+    public ArrayList<User> getAll() {
+        String sql = "Select * From Klant";
+        ArrayList<User> userslist = new ArrayList<>();
+        try {
+            setupPreparedStatement(sql);
+            ResultSet resultSet = executeSelectStatement();
+            User user;
+            while (resultSet.next()) {
+                String userName = resultSet.getString("userName");
+                String password = resultSet.getString("password");
+                String role = resultSet.getString("role");
+                user = new User(userName, password, role);
+                user.setIdUser(resultSet.getInt("idUser"));
+                userslist.add(user);
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("SQL error " + sqlException.getMessage());
+        }
+        return userslist;
     }
 
 }

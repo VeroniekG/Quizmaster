@@ -41,6 +41,7 @@ public class LoginController {
             if (currentUser.getPassword().equals(passwordInut)) {
                 // Naar het volgende scherm als de wachtwoordvalidatie geslaagd is en de connectie
                 // afbreken.
+                Main.setCurrentUser(currentUser);
                 Main.getSceneManager().showWelcomeScene();
                 dbAccess.closeConnection();
             } else {
