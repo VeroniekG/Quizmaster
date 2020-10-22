@@ -1,5 +1,6 @@
 package database.mysql;
 
+import model.Role;
 import model.User;
 
 import java.sql.ResultSet;
@@ -18,7 +19,6 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     }
 
     /**
-     * TODO: userName validatie case-sensitive!
      * Haalt een gebruiker op uit de database o.b.v. de gebruikersnaam.
      *
      * @param name de gebruikersnaam als String
@@ -37,7 +37,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
                 String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
-                user = new User(userName, password, role);
+                user = new User(userName, password, Role.valueOf(role));
                 user.setIdUser(resultSet.getInt("idUser"));
             } else {
                 System.out.println("Gebruiker '" + name + "' niet gevonden!");
@@ -66,7 +66,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
                 String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
-                user = new User(userName, password, role);
+                user = new User(userName, password, Role.valueOf(role));
                 user.setIdUser(id);
             } else {
                 System.out.println("Gebruiker met id " + id + " niet gevonden!");
@@ -90,7 +90,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             setupPreparedStatementWithKey(sql);
             preparedStatement.setString(1, type.getUserName());
             preparedStatement.setString(2, type.getPassword());
-            preparedStatement.setString(3, type.getRole());
+            preparedStatement.setString(3, type.getRole().name());
             int id = executeInsertStatementWithKey();
             type.setIdUser(id);
         } catch (SQLException sqlException) {
@@ -116,7 +116,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
                 String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
-                user = new User(userName, password, role);
+                user = new User(userName, password, Role.valueOf(role));
                 user.setIdUser(resultSet.getInt("idUser"));
                 userslist.add(user);
             }
