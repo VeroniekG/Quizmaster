@@ -25,7 +25,6 @@ public class DBAccess {
         this.mainUser = mainUser;
         this.mainUserPassword = mainUserPassword;
     }
-
     /**
      * Open database connection
      */
@@ -44,7 +43,6 @@ public class DBAccess {
             System.out.println(SQL_EXCEPTION + sqlFout.getMessage());
         }
     }
-
     /**
      * Close database connection
      */
