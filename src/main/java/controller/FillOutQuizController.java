@@ -1,9 +1,11 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import model.Quiz;
+import view.Main;
 
 public class FillOutQuizController {
 
@@ -26,5 +28,9 @@ public class FillOutQuizController {
 
     public void doPreviousQuestion() {}
 
-    public void doMenu() {}
+    //TJ menu knop terug naar menu
+    public void doMenu(ActionEvent actionEvent) {
+        Main.getSceneManager().showWelcomeScene();
+    }
+
 }
