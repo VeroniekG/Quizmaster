@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Centraliseert gedeelde database bewerkingen
+ * Centralizes shared database edits
  * @author remideboer, gerke de boer, Michael Oosterhout
  */
 public abstract class AbstractDAO {
@@ -19,7 +19,7 @@ public abstract class AbstractDAO {
 	}
 	
 	/**
-	 * Maakt een preparedStatement voor de sql string. Een DAO gebruikt dit om de parameters te vullen.
+	 * Creates a preparedStatement for the sql string. A DAO uses this to fill the parameters.
 	 *
 	 * @param sql,
 	 *            de SQl query
@@ -29,8 +29,9 @@ public abstract class AbstractDAO {
 	}
 
 	/**
-	 * Voert de preparedStatement uit zonder een ResultSet. Wordt gebruikt voor insert, update en
-	 * delete statements.
+
+	 *
+	 * Executes the preparedStatement without a ResultSet. Is used for insert, update and delete statements.
 	 *
 	 */
 	protected void executeManipulateStatement() throws SQLException {
@@ -38,7 +39,8 @@ public abstract class AbstractDAO {
 	}
 
 	/**
-	 * Voert de preparedStatement uit met een ResultSet. Wordt gebruikt voor select statements.
+	 *
+	 * Executes the preparedStatement with a Resultset. Is used for select statements.
 	 *
 	 */
 	protected ResultSet executeSelectStatement() throws SQLException {
@@ -46,7 +48,7 @@ public abstract class AbstractDAO {
 	}
 
 	/**
-	 * Maakt een preparedStatement voor de sql string, die een gegenereerde sleutel terug moet geven.
+	 * Creates a preparedStatement for the sql string, which has to return a generated key.
 	 * @param sql,
 	 *            de SQL query
 	 */
@@ -55,8 +57,9 @@ public abstract class AbstractDAO {
 	}
 
 	/**
-	 * Voert de prepared statement uit en geeft de gegenereerde sleutel terug.
-	 * Wordt gebruikt voor een insert in een AutoIncrement tabel
+	 *
+	 * Executes the prepared statement en returns the generated key.
+	 * Is used for an insert in a AutoIncrement table.
 	 */
 	protected int executeInsertStatementWithKey() throws SQLException {
 		preparedStatement.executeUpdate();

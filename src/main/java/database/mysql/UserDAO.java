@@ -19,11 +19,11 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     }
 
     /**
-     * Haalt een gebruiker op uit de database o.b.v. de gebruikersnaam.
+     * Retrieves a user from the database based on the username.
      *
-     * @param name de gebruikersnaam als String
-     * @return een object van het type User
-     * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @param name the username as String
+     * @return an object with the type User
+     * @throws SQLException when executing the SQL-query results in an error.
      */
     public User getUserByName(String name) {
         // Case-sensitive SQL-query
@@ -49,10 +49,10 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     }
 
     /**
-     * Haalt een specifieke gebruiker op uit de database
+     * Retrieves a specific user from the database
      *
-     * @return een object van het type User
-     * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @return an object with the type User
+     * @throws SQLException when executing the SQL-query results in an error.
      */
     @Override
     public User getOneById(int id) {
@@ -79,9 +79,9 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     }
 
     /**
-     * Slaat een specifieke gebruiker op in de database
+     * Stores a specific user in the database.
      *
-     * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @throws SQLException when executing the SQL-query results in an error.
      */
     @Override
     public void storeOne(User type) {
@@ -99,10 +99,10 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     }
 
     /**
-     * Haalt alle gebruikers in de database op
+     * Retrieves all users from the database
      *
-     * @return een ArrayList met objecten van het type User
-     * @throws SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @return een ArrayList with objects with the type User
+     * @throws SQLException when executing the SQL-query results in an error.
      */
     @Override
     public ArrayList<User> getAll() {
