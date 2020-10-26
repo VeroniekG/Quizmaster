@@ -35,4 +35,11 @@ public class Course {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder resultstring = new StringBuilder("");
+        resultstring.append(courseName + " ");
+        return resultstring.toString();
+    }
 }
