@@ -20,5 +20,3 @@ UPDATE `Quizmaster`.`User`
 SET `password` = 'pwUser5',
     `role`     = 'TECHNISCH_BEHEERDER'
 WHERE (`idUser` = '5');
-
-
