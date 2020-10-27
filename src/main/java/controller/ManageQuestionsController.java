@@ -45,6 +45,7 @@ public class ManageQuestionsController {
     }
 
     public void doCreateQuestion(){
+
     }
 
     public void doUpdateQuestion(){
