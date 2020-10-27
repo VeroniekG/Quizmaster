@@ -8,6 +8,7 @@ import model.User;
 
 public class Main extends Application {
 
+    // ApplicationSetup implements a singleton design pattern -> only one instance
     private static final ApplicationSetup applicationSetup = ApplicationSetup.getInstance();
     private static SceneManager sceneManager = null;
     private static Stage primaryStage = null;
@@ -15,8 +16,8 @@ public class Main extends Application {
     private static User currentUser = null;
 
     public static void main(String[] args) {
-        applicationSetup.load(); // Singleton -> Only one instance
-        dbAccess = getDbAccess();
+        applicationSetup.load();
+        dbAccess = getDBaccess();
         dbAccess.loadDriver();
         launch(args);
     }
@@ -48,7 +49,7 @@ public class Main extends Application {
         Main.currentUser = currentUser;
     }
 
-    public static DBAccess getDbAccess() {
+    public static DBAccess getDBaccess() {
         String dbName = applicationSetup.getProperties().getProperty("jdbc.database.name");
         String dbUser = applicationSetup.getProperties().getProperty("jdbc.database.user");
         String dbPasword = applicationSetup.getProperties().getProperty("jdbc.database.password");

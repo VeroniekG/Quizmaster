@@ -1,6 +1,5 @@
 package controller;
 
-import database.mysql.DBAccess;
 import database.mysql.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,10 +30,7 @@ import view.Main;
 public class LoginController {
 
     private static final Logger log = LogManager.getLogger(LoginController.class);
-
     private UserDAO userDAO;
-    private DBAccess dbAccess;
-    //private ApplicationSetup applicationSetup = ApplicationSetup.getInstance();
 
     @FXML
     private TextField nameTextField;
@@ -42,8 +38,7 @@ public class LoginController {
     private PasswordField passwordField;
 
     public LoginController() {
-        dbAccess = Main.getDbAccess();
-        userDAO = new UserDAO(dbAccess);
+        userDAO = new UserDAO(Main.getDBaccess());
     }
 
     @FXML

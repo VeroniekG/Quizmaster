@@ -70,7 +70,7 @@ public class ApplicationSetup {
         properties.forEach(
                 (propertyKey, propertyValue) -> {
                     if (properties.containsKey(propertyKey)) {
-                        propertyValue = properties.get(propertyKey);
+                        propertyValue = propertiesFromFile.get(propertyKey);
                     }
                     properties.replace(propertyKey, propertyValue);
                 }

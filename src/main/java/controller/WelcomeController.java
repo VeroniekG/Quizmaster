@@ -25,17 +25,16 @@ import static model.MenuItem.*;
  */
 public class WelcomeController {
 
+    private static final DBAccess dbAccess = Main.getDBaccess();
     public Button logoutButton;
     @FXML
     private Label welcomeLabel;
     @FXML
     private MenuButton taskMenuButton;
     private User currentUser;
-    private DBAccess dbAccess;
 
     public WelcomeController() {
         currentUser = Main.getCurrentUser();
-        dbAccess = Main.getDbAccess();
     }
 
     public void setup() {

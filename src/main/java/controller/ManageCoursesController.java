@@ -1,13 +1,13 @@
 package controller;
-import database.mysql.DBAccess;
+
 import database.mysql.CourseDAO;
+import database.mysql.DBAccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import view.Main;
 import model.Course;
-import view.SceneManager;
+import view.Main;
 
 import java.util.ArrayList;
 
@@ -15,13 +15,12 @@ public class ManageCoursesController {
 
     public Button newCourseButton;
     public Button menuButton;
+    @FXML
+    ListView<Course> courseList;
     private DBAccess dbAccess;
     private CourseDAO courseDAO;
 
-    @FXML
-    ListView<Course> courseList;
-
-    public ManageCoursesController(){
+    public ManageCoursesController() {
         this.dbAccess = Main.getDBaccess();
         courseDAO = new CourseDAO(dbAccess);
     }
@@ -34,20 +33,22 @@ public class ManageCoursesController {
         courseList.getSelectionModel().selectFirst();
 
     }
-        public void doCreateCourse () {
-        }
 
-        public void doUpdateCourse () {
-        this.dbAccess =Main.getDBaccess();
-        this.courseDAO = new CourseDAO(dbAccess);
-        }
-
-        public void doDeleteCourse () {
-        }
-
-        //TJ menu knop terug naar menu
-        public void doMenu (ActionEvent actionEvent){
-            Main.getSceneManager().showWelcomeScene();
-        }
+    public void doCreateCourse() {
     }
+
+    public void doUpdateCourse() {
+        this.dbAccess = Main.getDBaccess();
+        this.courseDAO = new CourseDAO(dbAccess);
+    }
+
+    public void doDeleteCourse() {
+    }
+
+    //TJ menu knop terug naar menu
+    public void doMenu(ActionEvent actionEvent) {
+        Main.getSceneManager().showWelcomeScene();
+    }
+
+}
 
