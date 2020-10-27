@@ -143,4 +143,10 @@ public class SceneManager {
         CoordinatorDashboardController controller = loader.getController();
         controller.setup();
     }
+
+    public void showCreateUpdateQuestionScene() {
+        FXMLLoader loader = getScene("/view/fxml/createUpdateQuestionController.fxml");
+        CoordinatorDashboardController controller = loader.getController();
+        controller.setup();
+    }
 }
