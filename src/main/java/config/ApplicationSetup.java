@@ -76,7 +76,7 @@ public class ApplicationSetup {
                 }
         );
         LOG.info("Custom properties set.");
-        LOG.info(properties);
+        LOG.info("Properties" + properties);
     }
 
     public static ApplicationSetup getInstance() {

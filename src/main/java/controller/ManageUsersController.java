@@ -3,7 +3,6 @@ package controller;
 import database.mysql.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -21,8 +20,7 @@ import java.util.List;
 
 public class ManageUsersController {
 
-    private static final Logger logger = LogManager.getLogger(ManageUsersController.class);
-
+    private static final Logger LOGGER = LogManager.getLogger(ManageUsersController.class);
     @FXML
     private ListView<User> userList;
     private UserDAO userDAO;
@@ -43,7 +41,7 @@ public class ManageUsersController {
         addEventHandlers();
     }
 
-    public void doMenu(ActionEvent event) {
+    public void doMenu() {
         Main.getSceneManager().showWelcomeScene();
     }
 
@@ -62,6 +60,7 @@ public class ManageUsersController {
         List<User> allUsers = userDAO.getAll();
         Collections.sort(allUsers, new User.UserNameComparator());
         ObservableList<User> userObservableList = FXCollections.observableArrayList(allUsers);
+        userObservableList = FXCollections.observableArrayList(allUsers);
         userList.setItems(userObservableList);
     }
 
@@ -73,7 +72,6 @@ public class ManageUsersController {
 
     public void setSelectedUser() {
         selectedUser = userList.getSelectionModel().getSelectedItem();
-        logger.info(selectedUser);
     }
 
     public void addEventHandlers() {

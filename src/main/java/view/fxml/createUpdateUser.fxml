@@ -4,14 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.CreateUpdateUserController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.CreateUpdateUserController">
     <children>
-        <Label fx:id="titleLabel" layoutX="250.0" layoutY="36.0" text="Nieuwe Klant">
+        <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="40.0" text="Gebruiker bewerken" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
             <font>
-                <Font size="18.0"/>
+                <Font name="System Bold" size="18.0"/>
             </font>
         </Label>
-        <GridPane layoutX="129.0" layoutY="142.0" prefHeight="146.0" prefWidth="341.0">
+        <GridPane alignment="TOP_CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="148.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="193.0"/>
@@ -19,22 +19,26 @@
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
             </rowConstraints>
             <children>
-                <Label text="Gebruikersnaam" GridPane.halignment="RIGHT">
+                <Label text="Gebruikersnaam" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets right="5.0"/>
                     </GridPane.margin>
                 </Label>
-                <Label text="Wachtwoord" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                <Label text="Wachtwoord" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets right="5.0"/>
                     </GridPane.margin>
                 </Label>
-                <TextField fx:id="userName" disable="true" editable="false" text="Gebruikersnaam" GridPane.columnIndex="1"/>
-                <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <TextField fx:id="userName" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
             </children>
         </GridPane>
-        <Button fx:id="menuButton" layoutX="276.0" layoutY="304.0" mnemonicParsing="false" onAction="#doMenu" text="Save"/>
+        <Button fx:id="menuButton" layoutX="276.0" layoutY="304.0" mnemonicParsing="false" onAction="#doMenu" text="Menu"/>
+        <Button fx:id="lijstButton" layoutX="327.0" layoutY="304.0" mnemonicParsing="false" onAction="#doCreateUpdateUser" text=""/>
     </children>
 </AnchorPane>
