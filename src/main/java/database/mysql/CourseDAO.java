@@ -83,4 +83,15 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
             System.out.println("SQL error " + sqlException.getMessage());
         }
     }
+
+    public void updateCourse(Course course){
+        String sql = "Update course Set courseName = ?;";
+        try{
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, course.getCourseName());
+            executeManipulateStatement();
+        } catch (SQLException sqlException){
+            System.out.println("SQL error " + sqlException.getMessage());
+        }
+    }
 }
