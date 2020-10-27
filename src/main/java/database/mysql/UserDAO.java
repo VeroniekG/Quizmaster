@@ -2,48 +2,37 @@ package database.mysql;
 
 import model.Role;
 import model.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * DAO for User Model Object. Used to access persisted user data.
+ * Data Access Object voor gebruikers van de applicatie
  *
- * @author dleertouwer
- * @version 1.0.2
- * @see model.User
- * @see database.mysql.DBAccess
- * @since 1.0
+ * @Author dleertouwer
  */
 public class UserDAO extends AbstractDAO implements GenericDAO<User> {
-
-    //private static final Log log = LogFactory.getLog(UserDAO.class);
-    private static final Logger log = LogManager.getLogger(UserDAO.class);
 
     public UserDAO(DBAccess dBaccess) {
         super(dBaccess);
     }
 
     /**
-     * Haalt een gebruiker op uit de database o.b.v. de gebruikersnaam.
+     * Retrieves a user from the database based on the username.
      *
-     * @param name de gebruikersnaam als String
-     *
-     * @return een object van het type User
-     * @exception SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @param name the username as String
+     * @return an object with the type User
+     * @throws SQLException when executing the SQL-query results in an error.
      */
     public User getUserByName(String name) {
         // Case-sensitive SQL-query
         String sql = "SELECT * FROM User WHERE BINARY userName = ?";
-        ResultSet resultSet = null;
         User user = null;
         try {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, name);
-            resultSet = executeSelectStatement();
+            ResultSet resultSet = executeSelectStatement();
             if (resultSet.next()) {
                 String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
@@ -51,21 +40,19 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
                 user = new User(userName, password, Role.valueOf(role));
                 user.setIdUser(resultSet.getInt("idUser"));
             } else {
-                log.info("Gebruiker '" + name + "' niet gevonden!");
+                System.out.println("Gebruiker '" + name + "' niet gevonden!");
             }
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
-        } finally {
-            dbAccess.closeConnection();
         }
         return user;
     }
 
     /**
-     * Haalt een specifieke gebruiker op uit de database
+     * Retrieves a specific user from the database
      *
-     * @return een object van het type User
-     * @exception SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @return an object with the type User
+     * @throws SQLException when executing the SQL-query results in an error.
      */
     @Override
     public User getOneById(int id) {
@@ -87,16 +74,14 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
 
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
-        } finally {
-            dbAccess.closeConnection();
         }
         return user;
     }
 
     /**
-     * Slaat een specifieke gebruiker op in de database
+     * Stores a specific user in the database.
      *
-     * @exception SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @throws SQLException when executing the SQL-query results in an error.
      */
     @Override
     public void storeOne(User type) {
@@ -110,20 +95,18 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             type.setIdUser(id);
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
-        } finally {
-            dbAccess.closeConnection();
         }
     }
 
     /**
-     * Haalt alle gebruikers in de database op
+     * Retrieves all users from the database
      *
-     * @return een ArrayList met objecten van het type User
-     * @exception SQLException wanneer het uitvoeren van de SQL-query een fout oplevert.
+     * @return een ArrayList with objects with the type User
+     * @throws SQLException when executing the SQL-query results in an error.
      */
     @Override
     public ArrayList<User> getAll() {
-        String sql = "Select * From User";
+        String sql = "Select * From Klant";
         ArrayList<User> userslist = new ArrayList<>();
         try {
             setupPreparedStatement(sql);
@@ -139,8 +122,6 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             }
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
-        } finally {
-            dbAccess.closeConnection();
         }
         return userslist;
     }

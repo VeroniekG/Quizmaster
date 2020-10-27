@@ -1,8 +1,10 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import model.Course;
+import view.Main;
 
 public class StudentSignInOutController {
 
@@ -13,7 +15,10 @@ public class StudentSignInOutController {
 
     public void setup() {}
 
-    public void doMenu() {}
+    //TJ menu knop terug naar menu
+    public void doMenu(ActionEvent actionEvent) {
+        Main.getSceneManager().showWelcomeScene();
+    }
 
     public void doSignIn() {}
 

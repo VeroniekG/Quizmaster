@@ -1,12 +1,15 @@
 package controller;
 
+import database.mysql.DBAccess;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import model.Course;
 import model.Question;
 import model.Quiz;
+import view.Main;
 
 public class CoordinatorDashboardController {
 
@@ -43,5 +46,8 @@ public class CoordinatorDashboardController {
 
     public void doEditQuestion() { }
 
-    public void doMenu() { }
+    //TJ menu knop terug naar menu
+    public void doMenu(ActionEvent actionEvent) {
+        Main.getSceneManager().showWelcomeScene();
+    }
 }

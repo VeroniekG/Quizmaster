@@ -60,7 +60,7 @@ public class LoginController {
                 Main.setCurrentUser(currentUser);
                 Main.getSceneManager().showWelcomeScene();
             } else {
-                showAlert("Het ingevoerde wachtwoord is onjuist!", AlertType.ERROR);
+                showAlert("Inloggen is mislukt, probeer het opnieuw", AlertType.ERROR);
             }
         } else {
             showAlert("Gebruiker '" + userNameInput + "' niet gevonden!", AlertType.ERROR);
