@@ -89,10 +89,8 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" +
-                "idQuestion=" + idQuestion +
-                ", question='" + description + '\'' +
-                '}';
+
+        return "Vraag " + idQuestion + ": " + description;
     }
 }
 
