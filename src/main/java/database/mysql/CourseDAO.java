@@ -22,15 +22,15 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
      */
     @Override
     public ArrayList<Course> getAll() {
-        String sql = "Select * From course";
+        String sql = "Select * From Course";
         ArrayList<Course> courselist = new ArrayList<>();
         try {
             setupPreparedStatement(sql);
             ResultSet resultSet = executeSelectStatement();
             Course course;
             while (resultSet.next()) {
-                String courseName = resultSet.getString("courseName");
-                course = new Course(courseName);
+                String coursename = resultSet.getString("courseName");
+                course = new Course(coursename);
                 course.setIdCourse(resultSet.getInt("idCourse"));
                 courselist.add(course);
             }

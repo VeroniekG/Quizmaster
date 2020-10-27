@@ -6,6 +6,8 @@ module QuizMaster {
     requires mysql.connector.java;
     requires lightcouch;
     requires gson;
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.core;
 
     opens view to javafx.graphics, javafx.fxml;
     opens controller to javafx.fxml;

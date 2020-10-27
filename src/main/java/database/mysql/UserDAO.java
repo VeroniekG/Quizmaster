@@ -22,8 +22,9 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
      * Retrieves a user from the database based on the username.
      *
      * @param name the username as String
+     *
      * @return an object with the type User
-     * @throws SQLException when executing the SQL-query results in an error.
+     * @exception SQLException when executing the SQL-query results in an error.
      */
     public User getUserByName(String name) {
         // Case-sensitive SQL-query
@@ -52,7 +53,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
      * Retrieves a specific user from the database
      *
      * @return an object with the type User
-     * @throws SQLException when executing the SQL-query results in an error.
+     * @exception SQLException when executing the SQL-query results in an error.
      */
     @Override
     public User getOneById(int id) {
@@ -81,7 +82,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     /**
      * Stores a specific user in the database.
      *
-     * @throws SQLException when executing the SQL-query results in an error.
+     * @exception SQLException when executing the SQL-query results in an error.
      */
     @Override
     public void storeOne(User type) {
@@ -102,11 +103,11 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
      * Retrieves all users from the database
      *
      * @return een ArrayList with objects with the type User
-     * @throws SQLException when executing the SQL-query results in an error.
+     * @exception SQLException when executing the SQL-query results in an error.
      */
     @Override
     public ArrayList<User> getAll() {
-        String sql = "Select * From Klant";
+        String sql = "Select * From User";
         ArrayList<User> userslist = new ArrayList<>();
         try {
             setupPreparedStatement(sql);

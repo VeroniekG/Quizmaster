@@ -1,5 +1,6 @@
 package view;
 
+import config.ApplicationSetup;
 import database.mysql.DBAccess;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -7,12 +8,17 @@ import model.User;
 
 public class Main extends Application {
 
+    // ApplicationSetup implements a singleton design pattern -> only one instance
+    private static final ApplicationSetup applicationSetup = ApplicationSetup.getInstance();
     private static SceneManager sceneManager = null;
     private static Stage primaryStage = null;
     private static DBAccess dbAccess = null;
     private static User currentUser = null;
 
     public static void main(String[] args) {
+        applicationSetup.load();
+        dbAccess = getDBaccess();
+        dbAccess.loadDriver();
         launch(args);
     }
 
@@ -22,13 +28,6 @@ public class Main extends Application {
         primaryStage.setTitle("Make IT Work - Project 1");
         getSceneManager().setWindowTool();
         primaryStage.show();
-    }
-
-    public static DBAccess getDBaccess() {
-        if (dbAccess == null) {
-            dbAccess = new DBAccess("Quizmaster", "userQuizmaster", "pwQuizmaster");
-        }
-        return dbAccess;
     }
 
     public static SceneManager getSceneManager() {
@@ -48,6 +47,16 @@ public class Main extends Application {
 
     public static void setCurrentUser(User currentUser) {
         Main.currentUser = currentUser;
+    }
+
+    public static DBAccess getDBaccess() {
+        String dbName = applicationSetup.getProperties().getProperty("jdbc.database.name");
+        String dbUser = applicationSetup.getProperties().getProperty("jdbc.database.user");
+        String dbPasword = applicationSetup.getProperties().getProperty("jdbc.database.password");
+        if (dbAccess == null) {
+            dbAccess = new DBAccess(dbName, dbUser, dbPasword);
+        }
+        return dbAccess;
     }
 
 }
