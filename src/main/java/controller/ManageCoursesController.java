@@ -56,6 +56,7 @@ public class ManageCoursesController {
     }
 
     public void doDeleteCourse(ActionEvent event) {
+        courseList.getItems().removeAll(courseList.getSelectionModel().getSelectedItem());
     }
 
     //TJ menu knop terug naar menu

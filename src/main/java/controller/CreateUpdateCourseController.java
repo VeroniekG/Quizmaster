@@ -30,7 +30,6 @@ public class CreateUpdateCourseController {
     }
 
     public void setup(Course course) {
-        titleLabel.setText("Wijzig cursus");
         courseNameTextfield.setText(course.getCourseName());
     }
 
@@ -40,28 +39,33 @@ public class CreateUpdateCourseController {
     }
 
     public void createCourse() {
+        StringBuilder warningtext = new StringBuilder();
         boolean correct = true;
         String coursename = courseNameTextfield.getText();
         if (coursename.isEmpty()) {
+            warningtext.append("Graag een cursusnaam invoeren\n");
             Alert foutmelding = new Alert(Alert.AlertType.ERROR);
-            foutmelding.setContentText("Graag een cursusnaam invoeren");
+            foutmelding.setContentText(warningtext.toString());
             foutmelding.show();
-            correct = false;
-            coursename = null;
+            course = null;
         } else {
             course = new Course(coursename);
         }
     }
+
     public void doStoreCourse(ActionEvent actionEvent){
         createCourse();
         if(course !=null){
-            if (courseNameTextfield.getText().equals("cursusnaam")){
+            if (courseNameTextfield.getText().equals("cursusnaam")) {
                 courseDAO.storeOne(course);
                 courseNameTextfield.setText(course.getCourseName());
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
                 saved.setContentText("Cursus opgeslagen");
                 saved.show();
-  // hier verder          } else {
+            }else {
+                String name = courseNameTextfield.getText();
+                course.setCourseName(name);
+                courseDAO.updateCourse(course);
                 Alert updated = new Alert(Alert.AlertType.INFORMATION);
                 updated.setContentText("Cursus is gewijzigd");
                 updated.show();
