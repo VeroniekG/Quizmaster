@@ -5,11 +5,16 @@ import database.mysql.DBAccess;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.User;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.io.IoBuilder;
 
 public class Main extends Application {
 
     // ApplicationSetup implements a singleton design pattern -> only one instance
     private static final ApplicationSetup applicationSetup = ApplicationSetup.getInstance();
+    private static final Logger LOGGER = LogManager.getRootLogger();
     private static SceneManager sceneManager = null;
     private static Stage primaryStage = null;
     private static DBAccess dbAccess = null;
@@ -17,9 +22,26 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         applicationSetup.load();
+        setLogging();
         dbAccess = getDBaccess();
         dbAccess.loadDriver();
         launch(args);
+    }
+
+    public static void setLogging() {
+        // Redirect System.out to logger
+        System.setOut(
+                IoBuilder.forLogger(LogManager.getLogger("system.out"))
+                        .setLevel(Level.INFO)
+                        .buildPrintStream()
+        );
+        // Redirect System.err to logger
+        System.setErr(
+                IoBuilder.forLogger(LogManager.getLogger("system.err"))
+                        .setLevel(Level.WARN)
+                        .buildPrintStream()
+        );
+
     }
 
     @Override

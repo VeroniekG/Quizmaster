@@ -19,7 +19,7 @@ import view.Main;
  * TODO: Error labels instead of alerts
  * TODO: Password-encryption
  *
- * @author thieh, leertod
+ * @author Huub van Thienen, Daan Leertouwer
  * @version 1.0.7
  * @see view.Main
  * @see view.SceneManager
@@ -45,7 +45,7 @@ public class LoginController {
     public void doLogin() {
         String userNameInput = nameTextField.getText();
         CharSequence passwordInut = passwordField.getText();
-        User currentUser = userDAO.getUserByName(userNameInput);
+        User currentUser = userDAO.getOneByName(userNameInput);
         // Als de gebruiker gevonden is in de database het wachtwoord valideren en anders de
         // gebruiker informeren.
         if (currentUser != null) {

@@ -60,7 +60,6 @@ public class ManageUsersController {
         List<User> allUsers = userDAO.getAll();
         Collections.sort(allUsers, new User.UserNameComparator());
         ObservableList<User> userObservableList = FXCollections.observableArrayList(allUsers);
-        userObservableList = FXCollections.observableArrayList(allUsers);
         userList.setItems(userObservableList);
     }
 

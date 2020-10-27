@@ -45,11 +45,10 @@ public class DBAccess {
      * Open database connection
      */
     public void openConnection() {
-        log.info("Opening connection to database " + databaseName);
         String connectionURL = PREFIX_CONNECTION_URL + databaseName + CONNECTION_SETTINGS;
         try {
             connection = DriverManager.getConnection(connectionURL, mainUser, mainUserPassword);
-            log.trace("OK, connection open.");
+            log.info("Connection to database '" + databaseName + "' open.");
         } catch (SQLException sqlFout) {
             log.error(SQL_EXCEPTION + sqlFout.getMessage());
         }
@@ -64,7 +63,7 @@ public class DBAccess {
         } catch (SQLException connectionError) {
             log.error("Error while closing connection: " + connectionError.getMessage());
         } finally {
-            log.trace("Connection closed.");
+            log.info("Connection to database '" + databaseName + "' closed.");
         }
     }
 
