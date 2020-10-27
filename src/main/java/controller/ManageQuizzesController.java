@@ -1,5 +1,6 @@
 package controller;
 
+import database.mysql.CourseDAO;
 import database.mysql.DBAccess;
 import database.mysql.QuizDAO;
 import javafx.event.ActionEvent;
@@ -15,12 +16,18 @@ public class ManageQuizzesController {
 
         ListView<Quiz> quizlist;
 
+    public ManageQuizzesController() {
+        this.dbAccess = Main.getDBaccess();
+        quizDAO = new QuizDAO(dbAccess);
+    }
+
     public void setup() {
         this.quizDAO = new QuizDAO(dbAccess);
         ArrayList<Quiz> allQuizzes = quizDAO.getAll();
         for (Quiz quiz : allQuizzes) {
             quizlist.getItems().add(quiz);
         }
+        quizlist.getSelectionModel().selectFirst();
     }
 
     //TJ menu knop terug naar menu
@@ -30,7 +37,10 @@ public class ManageQuizzesController {
 
     public void doCreateQuiz(){}
 
-    public void doUpdateQuiz(){}
+    public void doUpdateQuiz(){
+        this.dbAccess = Main.getDBaccess();
+        this.quizDAO = new QuizDAO(dbAccess);
+    }
 
     public void doDeleteQuiz(){}
 }
