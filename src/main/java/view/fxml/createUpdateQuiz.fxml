@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="titlelable" layoutX="14.0" layoutY="14.0" text="Nieuwe Quiz">
+      <Label fx:id="titlelable" layoutX="14.0" layoutY="14.0" text="Maak nieuwe Quiz">
          <font>
             <Font size="18.0" />
          </font></Label>

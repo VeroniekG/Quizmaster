@@ -14,6 +14,11 @@ public class Quiz {
         this.quizName = quizName;
     }
 
+    @Override
+    public String toString() {
+        return quizName;
+    }
+
     public int getIdQuiz() {
         return idQuiz;
     }
