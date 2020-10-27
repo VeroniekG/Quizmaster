@@ -1,6 +1,5 @@
 package controller;
 
-import database.mysql.DBAccess;
 import database.mysql.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,16 +22,15 @@ import java.util.List;
 public class ManageUsersController {
 
     private static final Logger logger = LogManager.getLogger(ManageUsersController.class);
-    private static User selectedUser = null;
+
     @FXML
     private ListView<User> userList;
     private UserDAO userDAO;
-    private DBAccess dbAccess;
+    private User selectedUser = null;
 
     public ManageUsersController() {
         userList = new ListView<>();
-        dbAccess = Main.getDbAccess();
-        userDAO = new UserDAO(dbAccess);
+        userDAO = new UserDAO(Main.getDbAccess());
     }
 
     public void setup() {
