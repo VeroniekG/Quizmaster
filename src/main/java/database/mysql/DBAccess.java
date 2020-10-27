@@ -1,13 +1,20 @@
 package database.mysql;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBAccess {
 
+    //private static final Log log = LogFactory.getLog(DBAccess.class);
+    private static final Logger log = LogManager.getLogger(DBAccess.class);
     private static final String SQL_EXCEPTION = "SQL Exception: ";
     private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
+    //private static final String MYSQL_DRIVER =
+    //        Main.getApplicationConfig().getProperties().getProperty("jdbc.driver");
     private static final String PREFIX_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
     private static final String CONNECTION_SETTINGS = "?useSSL=false" +
             "&allowPublicKeyRetrieval=true" +
@@ -20,37 +27,44 @@ public class DBAccess {
     private String mainUserPassword;
 
     public DBAccess(String databaseName, String mainUser, String mainUserPassword) {
-        super();
         this.databaseName = databaseName;
         this.mainUser = mainUser;
         this.mainUserPassword = mainUserPassword;
     }
+
+    public void loadDriver() { // Driver loaded in ApplicationSetup
+        try {
+            Class.forName(MYSQL_DRIVER); // Explicitly load the JDBC-driver.
+            log.trace("Driver successfully loaded.");
+        } catch (ClassNotFoundException driverFout) {
+            log.warn("Driver not found!");
+        }
+    }
+
     /**
      * Open database connection
      */
     public void openConnection() {
+        log.info("Opening connection to database " + databaseName);
         String connectionURL = PREFIX_CONNECTION_URL + databaseName + CONNECTION_SETTINGS;
         try {
-            System.out.print("Laad de driver... ");
-            Class.forName(MYSQL_DRIVER); // laad de JDBC-driver.
-            System.out.println("Driver geladen");
-
             connection = DriverManager.getConnection(connectionURL, mainUser, mainUserPassword);
-            System.out.println("OK, Connectie open");
-        } catch (ClassNotFoundException driverFout) {
-            System.out.println("Driver niet gevonden");
+            log.trace("OK, connection open.");
         } catch (SQLException sqlFout) {
-            System.out.println(SQL_EXCEPTION + sqlFout.getMessage());
+            log.error(SQL_EXCEPTION + sqlFout.getMessage());
         }
     }
+
     /**
      * Close database connection
      */
     public void closeConnection() {
         try {
             connection.close();
-        } catch (Exception connectionFout) {
-            System.err.println(connectionFout.getMessage());
+        } catch (SQLException connectionError) {
+            log.error("Error while closing connection: " + connectionError.getMessage());
+        } finally {
+            log.trace("Connection closed.");
         }
     }
 
@@ -67,8 +81,8 @@ public class DBAccess {
             if (connection.isClosed()) {
                 this.openConnection();
             }
-        } catch (SQLException sqlFout) {
-            System.out.println("Connectie fout!");
+        } catch (SQLException connectionError) {
+            log.error("Connection error!");
         }
         return connection;
     }

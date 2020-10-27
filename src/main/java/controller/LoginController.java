@@ -1,24 +1,36 @@
 package controller;
 
-import database.mysql.DBAccess;
 import database.mysql.UserDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import view.Main;
 
 /**
- * TODO: password-encryptie
+ * Controller for login view (view.fxml.login.fxml). Controls data flow and updates the view. This
+ * class has methods to process username and password, exit the application and show alerts.
+ * TODO: Modify message (login failed)
+ * TODO: Error labels instead of alerts
+ * TODO: Password-encryption
  *
- * @Author dleertouwer
+ * @author thieh, leertod
+ * @version 1.0.7
+ * @see view.Main
+ * @see view.SceneManager
+ * @see model.User
+ * @see database.mysql.UserDAO
+ * @since 1.0
  */
 public class LoginController {
 
+    private static final Logger log = LogManager.getLogger(LoginController.class);
     private UserDAO userDAO;
-    private DBAccess dbAccess;
 
     @FXML
     private TextField nameTextField;
@@ -26,8 +38,7 @@ public class LoginController {
     private PasswordField passwordField;
 
     public LoginController() {
-        this.dbAccess = Main.getDBaccess();
-        this.userDAO = new UserDAO(dbAccess);
+        userDAO = new UserDAO(Main.getDBaccess());
     }
 
     @FXML
@@ -43,7 +54,6 @@ public class LoginController {
                 // afbreken.
                 Main.setCurrentUser(currentUser);
                 Main.getSceneManager().showWelcomeScene();
-                dbAccess.closeConnection();
             } else {
                 showAlert("Inloggen is mislukt, probeer het opnieuw", AlertType.ERROR);
             }
@@ -53,9 +63,8 @@ public class LoginController {
     }
 
     @FXML
-    public void doQuit() {
-        dbAccess.closeConnection();
-        System.out.println("Connectie gesloten, applicatie beëindigen...");
+    public void doQuit(ActionEvent event) {
+        log.info("Quitting application...");
         System.exit(0);
     }
 
