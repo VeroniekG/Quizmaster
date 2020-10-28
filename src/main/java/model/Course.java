@@ -38,8 +38,6 @@ public class Course {
 
     @Override
     public String toString() {
-        StringBuilder resultstring = new StringBuilder("");
-        resultstring.append(courseName + " ");
-        return resultstring.toString();
+        return "" + courseName + " ";
     }
 }
