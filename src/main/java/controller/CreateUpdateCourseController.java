@@ -56,13 +56,12 @@ public class CreateUpdateCourseController {
     public void doStoreCourse(ActionEvent actionEvent){
         createCourse();
         if(course !=null){
-            if (courseNameTextfield.getText().equals("cursusnaam")) {
                 courseDAO.storeOne(course);
-                courseNameTextfield.setText(course.getCourseName());
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
                 saved.setContentText("Cursus opgeslagen");
                 saved.show();
             }else {
+                //courseNameTextfield.setText(course.getCourseName());
                 String name = courseNameTextfield.getText();
                 course.setCourseName(name);
                 courseDAO.updateCourse(course);
@@ -72,4 +71,4 @@ public class CreateUpdateCourseController {
             }
         }
     }
-}
+
