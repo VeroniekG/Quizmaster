@@ -23,14 +23,16 @@ public class CreateUpdateCourseController {
     private Button makeButton;
     @FXML
     private TextField courseNameTextfield;
+    @FXML
+    private TextField courseIdTextfield;
 
-    public CreateUpdateCourseController(){
-        this.dbAccess = Main.getDBaccess();
-        this.courseDAO = new CourseDAO(dbAccess);
+    public CreateUpdateCourseController() {
+        courseDAO = new CourseDAO(Main.getDBaccess());
     }
 
     public void setup(Course course) {
-        courseNameTextfield.setText(course.getCourseName());
+        courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
+        courseNameTextfield.setText(courseNameTextfield.getSelectedText());
     }
 
     //TJ menu knop terug naar menu
@@ -53,17 +55,19 @@ public class CreateUpdateCourseController {
         }
     }
 
-    public void doStoreCourse(ActionEvent actionEvent){
+    //@VG check in DB if idCourse already exist. If so --> update course  If not --> new course
+    public void doStoreCourse(ActionEvent actionEvent) {
         createCourse();
-        if(course !=null){
+        if (course != null) {
+            if (courseIdTextfield.getText().isEmpty()) {
                 courseDAO.storeOne(course);
+                courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
                 saved.setContentText("Cursus opgeslagen");
                 saved.show();
-            }else {
-                //courseNameTextfield.setText(course.getCourseName());
-                String name = courseNameTextfield.getText();
-                course.setCourseName(name);
+            } else {
+                int id = Integer.parseInt(courseIdTextfield.getText());
+                course.setIdCourse(id);
                 courseDAO.updateCourse(course);
                 Alert updated = new Alert(Alert.AlertType.INFORMATION);
                 updated.setContentText("Cursus is gewijzigd");
@@ -71,4 +75,5 @@ public class CreateUpdateCourseController {
             }
         }
     }
+}
 
