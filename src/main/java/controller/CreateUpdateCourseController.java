@@ -54,7 +54,6 @@ public class CreateUpdateCourseController {
             course = new Course(coursename);
         }
     }
-
     //@VG check in DB if idCourse already exist. If so --> update course  If not --> new course
     public void doStoreCourse(ActionEvent actionEvent) {
         createCourse();

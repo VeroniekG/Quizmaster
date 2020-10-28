@@ -58,6 +58,7 @@ public class ManageCoursesController {
 
     public void doDeleteCourse(ActionEvent event) {
         courseList.getItems().remove(courseList.getSelectionModel().getSelectedItem());
+        courseDAO.deleteRow(course);
     }
 
     //TJ menu knop terug naar menu

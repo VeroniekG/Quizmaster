@@ -95,4 +95,15 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
             System.out.println("SQL error " + sqlException.getMessage());
         }
     }
+    public void deleteRow(Course course){
+        String sql = "DELETE FROM course WHERE idCourse = ?;";
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, course.getCourseName());
+            preparedStatement.setInt(2, course.getIdCourse());
+            preparedStatement.execute();
+        } catch (SQLException sqlException){
+            System.out.println("SQL error" + sqlException.getMessage());
+        }
+    }
 }
