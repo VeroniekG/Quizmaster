@@ -16,6 +16,7 @@ public class ManageQuizzesController {
         public Button menuButton;
         private QuizDAO quizDAO;
         private DBAccess dbAccess;
+        private Quiz quiz;
 
         @FXML
         ListView<Quiz> quizlist;
@@ -39,7 +40,7 @@ public class ManageQuizzesController {
     }
 
     public void doCreateQuiz(ActionEvent actionEvent){
-        Main.getSceneManager().showCreateUpdateQuizScene();
+        Main.getSceneManager().showCreateUpdateQuizScene(quiz);
 
     }
 
