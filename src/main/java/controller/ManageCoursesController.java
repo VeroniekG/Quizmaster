@@ -51,14 +51,15 @@ public class ManageCoursesController {
         Main.getSceneManager().showCreateUpdateCourseScene(course);
     }
 
-    public void doUpdateCourse(ActionEvent event) {
+    public void doUpdateCourse(ActionEvent actionEvent) {
         Course course = courseList.getSelectionModel().getSelectedItem();
         Main.getSceneManager().showCreateUpdateCourseScene(course);
     }
-
-    public void doDeleteCourse(ActionEvent event) {
-        courseList.getItems().remove(courseList.getSelectionModel().getSelectedItem());
-        courseDAO.deleteRow(course);
+    //@authorVG - select item and remove from ListView + use deleteCourse() to remove from DB
+    public void doDeleteCourse(ActionEvent actionEvent) {
+      Course selectedCourse  = courseList.getSelectionModel().getSelectedItem();
+        courseList.getItems().remove(selectedCourse);
+        courseDAO.deleteCourse(selectedCourse);
     }
 
     //TJ menu knop terug naar menu
