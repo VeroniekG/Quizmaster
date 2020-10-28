@@ -13,5 +13,7 @@ public class CreateUpdateQuestionController {
         Main.getSceneManager().showWelcomeScene();
     }
 
-    public void doCreateUpdateQuestion() {}
+    public void doCreateUpdateQuestion(Question question) {
+
+    }
 }

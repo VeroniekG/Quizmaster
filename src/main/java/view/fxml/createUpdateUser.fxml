@@ -1,40 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.CreateUpdateUserController">
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.CreateUpdateUserController">
     <children>
-        <Label fx:id="titleLabel" layoutX="250.0" layoutY="36.0" text="Nieuwe Klant">
+        <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" text="Gebruiker bewerken" textAlignment="CENTER" textFill="#212121" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>
-                <Font size="18.0"/>
+                <Font name="Lucida Grande" size="18.0"/>
             </font>
         </Label>
-        <GridPane layoutX="129.0" layoutY="142.0" prefHeight="146.0" prefWidth="341.0">
+        <GridPane alignment="TOP_CENTER" prefHeight="203.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="148.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="193.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="240.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES"/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
             </rowConstraints>
             <children>
-                <Label text="Gebruikersnaam" GridPane.halignment="RIGHT">
+                <Label text="Voornaam" textFill="DIMGRAY" GridPane.halignment="LEFT" GridPane.rowIndex="0">
                     <GridPane.margin>
-                        <Insets right="5.0"/>
+                        <Insets/>
                     </GridPane.margin>
+                    <font>
+                        <Font name="Lucida Grande" size="14.0"/>
+                    </font>
                 </Label>
-                <Label text="Wachtwoord" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                <Label text="Achternaam" textFill="DIMGRAY" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                     <GridPane.margin>
-                        <Insets right="5.0"/>
+                        <Insets/>
                     </GridPane.margin>
+                    <font>
+                        <Font name="Lucida Grande" size="14.0"/>
+                    </font>
                 </Label>
-                <TextField fx:id="userName" disable="true" editable="false" text="Gebruikersnaam" GridPane.columnIndex="1"/>
-                <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="Gebruikersnaam" textFill="DIMGRAY" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                    <GridPane.margin>
+                        <Insets/>
+                    </GridPane.margin>
+                    <font>
+                        <Font name="Lucida Grande" size="14.0"/>
+                    </font>
+                </Label>
+                <Label text="Wachtwoord" textFill="DIMGRAY" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                    <GridPane.margin>
+                        <Insets/>
+                    </GridPane.margin>
+                    <font>
+                        <Font name="Lucida Grande" size="14.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="firstName" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                    <font>
+                        <Font name="Lucida Grande" size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets/>
+                    </GridPane.margin>
+                </TextField>
+                <TextField fx:id="lastName" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                    <font>
+                        <Font name="Lucida Grande" size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets/>
+                    </GridPane.margin>
+                </TextField>
+                <TextField fx:id="userName" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                    <font>
+                        <Font name="Lucida Grande" size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets/>
+                    </GridPane.margin>
+                </TextField>
+                <PasswordField fx:id="password" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                    <font>
+                        <Font name="Lucida Grande" size="14.0"/>
+                    </font>
+                </PasswordField>
             </children>
         </GridPane>
-        <Button fx:id="menuButton" layoutX="276.0" layoutY="304.0" mnemonicParsing="false" onAction="#doMenu" text="Save"/>
+        <Button fx:id="buttonMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#doMenu" prefHeight="34.0" prefWidth="75.0" text="Terug" textFill="#484848" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font name="Lucida Grande" size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="buttonCreateUpdate" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#doCreateUpdateUser" prefHeight="34.0" prefWidth="149.0" text="Opslaan" textAlignment="CENTER" textFill="#484848" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="91.0">
+            <font>
+                <Font name="Lucida Grande" size="14.0"/>
+            </font>
+        </Button>
     </children>
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+    </padding>
 </AnchorPane>

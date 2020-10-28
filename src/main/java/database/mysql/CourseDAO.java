@@ -72,14 +72,26 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
      * @throws SQLException when executing the SQL-query results in an error.
      */
     @Override
-    public void storeOne(Course type) {
+    public void storeOne(Course course) {
         String sql = "INSERT INTO course(courseName) VALUES(?);";
         try {
             setupPreparedStatementWithKey(sql);
-            preparedStatement.setString(1, type.getCourseName());
+            preparedStatement.setString(1, course.getCourseName());
             int id = executeInsertStatementWithKey();
-            type.setIdCourse(id);
+            course.setIdCourse(id);
         } catch (SQLException sqlException) {
+            System.out.println("SQL error " + sqlException.getMessage());
+        }
+    }
+
+    public void updateCourse(Course course){
+        String sql = "Update course Set courseName = ? where idCourse = ?;";
+        try{
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, course.getCourseName());
+            preparedStatement.setInt(2, course.getIdCourse());
+            executeManipulateStatement();
+        } catch (SQLException sqlException){
             System.out.println("SQL error " + sqlException.getMessage());
         }
     }
