@@ -41,7 +41,7 @@ public class ApplicationSetup {
                 JDBC_DATABASE_DRIVER.getValue());
         properties.setProperty(JDBC_CONNECTION_SETTINGS.getKey(),
                 JDBC_CONNECTION_SETTINGS.getValue());
-        LOG.warn("Default application properties set.");
+        LOG.info("Default application properties set.");
     }
 
     private Properties loadPropertiesFile() {
@@ -76,7 +76,6 @@ public class ApplicationSetup {
                 }
         );
         LOG.info("Custom properties set.");
-        LOG.info("Properties" + properties);
     }
 
     public static ApplicationSetup getInstance() {
