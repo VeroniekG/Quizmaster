@@ -35,7 +35,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
      *
      * @return an object of type User
      * @throws SQLException if one or more columnLabels are not valid; if a database access
-     * error occurs or this method is called with a closed ResultSet
+     * error occurs; if this method is called with a closed ResultSet
      * @see ResultSet
      * @since 1.0.0
      */
@@ -59,9 +59,9 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
      * @param name the username as a String
      *
      * @return an object of type User
-     * @throws SQLException if the Parameter index is out of ronge or a database access error
-     * occurs
-     * @see AbstractDAO#setupPreparedStatement(String sql)
+     * @throws SQLException if the Parameter index is out of ronge; if a database access error
+     * occurs; if other SQL-errors occur
+     * @see #setupPreparedStatement(String sql)
      * @see ResultSet
      * @since 1.0.0
      */
@@ -91,8 +91,8 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
      * @return an object of type User
      * @throws IllegalArgumentException if the requested user id does not exist
      * @throws SQLException if the parameter index is out of range; if a database access error
-     * occurs or if another SQL-error occurs
-     * @see AbstractDAO#setupPreparedStatement(String sql)
+     * occurs; if other SQL-error occur
+     * @see #setupPreparedStatement(String sql)
      * @see ResultSet
      * @since 1.0.0
      */
@@ -117,12 +117,16 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     }
 
     /**
-     * Stores a specific user in the database.
+     * Stores a specific user in the database. Takes a User object as an argument, gets the field
+     * values and makes use of a PreparedStatement to execute a parameterized SQL-query with these
+     * values. The user id (idUser) is an Auto Increment value, which is generated when the user is
+     * stored. {@link #executeInsertStatementWithKey()} executes an insert statement and
+     * returns the generated key, which is then set as the user id of the provided User object.
      *
      * @throws SQLException if the parameter index is out of range; if a database access error
-     * occurs or if another SQL-error occurs
-     * @see AbstractDAO#setupPreparedStatementWithKey(String sql)
-     * @see AbstractDAO#executeInsertStatementWithKey()
+     * occurs; if other SQL-error occur
+     * @see #setupPreparedStatementWithKey(String sql)
+     * @see #executeInsertStatementWithKey()
      */
     @Override
     public void storeOne(User type) {
@@ -143,14 +147,17 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     }
 
     /**
-     * Retrieves all users from the database.
+     * Retrieves all users from the database. A PreparedStatement is used to execute a
+     * parameterized SQL-query. {@link #setUserWithResultset(ResultSet)} is called with the
+     * resulting ResultSet to convert the contained values to a corresponding User object
      *
      * @return an ArrayList with objects of type User
-     * @throws SQLException when executing the SQL-query results in an error.
+     * @throws SQLException if one or more columnLabels are not valid; if a database access
+     * error occurs; if other SQL-errors occur
      */
     @Override
     public ArrayList<User> getAll() {
-        String sql = "Select * From User";
+        String sql = "SELECT * FROM User";
         ArrayList<User> userslist = new ArrayList<>();
         try {
             setupPreparedStatement(sql);
