@@ -21,12 +21,12 @@
             <Font size="14.0" />
         </font>
     </Button>
-    <Button layoutX="113.0" layoutY="285.0" mnemonicParsing="false" onAction="#doUpdateQuiz" text="Wijzig">
+    <Button fx:id="changeButton" layoutX="113.0" layoutY="285.0" mnemonicParsing="false" onAction="#doUpdateQuiz" text="Wijzig">
         <font>
             <Font size="14.0" />
         </font>
     </Button>
-    <Button layoutX="217.0" layoutY="285.0" mnemonicParsing="false" onAction="#doDeleteQuiz" text="Verwijder">
+    <Button fx:id="deleteButton" layoutX="217.0" layoutY="285.0" mnemonicParsing="false" onAction="#doDeleteQuiz" text="Verwijder">
         <font>
             <Font size="14.0" />
         </font>

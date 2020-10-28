@@ -38,7 +38,10 @@ public class ManageQuizzesController {
         Main.getSceneManager().showWelcomeScene();
     }
 
-    public void doCreateQuiz(){}
+    public void doCreateQuiz(ActionEvent actionEvent){
+        Main.getSceneManager().showCreateUpdateQuizScene();
+
+    }
 
     public void doUpdateQuiz(){
         this.dbAccess = Main.getDBaccess();
