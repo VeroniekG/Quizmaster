@@ -1,9 +1,8 @@
 package controller;
 
-import database.mysql.CourseDAO;
+import database.mysql.QuizDAO;
 import javafx.fxml.FXML;
 import database.mysql.DBAccess;
-import database.mysql.QuizDAO;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

@@ -1,7 +1,7 @@
 package controller;
 
 import database.mysql.CourseDAO;
-import javafx.fxml.FXML;
+    import javafx.fxml.FXML;
 import database.mysql.DBAccess;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
