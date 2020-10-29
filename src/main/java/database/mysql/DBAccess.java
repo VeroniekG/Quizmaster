@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 public class DBAccess {
 
-    //private static final Log log = LogFactory.getLog(DBAccess.class);
     private static final Logger log = LogManager.getLogger(DBAccess.class);
     private static final String SQL_EXCEPTION = "SQL Exception: ";
     private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";

@@ -60,9 +60,10 @@ public class CreateUpdateUserController {
     private String[] inputItems;
 
     public CreateUpdateUserController() {
-        userDAO = new UserDAO(Main.getDBaccess());
+        userDAO = new UserDAO(Main.getDBaccessMySql());
         inputItems = new String[4];
         comboBoxRole = new ComboBox<>();
+        user = null;
     }
 
     /**
@@ -75,6 +76,9 @@ public class CreateUpdateUserController {
      * @since 1.0.0
      */
     public void setup(User user) {
+        if (user.getIdUser() == 0) {
+            labelTitle.setText("Nieuwe gebruiker");
+        }
         userHasUpdate = false;
         inputFields = new TextField[]{textFieldFirstName, textFieldLastName, textFieldUserName,
                 passwordFieldPassword};

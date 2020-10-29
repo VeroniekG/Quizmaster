@@ -32,15 +32,24 @@ public class ApplicationSetup {
 
     private void setDefaultProperties() {
         properties = new Properties();
-        properties.setProperty(JDBC_DATABASE_NAME.getKey(), JDBC_DATABASE_NAME.getValue());
-        properties.setProperty(JDBC_DATABASE_URL.getKey(), JDBC_DATABASE_URL.getValue());
-        properties.setProperty(JDBC_DATABASE_USER.getKey(), JDBC_DATABASE_USER.getValue());
-        properties.setProperty(JDBC_DATABASE_PASSWORD.getKey(),
-                JDBC_DATABASE_PASSWORD.getValue());
-        properties.setProperty(JDBC_DATABASE_DRIVER.getKey(),
-                JDBC_DATABASE_DRIVER.getValue());
-        properties.setProperty(JDBC_CONNECTION_SETTINGS.getKey(),
-                JDBC_CONNECTION_SETTINGS.getValue());
+        properties.setProperty(MYSQL_DATABASE_NAME.getKey(), MYSQL_DATABASE_NAME.getValue());
+        properties.setProperty(MYSQL_DATABASE_URL.getKey(), MYSQL_DATABASE_URL.getValue());
+        properties.setProperty(MYSQL_DATABASE_USER.getKey(), MYSQL_DATABASE_USER.getValue());
+        properties.setProperty(MYSQL_DATABASE_PASSWORD.getKey(),
+                MYSQL_DATABASE_PASSWORD.getValue());
+        properties.setProperty(MYSQL_JDBC_DRIVER.getKey(), MYSQL_JDBC_DRIVER.getValue());
+        properties.setProperty(MYSQL_JDBC_CONNECTION_SETTINGS.getKey(),
+                MYSQL_JDBC_CONNECTION_SETTINGS.getValue());
+        properties.setProperty(COUCHDB_DATABASE_NAME.getKey(), COUCHDB_DATABASE_NAME.getValue());
+        properties.setProperty(COUCHDB_DATABASE_URL.getKey(), COUCHDB_DATABASE_URL.getValue());
+        properties.setProperty(COUCHDB_CONNECTION_PORT.getKey(),
+                COUCHDB_CONNECTION_PORT.getValue());
+        properties.setProperty(COUCHDB_CONNECTION_PROTOCOL.getKey(),
+                COUCHDB_CONNECTION_PROTOCOL.getValue());
+        properties.setProperty(COUCHDB_DATABASE_USER.getKey(), COUCHDB_DATABASE_USER.getValue());
+        properties.setProperty(COUCHDB_DATABASE_PASSWORD.getKey(),
+                COUCHDB_DATABASE_PASSWORD.getValue());
+
         LOG.info("Default application properties set.");
     }
 
