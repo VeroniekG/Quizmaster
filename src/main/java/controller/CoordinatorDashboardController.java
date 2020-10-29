@@ -46,7 +46,12 @@ public class CoordinatorDashboardController {
     private ListView<Question> questionList;
 
     public CoordinatorDashboardController() {
-        this.dbAccess = Main.getDBaccess();
+        courseList = new ListView<>();
+        quizList = new ListView<>();
+        questionList = new ListView<>();
+        courseDAO = new CourseDAO(Main.getDBaccess());
+        // QuizDAO
+        //QuestionDA
     }
 
     //@AuthorVG - retrieve courselist from DB
@@ -74,11 +79,11 @@ public class CoordinatorDashboardController {
                 }
         );
 
-    }
-
+    }//VG - select course, retrieve corresponding quiz(zes) + corresponding questions
    public void handleMouseClick(MouseEvent mouseEvent){
         EventHandler<InputEvent> selectionHandler = inputEvent -> {
             courseList.getSelectionModel().getSelectedItem();
+            quizList.getItems();
         };
         courseList.addEventHandler(MouseEvent.MOUSE_CLICKED, selectionHandler);
     }
