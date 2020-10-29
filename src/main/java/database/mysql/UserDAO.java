@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * Interacts with the User model and maps application calls to the persistence layer. Extends
  * {@link AbstractDAO} and contains methods to retrieve all users, to retrieve one user by name, to
  * retrieve one user by id and to store one user.
+ * TODO: add updateOne() to GenericDAO
  *
  * @author dleertouwer
  * @version 1.0.9
@@ -75,10 +76,10 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             if (resultSet.next()) {
                 user = setUserWithResultset(resultSet);
             } else {
-                LOGGER.debug("Gebruiker '" + name + "' niet gevonden!");
+                LOGGER.debug("User '" + name + "' not found!");
             }
         } catch (SQLException sqlException) {
-            LOGGER.error("SQL error " + sqlException.getMessage());
+            LOGGER.error("SQL-error " + sqlException.getMessage());
         }
         return user;
     }
@@ -109,9 +110,8 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             } else {
                 throw new IllegalArgumentException("User with id '" + id + "' not found!");
             }
-
         } catch (SQLException sqlException) {
-            LOGGER.error("SQL error " + sqlException.getMessage());
+            LOGGER.error("SQL-error " + sqlException.getMessage());
         }
         return user;
     }
@@ -119,14 +119,15 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     /**
      * Stores a specific user in the database. Takes a User object as an argument, gets the field
      * values and makes use of a PreparedStatement to execute a parameterized SQL-query with these
-     * values. The user id (idUser) is an Auto Increment value, which is generated when the user is
-     * stored. {@link #executeInsertStatementWithKey()} executes an insert statement and
-     * returns the generated key, which is then set as the user id of the provided User object.
+     * values. The user id (idUser) is an Auto Increment value, which is generated when a new
+     * user is stored. The {@link #executeInsertStatementWithKey()} executes an insert statement
+     * and returns the generated key, which is then set as the user id of the provided User object.
      *
      * @throws SQLException if the parameter index is out of range; if a database access error
      * occurs; if other SQL-error occur
      * @see #setupPreparedStatementWithKey(String sql)
      * @see #executeInsertStatementWithKey()
+     * @since 1.0.0
      */
     @Override
     public void storeOne(User type) {
@@ -134,15 +135,32 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
                 "?,?,?);";
         try {
             setupPreparedStatementWithKey(sql);
-            preparedStatement.setString(1, type.getUserName());
-            preparedStatement.setString(2, type.getPassword());
-            preparedStatement.setString(3, type.getRole().name());
-            preparedStatement.setString(4, type.getFirstName());
-            preparedStatement.setString(5, type.getLastName());
-            int id = executeInsertStatementWithKey();
-            type.setIdUser(id);
+            setPreparedStatementParameters(type);
         } catch (SQLException sqlException) {
-            LOGGER.error("SQL error " + sqlException.getMessage());
+            LOGGER.error("SQL-error " + sqlException.getMessage());
+        }
+    }
+
+    public void updateOne(User type) {
+        String sql = "UPDATE User SET userName = ?, password = ?, role = ?, firstName = ?, " +
+                "lastName = ? where idUser = ?;";
+        try {
+            setupPreparedStatement(sql);
+            setPreparedStatementParameters(type);
+            executeManipulateStatement();
+        } catch (SQLException sqlException) {
+            LOGGER.error("SQL-error: " + sqlException.getMessage());
+        }
+    }
+
+    public void deleteOne(User type) {
+        String sql = "DELETE FROM User WHERE idUser = ?;";
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setInt(1, type.getIdUser());
+            executeManipulateStatement();
+        } catch (SQLException sqlException) {
+            LOGGER.error("SQL-error: " + sqlException.getMessage());
         }
     }
 
@@ -168,9 +186,22 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
                 userslist.add(user);
             }
         } catch (SQLException sqlException) {
-            LOGGER.error("SQL error " + sqlException.getMessage());
+            LOGGER.error("SQL-error " + sqlException.getMessage());
         }
         return userslist;
+    }
+
+    private void setPreparedStatementParameters(User user) throws SQLException {
+        preparedStatement.setString(1, user.getUserName());
+        preparedStatement.setString(2, user.getPassword());
+        preparedStatement.setString(3, user.getRole().name());
+        preparedStatement.setString(4, user.getFirstName());
+        preparedStatement.setString(5, user.getLastName());
+        // If the user isn't a new user (idUser == 0), we also need idUser to be able to execute an
+        // UPDATE statement
+        if (user.getIdUser() != 0) {
+            preparedStatement.setInt(6, user.getIdUser());
+        }
     }
 
 }

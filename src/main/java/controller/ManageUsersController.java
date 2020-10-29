@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
@@ -17,6 +19,7 @@ import view.Main;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class ManageUsersController {
 
@@ -46,7 +49,7 @@ public class ManageUsersController {
     }
 
     public void doCreateUser() {
-        //Main.getSceneManager().showCreateUpdateUserScene();
+        Main.getSceneManager().showCreateUpdateUserScene(selectedUser);
     }
 
     public void doUpdateUser() {
@@ -54,6 +57,7 @@ public class ManageUsersController {
     }
 
     public void doDeleteUser() {
+
     }
 
     public void populateList() {
@@ -80,6 +84,24 @@ public class ManageUsersController {
         userList.addEventHandler(MouseEvent.MOUSE_CLICKED, selectionHandler);
         userList.addEventHandler(TouchEvent.TOUCH_PRESSED, selectionHandler);
         userList.addEventHandler(KeyEvent.KEY_PRESSED, selectionHandler);
+    }
+
+    public void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Weet je het zeker?");
+        alert.setTitle("Meldingvenster");
+        alert.setHeaderText("Gebruiker verwijderen?");
+        alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) { // OK button pressed
+
+        } else if (result.get() == ButtonType.CANCEL) { // Cancel button pressed
+        } else {
+
+        }
+    }
+
+    private enum Operation {
+        CREATE, DELETE;
     }
 
 }
