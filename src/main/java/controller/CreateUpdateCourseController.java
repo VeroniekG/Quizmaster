@@ -21,7 +21,7 @@ public class CreateUpdateCourseController {
     @FXML
     private Button menuButton;
     @FXML
-    private Button makeButton;
+    private Button saveButton;
     @FXML
     private TextField courseNameTextfield;
     @FXML
@@ -32,6 +32,7 @@ public class CreateUpdateCourseController {
     }
 
     public void setup(Course course) {
+        titleLabel.setText("Wijzig cursus");
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
         courseNameTextfield.setText((String.valueOf(course.getCourseName())));
     }

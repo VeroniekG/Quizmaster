@@ -1,3 +1,5 @@
 package model;
 
-public class Quiz {}
+import javafx.scene.control.ListView;
+
+public class Quiz extends ListView<Quiz> {}
