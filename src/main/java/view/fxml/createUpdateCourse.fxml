@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateUpdateCourseController">
    <children>
-      <Label fx:id="titleLabel" layoutX="366.0" layoutY="47.0" text="Maak nieuwe cursus">
+      <Label fx:id="titleLabel" layoutX="356.0" layoutY="47.0" text="Maak nieuwe cursus">
          <font>
             <Font size="21.0" />
          </font>
@@ -21,13 +21,13 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Cursusnaam" GridPane.rowIndex="1">
+            <Label text="Cursusnaam:" GridPane.rowIndex="1">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="courseNameTextfield" prefHeight="37.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Cursus nummer">
+            <TextField fx:id="courseNameTextfield" prefHeight="38.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Cursusnummer:">
                <font>
                   <Font size="16.0" />
                </font>
@@ -35,11 +35,11 @@
             <TextField fx:id="courseIdTextfield" disable="true" prefHeight="26.0" prefWidth="141.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="menuButton" layoutX="366.0" layoutY="296.0" mnemonicParsing="false" onAction="#doMenu" prefHeight="42.0" prefWidth="86.0" text="Menu" AnchorPane.leftAnchor="366.0" AnchorPane.topAnchor="296.0">
+      <Button fx:id="menuButton" layoutX="356.0" layoutY="296.0" mnemonicParsing="false" onAction="#doMenu" prefHeight="42.0" prefWidth="86.0" text="Menu" AnchorPane.leftAnchor="356.0" AnchorPane.topAnchor="296.0">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="makeButton" contentDisplay="BOTTOM" layoutX="519.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#doStoreCourse" prefHeight="42.0" prefWidth="74.0" text="Maak" AnchorPane.topAnchor="296.0">
+      <Button fx:id="makeButton" contentDisplay="BOTTOM" layoutX="507.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#doStoreCourse" prefHeight="42.0" prefWidth="86.0" text="Maak" AnchorPane.topAnchor="296.0">
          <font>
             <Font size="15.0" />
          </font></Button>
