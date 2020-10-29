@@ -15,6 +15,7 @@ public class CreateUpdateCourseController {
     private DBAccess dbAccess;
     private CourseDAO courseDAO;
     private Course course;
+
     @FXML
     private Label titleLabel;
     @FXML
@@ -32,7 +33,7 @@ public class CreateUpdateCourseController {
 
     public void setup(Course course) {
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
-        courseNameTextfield.setText(courseNameTextfield.getSelectedText());
+        courseNameTextfield.setText((String.valueOf(course.getCourseName())));
     }
 
     //TJ menu knop terug naar menu

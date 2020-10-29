@@ -2,17 +2,10 @@ package controller;
 
 import database.mysql.CourseDAO;
 import database.mysql.DBAccess;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import model.Course;
 import view.Main;
 
@@ -23,6 +16,7 @@ public class ManageCoursesController {
     private DBAccess dbAccess;
     private CourseDAO courseDAO;
     private Course course;
+    private Course selectedCourse = null;
 
     @FXML
     public Button newCourseButton;
@@ -46,15 +40,19 @@ public class ManageCoursesController {
             courseList.getItems().add(course);
         } courseList.getSelectionModel().selectFirst();
     }
+    public void setSelectedUser() {
+        selectedCourse = courseList.getSelectionModel().getSelectedItem();
+    }
 
     public void doCreateCourse(ActionEvent actionEvent) {
         Main.getSceneManager().showCreateUpdateCourseScene(course);
     }
 
     public void doUpdateCourse(ActionEvent actionEvent) {
-        Course course = courseList.getSelectionModel().getSelectedItem();
-        Main.getSceneManager().showCreateUpdateCourseScene(course);
+        Course selectedCourse = courseList.getSelectionModel().getSelectedItem();
+        Main.getSceneManager().showCreateUpdateCourseScene(selectedCourse);
     }
+
     //@authorVG - select item and remove from ListView + use deleteCourse() to remove from DB
     public void doDeleteCourse(ActionEvent actionEvent) {
       Course selectedCourse  = courseList.getSelectionModel().getSelectedItem();
