@@ -1,5 +1,6 @@
 package database.mysql;
 
+import controller.CreateUpdateUserController;
 import model.Role;
 import model.User;
 import org.apache.logging.log4j.LogManager;
@@ -7,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 /**
@@ -136,6 +138,10 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
         try {
             setupPreparedStatementWithKey(sql);
             setPreparedStatementParameters(type);
+            type.setIdUser(executeInsertStatementWithKey());
+        } catch (SQLIntegrityConstraintViolationException duplicateUserName) {
+            LOGGER.error("Gebruikersnaam bestaat al!");
+            CreateUpdateUserController.setSqlErrorMessage("Gebruikersnaam bestaat al!");
         } catch (SQLException sqlException) {
             LOGGER.error("SQL-error " + sqlException.getMessage());
         }
@@ -148,6 +154,9 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             setupPreparedStatement(sql);
             setPreparedStatementParameters(type);
             executeManipulateStatement();
+        } catch (SQLIntegrityConstraintViolationException duplicateUserName) {
+            LOGGER.error("Gebruikersnaam bestaat al!");
+            CreateUpdateUserController.setSqlErrorMessage("Gebruikersnaam bestaat al!");
         } catch (SQLException sqlException) {
             LOGGER.error("SQL-error: " + sqlException.getMessage());
         }

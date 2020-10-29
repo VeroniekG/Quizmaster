@@ -1,24 +1,37 @@
 package controller;
 
 import database.mysql.UserDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.Role;
 import model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.Main;
 
+/**
+ * TODO: Refactor and remove code duplicates, validation
+ */
 public class CreateUpdateUserController {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateUpdateUserController.class);
     private static final WarningMessage[] WARNING_MESSAGES =
             new WarningMessage[]{WarningMessage.USER_FIRSTNAME, WarningMessage.USER_LASTNAME,
                     WarningMessage.USER_USERNAME, WarningMessage.USER_PASSWORD};
+    private static final ObservableList<Role> ROLE_OPTIONS =
+            FXCollections.observableArrayList(Role.class.getEnumConstants());
     private static boolean isValidInput;
     private static boolean userHasUpdate;
+    private static String sqlErrorMessage = "";
     private final UserDAO userDAO;
     @FXML
     Label labelTitle;
+    @FXML
+    TextField textFieldIdUser;
+    @FXML
+    Label labelWarnIdUser;
     @FXML
     TextField textFieldFirstName;
     @FXML
@@ -36,6 +49,8 @@ public class CreateUpdateUserController {
     @FXML
     Label labelWarnPassword;
     @FXML
+    ComboBox<Role> comboBoxRole;
+    @FXML
     Button buttonMenu;
     @FXML
     Button buttonCreateUpdate;
@@ -47,6 +62,7 @@ public class CreateUpdateUserController {
     public CreateUpdateUserController() {
         userDAO = new UserDAO(Main.getDBaccess());
         inputItems = new String[4];
+        comboBoxRole = new ComboBox<>();
     }
 
     /**
@@ -65,6 +81,14 @@ public class CreateUpdateUserController {
         warningLabels = new Label[]{labelWarnFirstName, labelWarnLastName, labelWarnUserName,
                 labelWarnPassword};
         this.user = user;
+        // https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ComboBox.html
+        comboBoxRole.setItems(ROLE_OPTIONS);
+        if (user.getIdUser() != 0) { // not a new user
+            textFieldIdUser.setText(Integer.toString(user.getIdUser()));
+            comboBoxRole.setValue(user.getRole());
+        } else {
+            comboBoxRole.getSelectionModel().selectFirst();
+        }
         textFieldFirstName.setText(user.getFirstName());
         textFieldLastName.setText(user.getLastName());
         textFieldUserName.setText(user.getUserName());
@@ -74,22 +98,34 @@ public class CreateUpdateUserController {
     }
 
     public void doMenu() {
+        ManageUsersController.setSelectedUser(user);
         Main.getSceneManager().showManageUserScene();
     }
 
     public void doCreateUpdateUser() {
+        sqlErrorMessage = "";
         updateFields(); // updates all fields and sets isValidInput
-        if (isValidInput) {
+        if (isValidInput && sqlErrorMessage.equals("")) {
             updateUser(); // updates user and sets userHasUpdate if attributes have valid changes
         }
         if (user.getIdUser() == 0 && userHasUpdate) { // storing a valid new user
             userDAO.storeOne(user);
-            doMenu();
-            showAlert(Operation.CREATE);
-        } else if (userHasUpdate) { // storing a valid updated user
-            userDAO.updateOne(user);
-            doMenu();
-            showAlert(Operation.UPDATE);
+            if (sqlErrorMessage.equals("")) {
+                doMenu();
+                showAlert(Operation.CREATE);
+            } else {
+                updateFields();
+                labelWarnUserName.setText(sqlErrorMessage);
+            }
+        } else if (isValidInput && userHasUpdate) { // storing a valid updated user
+            if (sqlErrorMessage.equals("") || sqlErrorMessage.isEmpty()) {
+                userDAO.updateOne(user);
+                doMenu();
+                showAlert(Operation.UPDATE);
+            } else {
+                updateFields();
+                labelWarnUserName.setText(sqlErrorMessage);
+            }
         } else if (isValidInput && !userHasUpdate) {
             doMenu();
             showAlert(Operation.NONE);
@@ -103,22 +139,25 @@ public class CreateUpdateUserController {
     }
 
     private boolean isEmptyField(TextField inputField) {
-        if (inputField.getText().isEmpty()) {
+        if (inputField.getText().isEmpty() || inputField.getText().equals("")) {
             return true;
         }
         return false;
     }
 
     private void updateFields() {
-        isValidInput = true;
+        boolean validInput = true;
         for (int i = 0; i < inputFields.length; i++) {
             warningLabels[i].setText("");
             inputFields[i].setStyle("-fx-border-color: inherit;");
             if (isEmptyField(inputFields[i])) {
                 warningLabels[i].setText(WARNING_MESSAGES[i].getMessage());
                 inputFields[i].setStyle("-fx-border-color:red;");
-                isValidInput = false;
+                validInput = false;
             }
+        }
+        if (sqlErrorMessage == "" || sqlErrorMessage.isEmpty()) { // valid input & no sql error
+            isValidInput = validInput;
         }
     }
 
@@ -151,7 +190,7 @@ public class CreateUpdateUserController {
                 .withLastName(inputFields[1].getText())
                 .withUserName(inputFields[2].getText())
                 .withPassword(inputFields[3].getText())
-                .withRole(user.getRole())
+                .withRole(comboBoxRole.getSelectionModel().getSelectedItem())
                 .update();
         if (updatedUser.equals(user)) {
             userHasUpdate = false;
@@ -183,6 +222,10 @@ public class CreateUpdateUserController {
         }
         alert.setContentText(alertMessage);
         alert.show();
+    }
+
+    public static void setSqlErrorMessage(String message) {
+        sqlErrorMessage = message;
     }
 
     private enum Operation {

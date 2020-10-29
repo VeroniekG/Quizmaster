@@ -20,15 +20,13 @@ public enum Role {
 
     private final String roleName;
 
-    private Role(String roleName) {
+    Role(String roleName) {
         this.roleName = roleName;
     }
 
     @Override
     public String toString() {
-        return "Role{" +
-                "roleName='" + roleName + '\'' +
-                '}';
+        return roleName;
     }
 
     public String getRoleName() {
