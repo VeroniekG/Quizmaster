@@ -16,8 +16,8 @@ public class Main extends Application {
     private static final Logger LOGGER = LogManager.getRootLogger();
     private static SceneManager sceneManager = null;
     private static Stage primaryStage = null;
-    private static database.mysql.DBAccess dbAccessMySql = null;
-    private static database.couchdb.DBAccess dbAccessCouchDb = null;
+    private static database.mysql.DBAccess dbAccessMySql;
+    private static database.couchdb.DBAccess dbAccessCouchDb;
 
     private static User currentUser = null;
 
@@ -83,9 +83,9 @@ public class Main extends Application {
     }
 
     public static database.mysql.DBAccess getDBaccessMySql() {
-        String dbName = applicationSetup.getProperties().getProperty("jdbc.database.name");
-        String dbUser = applicationSetup.getProperties().getProperty("jdbc.database.user");
-        String dbPasword = applicationSetup.getProperties().getProperty("jdbc.database.password");
+        String dbName = applicationSetup.getProperties().getProperty("mysql.database.name");
+        String dbUser = applicationSetup.getProperties().getProperty("msql.database.user");
+        String dbPasword = applicationSetup.getProperties().getProperty("mysql.database.password");
         if (dbAccessMySql == null) {
             dbAccessMySql = new database.mysql.DBAccess(dbName, dbUser, dbPasword);
         }
