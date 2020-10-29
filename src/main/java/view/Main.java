@@ -84,7 +84,7 @@ public class Main extends Application {
 
     public static database.mysql.DBAccess getDBaccessMySql() {
         String dbName = applicationSetup.getProperties().getProperty("mysql.database.name");
-        String dbUser = applicationSetup.getProperties().getProperty("msql.database.user");
+        String dbUser = applicationSetup.getProperties().getProperty("mysql.database.user");
         String dbPasword = applicationSetup.getProperties().getProperty("mysql.database.password");
         if (dbAccessMySql == null) {
             dbAccessMySql = new database.mysql.DBAccess(dbName, dbUser, dbPasword);
