@@ -18,7 +18,7 @@ public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
     @Override
     public ArrayList<Quiz> getAll() {
 
-        String sql = "Select * from Quiz";
+        String sql = "Select * from quiz";
         ArrayList<Quiz> quizlist = new ArrayList<>();
         try{
             setupPreparedStatement(sql);
@@ -39,7 +39,7 @@ public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
     @Override
     public Quiz getOneById(int id) {
 
-        String sql = "SELECT * FROM Quiz WHERE idQuiz = ?";
+        String sql = "SELECT * FROM quiz WHERE idQuiz = ?";
         Quiz quiz = null;
         try {
             setupPreparedStatement(sql);

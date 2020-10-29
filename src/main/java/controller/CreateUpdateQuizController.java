@@ -64,9 +64,11 @@ public class CreateUpdateQuizController {
         if (quiz != null) {
             if (quizIdTextfield.getText().isEmpty()) {
                 quizDAO.storeOne(quiz);
+                System.out.println(quiz.getIdQuiz());
+                System.out.flush();
                 quizIdTextfield.setText(String.valueOf(quiz.getIdQuiz()));
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                saved.setContentText("Quiz opgeslagen");
+                saved.setContentText("Quiz succesvol opgeslagen" + quiz.getIdQuiz());
                 saved.show();
             } else {
                 int id = Integer.parseInt(quizIdTextfield.getText());
