@@ -18,7 +18,7 @@ public class CreateUpdateQuizController {
     private DBAccess dbAccess;
     private Quiz quiz;
     @FXML
-    public Button composeButton;
+    private Button composeButton;
     @FXML
     private Label titleLabel;
 
@@ -40,7 +40,7 @@ public class CreateUpdateQuizController {
 
     //TJ menu knop terug naar menu
     public void doMenu(ActionEvent actionEvent) {
-        Main.getSceneManager().showWelcomeScene();
+        Main.getSceneManager().showManageQuizScene();
     }
 
     //TJ toegevoegde methode om quizen toe te voegen
