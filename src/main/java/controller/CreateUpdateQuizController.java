@@ -11,14 +11,19 @@ import model.Quiz;
 import view.Main;
 
 public class CreateUpdateQuizController {
+    @FXML
     public Button menuButton;
     private QuizDAO quizDAO;
     private DBAccess dbAccess;
     private Quiz quiz;
+    @FXML
     public Button composeButton;
-
+    @FXML
     private Label titleLabel;
+
+    @FXML
     private TextField quizIdTextfield;
+    @FXML
     private TextField quizNameTextfield;
 
 
