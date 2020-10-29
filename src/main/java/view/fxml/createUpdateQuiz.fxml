@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateUpdateQuizController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateUpdateQuizController">
    <children>
       <Label fx:id="titleLabel" layoutX="14.0" layoutY="14.0" text="Maak nieuwe Quiz">
          <font>
@@ -26,7 +27,7 @@
             <TextField fx:id="quizNameTextfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="menuButton" layoutX="124.0" layoutY="147.0" mnemonicParsing="false" text="Menu" />
-      <Button fx:id="composeButton" layoutX="206.0" layoutY="147.0" mnemonicParsing="false" text="Maak" />
+      <Button fx:id="menuButton" layoutX="124.0" layoutY="147.0" mnemonicParsing="false" onAction="#doMenu" text="Menu" />
+      <Button fx:id="composeButton" layoutX="206.0" layoutY="147.0" mnemonicParsing="false" onAction="#doStoreQuiz" text="Maak" />
    </children>
 </AnchorPane>

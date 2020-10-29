@@ -16,7 +16,7 @@ public class Quiz {
 
     @Override
     public String toString() {
-        return quizName;
+        return "" + quizName + " ";
     }
 
     public int getIdQuiz() {

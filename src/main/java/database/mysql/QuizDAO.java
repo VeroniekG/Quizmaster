@@ -81,4 +81,16 @@ public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
             System.out.println("SQL error" + sqlException.getMessage());
         }
     }
+    // TJ methode togevoegd om quizzen op te slaan in db
+    public void updateQuiz(Quiz quiz){
+        String sql = "Update quiz Set quizName = ? where idQuiz = ?;";
+        try{
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, quiz.getQuizName());
+            preparedStatement.setInt(2, quiz.getIdQuiz());
+            executeManipulateStatement();
+        } catch (SQLException sqlException){
+            System.out.println("SQL error " + sqlException.getMessage());
+        }
+    }
 }
