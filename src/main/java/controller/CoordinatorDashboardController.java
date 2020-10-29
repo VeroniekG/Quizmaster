@@ -12,21 +12,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.InputEvent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import model.Course;
 import model.Question;
 import model.Quiz;
-import model.User;
 import view.Main;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-
 public class CoordinatorDashboardController {
+
     private CourseDAO courseDAO;
     private DBAccess dbAccess;
 
@@ -49,7 +44,7 @@ public class CoordinatorDashboardController {
         courseList = new ListView<>();
         quizList = new ListView<>();
         questionList = new ListView<>();
-        courseDAO = new CourseDAO(Main.getDBaccess());
+        courseDAO = new CourseDAO(Main.getDBaccessMySql());
         // QuizDAO
         //QuestionDA
     }
@@ -60,27 +55,31 @@ public class CoordinatorDashboardController {
         courseList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Course>() {
                     @Override
-                    public void changed(ObservableValue<? extends Course> observableValue, Course oldCourse, Course newCourse) {
+                    public void changed(ObservableValue<? extends Course> observableValue,
+                                        Course oldCourse, Course newCourse) {
                         System.out.println("Geselecteerde cursus: " + observableValue + ", " + oldCourse + ", " + newCourse);
                     }
                 });
         quizList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Quiz>() {
                     @Override
-                    public void changed(ObservableValue<? extends Quiz> observableValue, Quiz oldQuiz, Quiz newQuiz) {
+                    public void changed(ObservableValue<? extends Quiz> observableValue,
+                                        Quiz oldQuiz, Quiz newQuiz) {
                         System.out.println("Geselecteerde quiz: " + observableValue + ", " + oldQuiz + ", " + newQuiz);
                     }
                 });
         questionList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Question>() {
                     @Override
-                    public void changed(ObservableValue<? extends Question> observableValue, Question oldQuestion, Question newQuestion) {
+                    public void changed(ObservableValue<? extends Question> observableValue,
+                                        Question oldQuestion, Question newQuestion) {
                     }
                 }
         );
 
     }//VG - select course, retrieve corresponding quiz(zes) + corresponding questions
-   public void handleMouseClick(MouseEvent mouseEvent){
+
+    public void handleMouseClick(MouseEvent mouseEvent) {
         EventHandler<InputEvent> selectionHandler = inputEvent -> {
             courseList.getSelectionModel().getSelectedItem();
             quizList.getItems();
@@ -114,8 +113,7 @@ public class CoordinatorDashboardController {
         ObservableList<Course> courseObservableList = FXCollections.observableArrayList(allCourse);
         courseList.setItems(courseObservableList);
         courseList.getSelectionModel().selectFirst();
-        }
-
+    }
 
 }
 
