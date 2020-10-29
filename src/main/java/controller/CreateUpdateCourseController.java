@@ -15,12 +15,13 @@ public class CreateUpdateCourseController {
     private DBAccess dbAccess;
     private CourseDAO courseDAO;
     private Course course;
+
     @FXML
     private Label titleLabel;
     @FXML
     private Button menuButton;
     @FXML
-    private Button makeButton;
+    private Button saveButton;
     @FXML
     private TextField courseNameTextfield;
     @FXML
@@ -31,8 +32,9 @@ public class CreateUpdateCourseController {
     }
 
     public void setup(Course course) {
+        titleLabel.setText("Wijzig cursus");
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
-        courseNameTextfield.setText(courseNameTextfield.getSelectedText());
+        courseNameTextfield.setText((String.valueOf(course.getCourseName())));
     }
 
     //TJ menu knop terug naar menu
