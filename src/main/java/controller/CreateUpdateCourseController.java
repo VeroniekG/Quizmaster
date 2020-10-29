@@ -1,9 +1,9 @@
 package controller;
 
 import database.mysql.CourseDAO;
-import javafx.fxml.FXML;
 import database.mysql.DBAccess;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +12,7 @@ import model.Course;
 import view.Main;
 
 public class CreateUpdateCourseController {
+
     private DBAccess dbAccess;
     private CourseDAO courseDAO;
     private Course course;
@@ -27,7 +28,7 @@ public class CreateUpdateCourseController {
     private TextField courseIdTextfield;
 
     public CreateUpdateCourseController() {
-        courseDAO = new CourseDAO(Main.getDBaccess());
+        courseDAO = new CourseDAO(Main.getDBaccessMySql());
     }
 
     public void setup(Course course) {
@@ -54,6 +55,7 @@ public class CreateUpdateCourseController {
             course = new Course(coursename);
         }
     }
+
     //@VG check in DB if idCourse already exist. If so --> update course  If not --> new course
     public void doStoreCourse(ActionEvent actionEvent) {
         createCourse();
@@ -74,5 +76,6 @@ public class CreateUpdateCourseController {
             }
         }
     }
+
 }
 

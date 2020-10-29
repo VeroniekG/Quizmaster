@@ -32,7 +32,7 @@ public class ManageUsersController {
 
     public ManageUsersController() {
         userList = new ListView<>();
-        userDAO = new UserDAO(Main.getDBaccess());
+        userDAO = new UserDAO(Main.getDBaccessMySql());
     }
 
     public void setup() {

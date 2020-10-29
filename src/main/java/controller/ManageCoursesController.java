@@ -2,27 +2,16 @@ package controller;
 
 import database.mysql.CourseDAO;
 import database.mysql.DBAccess;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import model.Course;
 import view.Main;
 
 import java.util.ArrayList;
 
 public class ManageCoursesController {
-
-    private DBAccess dbAccess;
-    private CourseDAO courseDAO;
-    private Course course;
 
     @FXML
     public Button newCourseButton;
@@ -31,12 +20,15 @@ public class ManageCoursesController {
     @FXML
     public Button updateButton;
     @FXML
-    ListView<Course> courseList;
-    @FXML
     public Button removeButton;
+    @FXML
+    ListView<Course> courseList;
+    private DBAccess dbAccess;
+    private CourseDAO courseDAO;
+    private Course course;
 
     public ManageCoursesController() {
-        this.dbAccess = Main.getDBaccess();
+        this.dbAccess = Main.getDBaccessMySql();
         courseDAO = new CourseDAO(dbAccess);
     }
 
@@ -44,7 +36,8 @@ public class ManageCoursesController {
         ArrayList<Course> allCourses = courseDAO.getAll();
         for (Course course : allCourses) {
             courseList.getItems().add(course);
-        } courseList.getSelectionModel().selectFirst();
+        }
+        courseList.getSelectionModel().selectFirst();
     }
 
     public void doCreateCourse(ActionEvent actionEvent) {
@@ -55,9 +48,10 @@ public class ManageCoursesController {
         Course course = courseList.getSelectionModel().getSelectedItem();
         Main.getSceneManager().showCreateUpdateCourseScene(course);
     }
+
     //@authorVG - select item and remove from ListView + use deleteCourse() to remove from DB
     public void doDeleteCourse(ActionEvent actionEvent) {
-      Course selectedCourse  = courseList.getSelectionModel().getSelectedItem();
+        Course selectedCourse = courseList.getSelectionModel().getSelectedItem();
         courseList.getItems().remove(selectedCourse);
         courseDAO.deleteCourse(selectedCourse);
     }

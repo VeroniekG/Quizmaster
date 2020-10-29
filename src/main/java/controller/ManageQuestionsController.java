@@ -10,25 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import model.Question;
-import org.apache.logging.log4j.core.appender.rolling.action.Action;
 import view.Main;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
 public class ManageQuestionsController {
-
-    @FXML
-    ListView<Question> questionsList;
-
-    @FXML
-    TextField warningText;
-
-    private QuestionDAO questionDAO;
-    private DBAccess dbAccess;
-    private Question question;
-
 
     @FXML
     public Button newQuestionButton;
@@ -40,16 +26,23 @@ public class ManageQuestionsController {
     public Button updateButton;
     @FXML
     public Button makeButton;
+    @FXML
+    ListView<Question> questionsList;
+    @FXML
+    TextField warningText;
+    private QuestionDAO questionDAO;
+    private DBAccess dbAccess;
+    private Question question;
 
-
-    public ManageQuestionsController(){
-        this.dbAccess = Main.getDBaccess();
+    public ManageQuestionsController() {
+        this.dbAccess = Main.getDBaccessMySql();
         questionDAO = new QuestionDAO(dbAccess);
     }
 
     public void setup() {
         List<Question> allQuestions = questionDAO.getAll();
-        ObservableList<Question> questionObservableList = FXCollections.observableArrayList(allQuestions);
+        ObservableList<Question> questionObservableList =
+                FXCollections.observableArrayList(allQuestions);
         questionsList.setItems(questionObservableList);
         questionsList.getSelectionModel().selectFirst();
     }
@@ -59,19 +52,19 @@ public class ManageQuestionsController {
         Main.getSceneManager().showWelcomeScene();
     }
 
-
-    public void doCreateQuestion(){
+    public void doCreateQuestion() {
         Main.getSceneManager().showCreateUpdateQuestionScene(question);
     }
 
-    public void doUpdateQuestion(ActionEvent actionEvent){
+    public void doUpdateQuestion(ActionEvent actionEvent) {
         Question question = questionsList.getSelectionModel().getSelectedItem();
         Main.getSceneManager().showCreateUpdateQuestionScene(question);
     }
 
-    public void doDeleteQuestion(){
-        Question selectedQuestion  = questionsList.getSelectionModel().getSelectedItem();
+    public void doDeleteQuestion() {
+        Question selectedQuestion = questionsList.getSelectionModel().getSelectedItem();
         questionsList.getItems().remove(selectedQuestion);
         questionDAO.deleteQuestion(selectedQuestion);
     }
+
 }

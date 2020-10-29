@@ -25,7 +25,7 @@ import static model.MenuItem.*;
  */
 public class WelcomeController {
 
-    private static final DBAccess dbAccess = Main.getDBaccess();
+    private static final DBAccess dbAccess = Main.getDBaccessMySql();
     public Button logoutButton;
     @FXML
     private Label welcomeLabel;

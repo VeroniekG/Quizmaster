@@ -1,7 +1,6 @@
 package view;
 
 import config.ApplicationSetup;
-import database.mysql.DBAccess;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.User;
@@ -17,31 +16,43 @@ public class Main extends Application {
     private static final Logger LOGGER = LogManager.getRootLogger();
     private static SceneManager sceneManager = null;
     private static Stage primaryStage = null;
-    private static DBAccess dbAccess = null;
+    private static database.mysql.DBAccess dbAccessMySql = null;
+    private static database.couchdb.DBAccess dbAccessCouchDb = null;
+
     private static User currentUser = null;
 
     public static void main(String[] args) {
         applicationSetup.load();
         setLogging();
-        dbAccess = getDBaccess();
-        dbAccess.loadDriver();
+        dbAccessMySql = getDBaccessMySql();
+        dbAccessMySql.loadDriver();
+        dbAccessCouchDb = getDbAccessCouchDb();
+        getCouchDbConnection();
         launch(args);
     }
 
     public static void setLogging() {
-        // Redirect System.out to logger
-        System.setOut(
-                IoBuilder.forLogger(LogManager.getLogger("system.out"))
-                        .setLevel(Level.INFO)
-                        .buildPrintStream()
-        );
         // Redirect System.err to logger
         System.setErr(
                 IoBuilder.forLogger(LogManager.getLogger("system.err"))
                         .setLevel(Level.WARN)
                         .buildPrintStream()
         );
+        // Redirect System.out to logger
+        System.setOut(
+                IoBuilder.forLogger(LogManager.getLogger("system.out"))
+                        .setLevel(Level.INFO)
+                        .buildPrintStream()
+        );
+    }
 
+    public static void getCouchDbConnection() {
+        try {
+            dbAccessCouchDb.setupConnection();
+            LOGGER.info("CouchDB connection open.");
+        } catch (Exception connectionError) {
+            LOGGER.error("CouchDB connection error: " + connectionError.getMessage());
+        }
     }
 
     @Override
@@ -71,14 +82,18 @@ public class Main extends Application {
         Main.currentUser = currentUser;
     }
 
-    public static DBAccess getDBaccess() {
+    public static database.mysql.DBAccess getDBaccessMySql() {
         String dbName = applicationSetup.getProperties().getProperty("jdbc.database.name");
         String dbUser = applicationSetup.getProperties().getProperty("jdbc.database.user");
         String dbPasword = applicationSetup.getProperties().getProperty("jdbc.database.password");
-        if (dbAccess == null) {
-            dbAccess = new DBAccess(dbName, dbUser, dbPasword);
+        if (dbAccessMySql == null) {
+            dbAccessMySql = new database.mysql.DBAccess(dbName, dbUser, dbPasword);
         }
-        return dbAccess;
+        return dbAccessMySql;
+    }
+
+    public static database.couchdb.DBAccess getDbAccessCouchDb() {
+        return new database.couchdb.DBAccess();
     }
 
 }

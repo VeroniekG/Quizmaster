@@ -38,7 +38,7 @@ public class LoginController {
     private PasswordField passwordField;
 
     public LoginController() {
-        userDAO = new UserDAO(Main.getDBaccess());
+        userDAO = new UserDAO(Main.getDBaccessMySql());
     }
 
     @FXML

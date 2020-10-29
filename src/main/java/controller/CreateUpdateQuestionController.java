@@ -4,21 +4,21 @@ import database.mysql.DBAccess;
 import database.mysql.QuestionDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import model.Question;
 import view.Main;
 
 public class CreateUpdateQuestionController {
 
+    //    @FXML
+    //    ListView<Question> questionsList;
+    @FXML
+    TextField warningText;
     private QuestionDAO questionDAO;
     private DBAccess dbAccess;
     private Question question;
-
-
-//    @FXML
-//    ListView<Question> questionsList;
-    @FXML
-    TextField warningText;
     @FXML
     private Label titleLabel;
     @FXML
@@ -34,9 +34,8 @@ public class CreateUpdateQuestionController {
     @FXML
     private TextField antwoordOnjuist3Textfield;
 
-
-    public CreateUpdateQuestionController(){
-        questionDAO = new QuestionDAO(Main.getDBaccess());
+    public CreateUpdateQuestionController() {
+        questionDAO = new QuestionDAO(Main.getDBaccessMySql());
     }
 
     // HL - To edit selected customer, all fields are filled with values from the database
@@ -75,7 +74,8 @@ public class CreateUpdateQuestionController {
             correcteInvoer = false;
             question = null;
         } else {
-            question = new Question(vraag, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2, antwoordOnjuist3);
+            question = new Question(vraag, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2,
+                    antwoordOnjuist3);
         }
     }
 
@@ -83,14 +83,14 @@ public class CreateUpdateQuestionController {
 
     public void doStoreQuestion(ActionEvent actionEvent) {
         createQuestion();
-        if (question != null){
-            if (vraagnummerTextfield.getText().isEmpty()){
+        if (question != null) {
+            if (vraagnummerTextfield.getText().isEmpty()) {
                 questionDAO.storeOne(question);
                 vraagnummerTextfield.setText(String.valueOf(question.getIdQuestion()));
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
                 saved.setContentText("Vraag is opgeslagen");
                 saved.show();
-        } else {
+            } else {
                 int id = Integer.parseInt(vraagnummerTextfield.getText());
                 question.setIdQuestion(id);
                 questionDAO.updateQuestion(question);
@@ -98,10 +98,11 @@ public class CreateUpdateQuestionController {
                 saved.setContentText("Vraag gewijzigd");
                 saved.show();
             }
+        }
+
+        //    public void doCreateUpdateQuestion(Question question) {
+        //    }
+
     }
 
-//    public void doCreateUpdateQuestion(Question question) {
-//    }
-
-
-}}
+}
