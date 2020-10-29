@@ -22,12 +22,11 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             while (resultSet.next()) {
                 int idQuestion = resultSet.getInt("idQuestion");
                 String description = resultSet.getString("description");
-                int idAnswer = resultSet.getInt("idAnswer");
                 String answerRight = resultSet.getString("answerRight");
                 String answerWrong1 = resultSet.getString("answerWrong1");
                 String answerWrong2 = resultSet.getString("answerWrong2");
                 String answerWrong3 = resultSet.getString("answerWrong3");
-                question = new Question(idQuestion,description,idAnswer,answerRight,answerWrong1,answerWrong2,answerWrong3);
+                question = new Question(idQuestion,description,answerRight,answerWrong1,answerWrong2,answerWrong3);
                 questionsList.add(question);
             }
         } catch (SQLException sqlException) {
@@ -60,10 +59,14 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
     @Override
     public void storeOne(Question type) {
-        String sql = "INSERT INTO question(description) VALUES(?);";
+        String sql = "INSERT INTO Question(description, answerRight, answerWrong1, answerWrong2, answerWrong3) VALUES(?,?,?,?,?) ;";
         try {
             setupPreparedStatementWithKey(sql);
             preparedStatement.setString(1, type.getDescription());
+            preparedStatement.setString(2, type.getAnswerRight());
+            preparedStatement.setString(3, type.getAnswerWrong1());
+            preparedStatement.setString(4, type.getAnswerWrong2());
+            preparedStatement.setString(5, type.getAnswerWrong3());
             int id = executeInsertStatementWithKey();
             type.setIdQuestion(id);
         } catch (SQLException sqlException) {
@@ -71,5 +74,33 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
         }
 
     }
+
+    public void updateQuestion (Question question){
+        String sql = "Update Question Set description = ?, answerRight = ?, answerWrong1 = ?, answerWrong2 = ?, answerWrong3 = ? where idQuestion = ?;";
+        try{
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, question.getDescription());
+            preparedStatement.setString(2, question.getAnswerRight());
+            preparedStatement.setString(3, question.getAnswerWrong1());
+            preparedStatement.setString(4, question.getAnswerWrong2());
+            preparedStatement.setString(5, question.getAnswerWrong3());
+            preparedStatement.setInt(6, question.getIdQuestion());
+            executeManipulateStatement();
+        } catch (SQLException sqlException){
+            System.out.println("SQL error " + sqlException.getMessage());
+        }
+    }
+
+    public void deleteQuestion(Question question){
+        String sql = "DELETE FROM question WHERE idQuestion = ?;";
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setInt(1, question.getIdQuestion());
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException){
+            System.out.println("SQL error" + sqlException.getMessage());
+        }
+    }
+
 
 }
