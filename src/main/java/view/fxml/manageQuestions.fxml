@@ -15,17 +15,17 @@
             <Font size="18.0" />
         </font>
     </Label>
-    <Button fx:id="doCreateQuestion" layoutX="13.0" layoutY="285.0" mnemonicParsing="false" onAction="#doCreateQuestion" text="Nieuw">
+    <Button fx:id="newQuestionButton" layoutX="13.0" layoutY="285.0" mnemonicParsing="false" onAction="#doCreateQuestion" text="Nieuw">
         <font>
             <Font size="14.0" />
         </font>
     </Button>
-    <Button fx:id="doUpdateQuestion" layoutX="113.0" layoutY="285.0" mnemonicParsing="false" onAction="#doUpdateQuestion" text="Wijzig">
+    <Button fx:id="updateButton" layoutX="113.0" layoutY="285.0" mnemonicParsing="false" onAction="#doUpdateQuestion" text="Wijzig">
         <font>
             <Font size="14.0" />
         </font>
     </Button>
-    <Button fx:id="doDeleteQuestion" layoutX="217.0" layoutY="285.0" mnemonicParsing="false" onAction="#doDeleteQuestion" text="Verwijder">
+    <Button fx:id="deleteButton" layoutX="217.0" layoutY="285.0" mnemonicParsing="false" onAction="#doDeleteQuestion" text="Verwijder">
         <font>
             <Font size="14.0" />
         </font>

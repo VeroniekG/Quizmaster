@@ -4,28 +4,31 @@ public class Question {
 
     private int idQuestion;
     private String description;
-    private int idAnswer;
     private String answerRight;
     private String answerWrong1;
     private String answerWrong2;
     private String answerWrong3;
 
-    public Question(int idQuestion, String question) {
+    public Question(String question) {
         this.idQuestion = idQuestion;
         this.description = question;
     }
 
-    public Question(int idQuestion, String question, int idAnswer, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
+    public Question(int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
         this.idQuestion = idQuestion;
-        this.description = question;
-        this.idAnswer = idAnswer;
+        this.description = description;
         this.answerRight = answerRight;
         this.answerWrong1 = answerWrong1;
         this.answerWrong2 = answerWrong2;
         this.answerWrong3 = answerWrong3;
     }
 
-    public Question(String description) {
+    public Question(String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
+        this.description = description;
+        this.answerRight = answerRight;
+        this.answerWrong1 = answerWrong1;
+        this.answerWrong2 = answerWrong2;
+        this.answerWrong3 = answerWrong3;
     }
 
     public int getIdQuestion() {
@@ -42,14 +45,6 @@ public class Question {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getIdAnswer() {
-        return idAnswer;
-    }
-
-    public void setIdAnswer(int idAnswer) {
-        this.idAnswer = idAnswer;
     }
 
     public String getAnswerRight() {
@@ -84,13 +79,13 @@ public class Question {
         this.answerWrong3 = answerWrong3;
     }
 
-    //toString
 
+    //HL - toString
 
     @Override
     public String toString() {
 
-        return "Vraag " + idQuestion + ": " + description;
+        return description;
     }
 }
 
