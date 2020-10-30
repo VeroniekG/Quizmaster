@@ -72,7 +72,7 @@ public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
 
     }
     public void deleteQuiz(Quiz quiz){
-        String sql = "DELETE FROM course WHERE idQuiz = ?;";
+        String sql = "DELETE FROM quiz WHERE idQuiz = ?;";
         try {
             setupPreparedStatement(sql);
             preparedStatement.setInt(1, quiz.getIdQuiz());
