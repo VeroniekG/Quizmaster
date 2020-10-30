@@ -105,4 +105,7 @@ public class CreateUpdateQuestionController {
 
     }
 
+    public void doBack(ActionEvent actionEvent) {
+        Main.getSceneManager().showManageQuestionsScene();
+    }
 }

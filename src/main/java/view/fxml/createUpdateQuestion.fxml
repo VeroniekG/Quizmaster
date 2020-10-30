@@ -6,8 +6,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateUpdateQuestionController">
    <children>
-      <Button fx:id= "menuButton" layoutX="153.0" layoutY="295.0" mnemonicParsing="false" onAction="#doMenu" text="Menu" />
-       <Button fx:id= "makeButton" layoutX="245.0" layoutY="295.0" mnemonicParsing="false" onAction="#doStoreQuestion" text="Sla op" />
+      <Button fx:id="menuButton" layoutX="153.0" layoutY="295.0" mnemonicParsing="false" onAction="#doMenu" text="Menu" />
+       <Button fx:id="makeButton" layoutX="245.0" layoutY="295.0" mnemonicParsing="false" onAction="#doStoreQuestion" text="Sla op" />
       <GridPane layoutX="130.0" layoutY="125.0" prefHeight="150.0" prefWidth="400.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="124.0" />
@@ -24,11 +24,7 @@
         </rowConstraints>
          <children>
             <Label contentDisplay="CENTER" text="Vraag" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label text="Juist antwoord" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <Label text="Juist antwoord" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label alignment="CENTER" contentDisplay="CENTER" text="Onjuist antwoord" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Label alignment="CENTER" contentDisplay="CENTER" text="Onjuist antwoord 2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Label alignment="CENTER" contentDisplay="CENTER" text="Onjuist antwoord 3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
@@ -46,5 +42,6 @@
             <Font size="21.0" />
          </font>
       </Label>
+      <Button fx:id="terugKnop" layoutX="395.0" layoutY="295.0" mnemonicParsing="false" onAction="#doBack" text="Terug naar vragenlijst" />
    </children>
 </AnchorPane>
