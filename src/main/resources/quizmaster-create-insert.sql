@@ -8,6 +8,17 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
         'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
+-- Schema Quizmaster
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `Quizmaster`;
+
+-- -----------------------------------------------------
+-- Schema Quizmaster
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Quizmaster` DEFAULT CHARACTER SET utf8;
+USE `Quizmaster`;
+
+-- -----------------------------------------------------
 -- Database user for Schema Quizmaster
 -- -----------------------------------------------------
 CREATE USER IF NOT EXISTS 'userQuizmaster'@'localhost'
@@ -28,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Course`
     `idCourse`   INT         NOT NULL AUTO_INCREMENT,
     `courseName` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`idCourse`)
+
 )
     ENGINE = InnoDB
     AUTO_INCREMENT = 13
@@ -100,14 +112,7 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Question`
     answerWrong1 VARCHAR(45)  NOT NULL,
     answerWrong2 VARCHAR(45)  NOT NULL,
     answerWrong3 VARCHAR(45)  NOT NULL,
-    idQuiz       INT          NOT NULL,
-    PRIMARY KEY (idQuestion, idQuiz),
-    INDEX verzinzelf1_idx (idQuiz ASC) VISIBLE,
-    CONSTRAINT verzinzelf1
-        FOREIGN KEY (idQuiz)
-            REFERENCES Quizmaster.Quiz (idQuiz)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    PRIMARY KEY (`idQuestion`)
 )
     ENGINE = InnoDB
     AUTO_INCREMENT = 8
@@ -119,20 +124,20 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Question`
 START TRANSACTION;
 USE `Quizmaster`;
 
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (1, 'Wat is 1+1?', 2, '15', '166', '345', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (2, 'Wat is 2+2?', '4', 'werw', 'ewrw', 'ww', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (3, 'Wat is 3+3?', '6', '345', '533', '353', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (4, 'Wat is 10x5?', '50', 'Peer', '655', '655', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (5, 'Wat is 60/2?', '30 ', '545', 'Sinterklaas', 'Boeien', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (6, 'Wat is de hoofdstad van Nederland?', 'Amsterdam', 'Enschede', 'Rotterdam', 'Urk', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (7, 'Hoe is het?', 'Oke', 'Goed', 'Slecht', 'Matig', 0);
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (1, 'Wat is 1+1?', '2', '15', '166', '345');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (2, 'Wat is 2+2?', '4', 'werw', 'ewrw', 'ww');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (3, 'Wat is 3+3?', '6', '345', '533', '353');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (4, 'Wat is 10x5?', '50', 'Appel', '655', '23');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (5, 'Wat is 60/2?', '30 ', '545', 'Sinterklaas', 'Boeien');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (6, 'Wat is de hoofdstad van Nederland?', 'Amsterdam', 'Enschede', 'Rotterdam', 'Urk');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (7, 'Hoe is het?', 'Oke', 'Goed', 'Slecht', 'Matig');
 
 COMMIT;
 
@@ -144,13 +149,8 @@ DROP TABLE IF EXISTS `Quizmaster`.`Quiz`;
 CREATE TABLE IF NOT EXISTS `Quizmaster`.`Quiz`
 (
     `idQuiz`   INT         NOT NULL AUTO_INCREMENT,
-    `nameQuiz` VARCHAR(25) NOT NULL,
-    `idCursus` INT         NOT NULL,
-    PRIMARY KEY (`idQuiz`),
-    INDEX `fk_Quizzes_Course1_idx` (`idCursus` ASC) VISIBLE,
-    CONSTRAINT `fk_Quizzes_Course1`
-        FOREIGN KEY (`idCursus`)
-            REFERENCES `Quizmaster`.`Course` (`idCourse`)
+    `quizName` VARCHAR(25) NOT NULL,
+    PRIMARY KEY (`idQuiz`)
 )
     ENGINE = InnoDB
     AUTO_INCREMENT = 1
@@ -159,39 +159,6 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Quiz`
 -- -----------------------------------------------------
 -- Data for table `Quizmaster`.`Quiz` ------------- TODO
 -- -----------------------------------------------------
-
-
--- -----------------------------------------------------
--- Table `Quizmaster`.`Quizresult` ---------------- TODO
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Quizmaster`.`QuizResult`;
-
-CREATE TABLE IF NOT EXISTS `Quizmaster`.`QuizResult`
-(
-    `idQuizResult`      INT          NOT NULL AUTO_INCREMENT,
-    `User_idUser`       INT          NOT NULL,
-    `Quizzes_idQuizzes` INT          NOT NULL,
-    `feedback`          VARCHAR(100) NOT NULL,
-    `dateTime`          DATETIME     NOT NULL,
-    `timesCompleted`    VARCHAR(45)  NOT NULL,
-    PRIMARY KEY (`idQuizResult`),
-    INDEX `fk_QuizResult_User1_idx` (`User_idUser` ASC) VISIBLE,
-    INDEX `fk_QuizResult_Quizzes1_idx` (`Quizzes_idQuizzes` ASC) VISIBLE,
-    CONSTRAINT `fk_QuizResult_Quizzes1`
-        FOREIGN KEY (`Quizzes_idQuizzes`)
-            REFERENCES `Quizmaster`.`Quiz` (`idQuiz`),
-    CONSTRAINT `fk_QuizResult_User1`
-        FOREIGN KEY (`User_idUser`)
-            REFERENCES `Quizmaster`.`User` (`idUser`)
-)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1
-    DEFAULT CHARACTER SET = utf8;
-
--- -----------------------------------------------------
--- Data for table `Quizmaster`.`Quizresult` ------- TODO
--- -----------------------------------------------------
-
 
 -- -----------------------------------------------------
 -- Table `Quizmaster`.`StudentGroup` -------------- TODO
