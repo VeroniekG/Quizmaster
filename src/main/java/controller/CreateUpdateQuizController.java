@@ -30,7 +30,7 @@ public class CreateUpdateQuizController {
 
 
     public CreateUpdateQuizController() {
-        quizDAO = new QuizDAO(Main.getDBaccess());
+        quizDAO = new QuizDAO(Main.getDBaccessMySql());
     }
 
     public void setup(Quiz quiz) {
@@ -58,7 +58,7 @@ public class CreateUpdateQuizController {
             quiz = new Quiz(quizname);
         }
     }
-        //TJ Methode aangemaakt om quizzen op te slaan
+    //TJ Methode aangemaakt om quizzen op te slaan
     public void doStoreQuiz(ActionEvent actionEvent) {
         createQuiz();
         if (quiz != null) {
