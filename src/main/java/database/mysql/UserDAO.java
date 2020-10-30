@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interacts with the User model and maps application calls to the persistence layer. Extends
@@ -212,5 +213,21 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
             preparedStatement.setInt(6, user.getIdUser());
         }
     }
-
+    //@VG - retrieve users from DB per specific rol
+    public ArrayList<User> getUserByRole() {
+        String sql = "SELECT * FROM User WHERE role = 'COORDINATOR'";
+        ArrayList<User> coordinatorlist = new ArrayList<>();
+        try {
+            setupPreparedStatement(sql);
+            ResultSet resultSet = executeSelectStatement();
+            User user;
+            while (resultSet.next()) {
+                user = setUserWithResultset(resultSet);
+                coordinatorlist.add(user);
+            }
+        } catch (SQLException sqlException) {
+            LOGGER.error("SQL-error " + sqlException.getMessage());
+        }
+        return coordinatorlist;
+    }
 }
