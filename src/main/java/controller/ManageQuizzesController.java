@@ -25,7 +25,7 @@ public class ManageQuizzesController {
         ListView<Quiz> quizlist;
 
     public ManageQuizzesController() {
-        this.dbAccess = Main.getDBaccess();
+        this.dbAccess = Main.getDBaccessMySql();
         quizDAO = new QuizDAO(dbAccess);
     }
 
