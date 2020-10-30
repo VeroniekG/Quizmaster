@@ -65,9 +65,9 @@ public abstract class AbstractDAO {
 		preparedStatement.executeUpdate();
 		ResultSet resultSet = preparedStatement.getGeneratedKeys();
 		int gegenereerdeSleutel = 0;
-		while (resultSet.next()) {
+
 			gegenereerdeSleutel = resultSet.getInt(1);
-		}
+
 		return gegenereerdeSleutel;
 	}
 }

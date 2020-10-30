@@ -15,23 +15,23 @@
             <Font size="18.0" />
         </font>
     </Label>
-    <ListView fx:id="quizList" layoutX="14.0" layoutY="78.0" prefHeight="200.0" prefWidth="281.0" />
-    <Button layoutX="13.0" layoutY="285.0" mnemonicParsing="false" onAction="#doCreateQuiz" text="Nieuw">
+    <ListView fx:id="quizlist" layoutX="14.0" layoutY="78.0" prefHeight="200.0" prefWidth="281.0" />
+    <Button fx:id="newQuizButton" layoutX="13.0" layoutY="285.0" mnemonicParsing="false" onAction="#doCreateQuiz" text="Nieuw">
         <font>
             <Font size="14.0" />
         </font>
     </Button>
-    <Button layoutX="113.0" layoutY="285.0" mnemonicParsing="false" onAction="#doUpdateQuiz" text="Wijzig">
+    <Button fx:id="changeButton" layoutX="113.0" layoutY="285.0" mnemonicParsing="false" onAction="#doUpdateQuiz" text="Wijzig">
         <font>
             <Font size="14.0" />
         </font>
     </Button>
-    <Button layoutX="217.0" layoutY="285.0" mnemonicParsing="false" onAction="#doDeleteQuiz" text="Verwijder">
+    <Button fx:id="deleteButton" layoutX="217.0" layoutY="285.0" mnemonicParsing="false" onAction="#doDeleteQuiz" text="Verwijder">
         <font>
             <Font size="14.0" />
         </font>
     </Button>
-    <Button layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#doMenu" text="Menu">
+    <Button fx:id="menuButton" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#doMenu" text="Menu">
         <font>
             <Font size="14.0" />
         </font>
