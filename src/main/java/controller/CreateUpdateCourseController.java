@@ -27,7 +27,7 @@ public class CreateUpdateCourseController {
     private TextField courseIdTextfield;
 
     public CreateUpdateCourseController() {
-        courseDAO = new CourseDAO(Main.getDBaccess());
+        courseDAO = new CourseDAO(Main.getDBaccessMySql());
     }
 
     public void setup(Course course) {
