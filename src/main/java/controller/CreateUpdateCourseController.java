@@ -2,12 +2,10 @@ package controller;
 
 import database.mysql.CourseDAO;
 import database.mysql.DBAccess;
+import database.mysql.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.Course;
 import view.Main;
 
@@ -16,6 +14,7 @@ public class CreateUpdateCourseController {
     private DBAccess dbAccess;
     private CourseDAO courseDAO;
     private Course course;
+    private UserDAO userDAO;
 
     @FXML
     private Label titleLabel;
@@ -27,6 +26,8 @@ public class CreateUpdateCourseController {
     private TextField courseNameTextfield;
     @FXML
     private TextField courseIdTextfield;
+    @FXML
+    private ComboBox menuCoordinator;
 
     public CreateUpdateCourseController() {
         courseDAO = new CourseDAO(Main.getDBaccessMySql());
@@ -36,6 +37,7 @@ public class CreateUpdateCourseController {
         titleLabel.setText("Wijzig cursus");
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
         courseNameTextfield.setText((String.valueOf(course.getCourseName())));
+        menuCoordinator.getItems().
     }
 
     //TJ menu knop terug naar menu
