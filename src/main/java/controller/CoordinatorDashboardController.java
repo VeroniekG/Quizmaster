@@ -112,7 +112,7 @@ public class CoordinatorDashboardController {
         List<Course> allCourse = courseDAO.getAll();
         ObservableList<Course> courseObservableList = FXCollections.observableArrayList(allCourse);
         courseList.setItems(courseObservableList);
-        courseList.getSelectionModel().selectFirst();
+        courseList.getSelectionModel().selectedItemProperty();
     }
 
 }
