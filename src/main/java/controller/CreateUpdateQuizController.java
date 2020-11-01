@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import model.Quiz;
 import view.Main;
 
-public class CreateUpdateQuizController {
+public class  CreateUpdateQuizController {
     @FXML
     public Button menuButton;
     private QuizDAO quizDAO;
@@ -34,6 +34,7 @@ public class CreateUpdateQuizController {
     }
 
     public void setup(Quiz quiz) {
+        titleLabel.setText("Wijzig Quiz");
         quizIdTextfield.setText(String.valueOf(quiz.getIdQuiz()));
         quizNameTextfield.setText(quizNameTextfield.getSelectedText());
     }
