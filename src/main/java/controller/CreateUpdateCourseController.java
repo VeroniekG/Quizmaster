@@ -1,38 +1,63 @@
 package controller;
 
 import database.mysql.CourseDAO;
-    import javafx.fxml.FXML;
 import database.mysql.DBAccess;
+import database.mysql.UserDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import model.Course;
+import model.Question;
+import model.Role;
+import model.User;
 import view.Main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CreateUpdateCourseController {
+
     private DBAccess dbAccess;
     private CourseDAO courseDAO;
     private Course course;
+    private UserDAO userDAO;
+    private Role role;
+    final ObservableList coordinatorlist = FXCollections.observableArrayList();
+
     @FXML
-    private Label titleLabel;
+    Label titleLabel;
     @FXML
-    private Button menuButton;
+    Button menuButton;
     @FXML
-    private Button makeButton;
+    Button saveButton;
     @FXML
-    private TextField courseNameTextfield;
+    TextField courseNameTextfield;
     @FXML
-    private TextField courseIdTextfield;
+    TextField courseIdTextfield;
+    @FXML
+    ComboBox<User> comboBoxCoordinator;
 
     public CreateUpdateCourseController() {
         courseDAO = new CourseDAO(Main.getDBaccessMySql());
+        userDAO = new UserDAO(Main.getDBaccessMySql());
     }
 
     public void setup(Course course) {
+        populateList();
+        titleLabel.setText("Wijzig cursus");
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
-        courseNameTextfield.setText(courseNameTextfield.getSelectedText());
+        courseNameTextfield.setText((String.valueOf(course.getCourseName())));
+
+    }
+    //@VG-retrieve users that are coordinator from DB
+    public void populateList(){
+        List<User> allCoordinators = userDAO.getUserByRole();
+        ObservableList<User> coordinatorObservableList =
+                FXCollections.observableArrayList(allCoordinators);
+        comboBoxCoordinator.setItems(coordinatorObservableList);
+        comboBoxCoordinator.getSelectionModel().selectFirst();
     }
 
     //TJ menu knop terug naar menu
@@ -54,6 +79,7 @@ public class CreateUpdateCourseController {
             course = new Course(coursename);
         }
     }
+
     //@VG check in DB if idCourse already exist. If so --> update course  If not --> new course
     public void doStoreCourse(ActionEvent actionEvent) {
         createCourse();
@@ -74,5 +100,6 @@ public class CreateUpdateCourseController {
             }
         }
     }
+
 }
 
