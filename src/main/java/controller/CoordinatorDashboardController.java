@@ -78,7 +78,6 @@ public class CoordinatorDashboardController {
         );
 
     }//VG - select course, retrieve corresponding quiz(zes) + corresponding questions
-
     public void handleMouseClick(MouseEvent mouseEvent) {
         EventHandler<InputEvent> selectionHandler = inputEvent -> {
             courseList.getSelectionModel().getSelectedItem();
