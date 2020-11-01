@@ -1,6 +1,7 @@
 package database.mysql;
 
 import controller.CreateUpdateUserController;
+import model.Question;
 import model.Role;
 import model.User;
 import org.apache.logging.log4j.LogManager;
@@ -215,19 +216,22 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User> {
     }
     //@VG - retrieve users from DB per specific rol
     public ArrayList<User> getUserByRole() {
-        String sql = "SELECT * FROM User WHERE role = 'COORDINATOR'";
-        ArrayList<User> coordinatorlist = new ArrayList<>();
+        String sql = "SELECT * FROM user WHERE role ='COORDINATOR'";
+        ArrayList<User> rolelist = new ArrayList<>();
         try {
             setupPreparedStatement(sql);
             ResultSet resultSet = executeSelectStatement();
             User user;
             while (resultSet.next()) {
-                user = setUserWithResultset(resultSet);
-                coordinatorlist.add(user);
+                int idUser = resultSet.getInt("idUser");
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+                user = new User(idUser, firstName, lastName);
+                rolelist.add(user);
             }
         } catch (SQLException sqlException) {
-            LOGGER.error("SQL-error " + sqlException.getMessage());
+            System.out.println("SQL error " + sqlException.getMessage());
         }
-        return coordinatorlist;
+        return rolelist;
     }
 }

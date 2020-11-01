@@ -24,7 +24,6 @@ public class CreateUpdateCourseController {
     private Course course;
     private UserDAO userDAO;
     private Role role;
-    final ObservableList coordinatorlist = FXCollections.observableArrayList();
 
     @FXML
     Label titleLabel;
@@ -57,7 +56,6 @@ public class CreateUpdateCourseController {
         ObservableList<User> coordinatorObservableList =
                 FXCollections.observableArrayList(allCoordinators);
         comboBoxCoordinator.setItems(coordinatorObservableList);
-        comboBoxCoordinator.getSelectionModel().selectFirst();
     }
 
     //TJ menu knop terug naar menu

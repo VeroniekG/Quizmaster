@@ -29,6 +29,12 @@ public class User {
     public User() {
     }
 
+    public User(int idUser, String firstName, String lastName) {
+        this.idUser = idUser;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
 
     @Override
     public String toString() {

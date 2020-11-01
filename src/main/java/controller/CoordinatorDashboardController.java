@@ -2,6 +2,7 @@ package controller;
 
 import database.mysql.CourseDAO;
 import database.mysql.DBAccess;
+import database.mysql.QuizDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,9 +22,10 @@ import view.Main;
 import java.util.List;
 
 public class CoordinatorDashboardController {
-
+    private QuizDAO quizDAO;
     private CourseDAO courseDAO;
     private DBAccess dbAccess;
+    private Quiz quiz;
 
     @FXML
     private Button updateButtonQuiz;
@@ -45,7 +47,7 @@ public class CoordinatorDashboardController {
         quizList = new ListView<>();
         questionList = new ListView<>();
         courseDAO = new CourseDAO(Main.getDBaccessMySql());
-        // QuizDAO
+        quizDAO = new QuizDAO(Main.getDBaccessMySql());
         //QuestionDA
     }
 
@@ -60,6 +62,7 @@ public class CoordinatorDashboardController {
                         System.out.println("Geselecteerde cursus: " + observableValue + ", " + oldCourse + ", " + newCourse);
                     }
                 });
+        getSelectedCourseID();
         quizList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Quiz>() {
                     @Override
@@ -77,16 +80,20 @@ public class CoordinatorDashboardController {
                 }
         );
 
-    }//VG - select course, retrieve corresponding quiz(zes) + corresponding questions
-    public void handleMouseClick(MouseEvent mouseEvent) {
-        EventHandler<InputEvent> selectionHandler = inputEvent -> {
-            courseList.getSelectionModel().getSelectedItem();
-            quizList.getItems();
-        };
-        courseList.addEventHandler(MouseEvent.MOUSE_CLICKED, selectionHandler);
+    }//VG - select course, retrieve courseID from DB, and retrieve corresponding quizID
+    public void getSelectedCourseID() {
+        Course selectedCourse = courseList.getSelectionModel().getSelectedItem();
+        courseDAO.getOneById(selectedCourse.getIdCourse());
+        if (selectedCourse.getIdCourse() == quiz.getIdCourse()){
+            List<Quiz> selectedQuiz = quizDAO.getAll();
+            ObservableList<Quiz> quizObservableList = FXCollections.observableArrayList(selectedQuiz);
+            quizList.setItems(quizObservableList);
+        }
     }
 
-    public void doNewQuiz() {
+    public void doNewQuiz(ActionEvent actionEvent) {
+        Quiz selectedQuiz = quizList.getSelectionModel().getSelectedItem();
+        Main.getSceneManager().showCreateUpdateQuizScene(selectedQuiz);
     }
 
     public void doEditQuiz() {
@@ -94,11 +101,11 @@ public class CoordinatorDashboardController {
         Main.getSceneManager().showCreateUpdateQuizScene(selectedQuiz);
     }
 
-    public void doNewQuestion() {
+    public void doNewQuestion(ActionEvent actionEvent) {
         Main.getSceneManager().showCreateUpdateQuestionScene();
     }
 
-    public void doEditQuestion() {
+    public void doEditQuestion(ActionEvent actionEvent) {
         Main.getSceneManager().showCreateUpdateQuestionScene();
     }
 
@@ -113,7 +120,6 @@ public class CoordinatorDashboardController {
         courseList.setItems(courseObservableList);
         courseList.getSelectionModel().selectedItemProperty();
     }
-
 }
 
 

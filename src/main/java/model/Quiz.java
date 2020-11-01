@@ -4,10 +4,12 @@ public class Quiz {
 
     private int idQuiz;
     private String quizName;
+    protected int idCourse;
 
-    public Quiz(int idQuiz, String quizName) {
+    public Quiz(int idQuiz, String quizName, int idCourse) {
         this.idQuiz = idQuiz;
         this.quizName = quizName;
+        this.idCourse = idCourse;
     }
 
     public Quiz(String quizName) {
@@ -33,5 +35,9 @@ public class Quiz {
 
     public void setQuizName(String quizName) {
         this.quizName = quizName;
+    }
+
+    public int getIdCourse() {
+        return idCourse;
     }
 }
