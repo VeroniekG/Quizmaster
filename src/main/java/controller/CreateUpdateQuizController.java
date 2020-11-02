@@ -1,20 +1,21 @@
 package controller;
 
+import database.mysql.CourseDAO;
 import database.mysql.QuizDAO;
 import javafx.fxml.FXML;
 import database.mysql.DBAccess;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import model.Course;
 import model.Quiz;
+import model.Role;
 import view.Main;
 
-public class CreateUpdateQuizController {
+public class  CreateUpdateQuizController {
     @FXML
     public Button menuButton;
     private QuizDAO quizDAO;
+    private CourseDAO courseDAO;
     private DBAccess dbAccess;
     private Quiz quiz;
     @FXML
@@ -26,16 +27,22 @@ public class CreateUpdateQuizController {
     private TextField quizIdTextfield;
     @FXML
     private TextField quizNameTextfield;
+    @FXML
+    ComboBox<Course> comboBoxCourse;
 
 
 
     public CreateUpdateQuizController() {
         quizDAO = new QuizDAO(Main.getDBaccessMySql());
+        courseDAO =new CourseDAO(Main.getDBaccessMySql());
+        comboBoxCourse = new ComboBox<>();
     }
 
     public void setup(Quiz quiz) {
+        titleLabel.setText("Wijzig Quiz");
         quizIdTextfield.setText(String.valueOf(quiz.getIdQuiz()));
         quizNameTextfield.setText(quizNameTextfield.getSelectedText());
+        comboBoxCourse.setValue(comboBoxCourse.getValue());
     }
 
     //TJ menu knop terug naar menu
