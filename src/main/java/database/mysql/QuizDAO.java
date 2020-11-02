@@ -93,4 +93,21 @@ public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
             System.out.println("SQL error " + sqlException.getMessage());
         }
     }
+
+    public ArrayList<Quiz> getQuizesForCourse(){
+        String sql = "SELECT * FROM quiz WHERE idCourse = ?;";
+        ArrayList<Quiz> quizList = new ArrayList<>();
+        try{
+            setupPreparedStatement(sql);
+            ResultSet resultSet = executeSelectStatement();
+            Quiz quiz;
+            while (resultSet.next()){
+                String nameQuiz = resultSet.getString("nameQuiz");
+                quiz = new Quiz(nameQuiz);
+                quizList.add(quiz);
+            }
+        }catch (SQLException sqlException){
+            System.out.println("SQL error" + sqlException.getMessage());
+        }return quizList;
+    }
 }

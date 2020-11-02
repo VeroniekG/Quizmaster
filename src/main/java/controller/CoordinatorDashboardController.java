@@ -52,6 +52,7 @@ public class CoordinatorDashboardController {
     }
 
     //@AuthorVG - retrieve courselist from DB
+    // NOT WORKING YET!!
     public void setup() {
         populateList();
         courseList.getSelectionModel().selectedItemProperty().addListener(
@@ -59,10 +60,12 @@ public class CoordinatorDashboardController {
                     @Override
                     public void changed(ObservableValue<? extends Course> observableValue,
                                         Course oldCourse, Course newCourse) {
-                        System.out.println("Geselecteerde cursus: " + observableValue + ", " + oldCourse + ", " + newCourse);
-                    }
+                        System.out.println("Geselecteerde cursus: " + oldCourse + "-> " + newCourse);
+                        List<Quiz> quizes = quizDAO.getQuizesForCourse();
+                        for (Quiz quiz : quizes) {
+                            quizList.getItems().add(quiz);}
+                        }
                 });
-        getSelectedCourseID();
         quizList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Quiz>() {
                     @Override
@@ -71,26 +74,7 @@ public class CoordinatorDashboardController {
                         System.out.println("Geselecteerde quiz: " + observableValue + ", " + oldQuiz + ", " + newQuiz);
                     }
                 });
-        questionList.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Question>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Question> observableValue,
-                                        Question oldQuestion, Question newQuestion) {
-                    }
-                }
-        );
-
-    }//VG - select course, retrieve courseID from DB, and retrieve corresponding quizID
-    public void getSelectedCourseID() {
-        Course selectedCourse = courseList.getSelectionModel().getSelectedItem();
-        courseDAO.getOneById(selectedCourse.getIdCourse());
-        if (selectedCourse.getIdCourse() == quiz.getIdCourse()){
-            List<Quiz> selectedQuiz = quizDAO.getAll();
-            ObservableList<Quiz> quizObservableList = FXCollections.observableArrayList(selectedQuiz);
-            quizList.setItems(quizObservableList);
-        }
     }
-
     public void doNewQuiz(ActionEvent actionEvent) {
         Quiz selectedQuiz = quizList.getSelectionModel().getSelectedItem();
         Main.getSceneManager().showCreateUpdateQuizScene(selectedQuiz);
@@ -118,7 +102,6 @@ public class CoordinatorDashboardController {
         List<Course> allCourse = courseDAO.getAll();
         ObservableList<Course> courseObservableList = FXCollections.observableArrayList(allCourse);
         courseList.setItems(courseObservableList);
-        courseList.getSelectionModel().selectedItemProperty();
     }
 }
 

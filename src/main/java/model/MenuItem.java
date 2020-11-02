@@ -32,7 +32,7 @@ public enum MenuItem {
 
     private final String menuItemName;
 
-    private MenuItem(String menuItemName) {
+    MenuItem(String menuItemName) {
         this.menuItemName = menuItemName;
     }
 

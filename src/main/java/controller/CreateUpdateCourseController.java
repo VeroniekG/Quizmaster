@@ -6,6 +6,7 @@ import database.mysql.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.MenuItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Course;
@@ -24,6 +25,8 @@ public class CreateUpdateCourseController {
     private Course course;
     private UserDAO userDAO;
     private Role role;
+    private User coordinator;
+    private User user;
 
     @FXML
     Label titleLabel;
@@ -36,7 +39,7 @@ public class CreateUpdateCourseController {
     @FXML
     TextField courseIdTextfield;
     @FXML
-    ComboBox<User> comboBoxCoordinator;
+    MenuButton coordinatorTaskMenuButton;
 
     public CreateUpdateCourseController() {
         courseDAO = new CourseDAO(Main.getDBaccessMySql());
@@ -50,12 +53,17 @@ public class CreateUpdateCourseController {
         courseNameTextfield.setText((String.valueOf(course.getCourseName())));
 
     }
-    //@VG-retrieve users that are coordinator from DB
-    public void populateList(){
+    //@VG-dropdown list coordinators
+    public void populateList() {
         List<User> allCoordinators = userDAO.getUserByRole();
-        ObservableList<User> coordinatorObservableList =
-                FXCollections.observableArrayList(allCoordinators);
-        comboBoxCoordinator.setItems(coordinatorObservableList);
+        for (User user : allCoordinators) {
+            MenuItem item = new MenuItem(user.getLastName());
+            item.setOnAction(event -> {
+                coordinator = user;
+                coordinatorTaskMenuButton.setText(coordinator.getLastName());
+            });
+            coordinatorTaskMenuButton.getItems().add(item);
+        }
     }
 
     //TJ menu knop terug naar menu

@@ -15,7 +15,12 @@ public class StudentFeedbackController {
     @FXML
     private ListView<QuizResult> feedbackList;
 
-    public void setup(Quiz quiz) {}
+    public void setup(Quiz quiz) {
+
+    }
+
+    //@Author VG- retrieve feedbacklist from CouchDB
+
 
     //TJ menu knop terug naar menu
     public void doMenu(ActionEvent actionEvent) {
