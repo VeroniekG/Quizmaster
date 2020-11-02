@@ -19,7 +19,6 @@ public class StudentFeedbackController {
 
     }
 
-    //@Author VG- retrieve feedbacklist from CouchDB
 
 
     //TJ menu knop terug naar menu
