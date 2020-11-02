@@ -36,6 +36,7 @@ public class SelectQuizForStudentController {
     public void doMenu(ActionEvent actionEvent) {
         Main.getSceneManager().showWelcomeScene();
     }
+
     // @TJ *public void doQuiz() {}* origineel, rest zelf toegevoegd
     public void doQuiz() {
         Quiz quiz = quizList.getSelectionModel().getSelectedItem();
