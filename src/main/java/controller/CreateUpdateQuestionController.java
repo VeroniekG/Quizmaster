@@ -2,18 +2,23 @@ package controller;
 
 import database.mysql.DBAccess;
 import database.mysql.QuestionDAO;
+import database.mysql.QuizDAO;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.MenuItem;
 import model.Question;
+import model.Quiz;
 import view.Main;
 
 public class CreateUpdateQuestionController {
 
-    //    @FXML
-    //    ListView<Question> questionsList;
+
+
     @FXML
     TextField warningText;
     private QuestionDAO questionDAO;
@@ -33,6 +38,8 @@ public class CreateUpdateQuestionController {
     private TextField antwoordOnjuist2Textfield;
     @FXML
     private TextField antwoordOnjuist3Textfield;
+    @FXML
+    public ComboBox quizlist = new ComboBox();
 
     public CreateUpdateQuestionController() {
         questionDAO = new QuestionDAO(Main.getDBaccessMySql());
@@ -48,7 +55,12 @@ public class CreateUpdateQuestionController {
         antwoordOnjuist1Textfield.setText(question.getAnswerWrong1());
         antwoordOnjuist2Textfield.setText(question.getAnswerWrong2());
         antwoordOnjuist3Textfield.setText(question.getAnswerWrong3());
+        quizlist.setPromptText("Wijzig de bijbehorende quiz:");
     }
+
+//    public void fillComboBoxQuizzes {
+//
+//    }
 
     //TJ menu knop terug naar menu
     public void doMenu(ActionEvent actionEvent) {
@@ -65,6 +77,7 @@ public class CreateUpdateQuestionController {
         String antwoordOnjuist1 = antwoordOnjuist1Textfield.getText();
         String antwoordOnjuist2 = antwoordOnjuist2Textfield.getText();
         String antwoordOnjuist3 = antwoordOnjuist3Textfield.getText();
+
 
         if (vraag.isEmpty() || correctAntwoord.isEmpty() || antwoordOnjuist1.isEmpty() || antwoordOnjuist2.isEmpty() || antwoordOnjuist3.isEmpty()) {
             warningText.append("Alle velden moeten worden ingevuld!\n");
