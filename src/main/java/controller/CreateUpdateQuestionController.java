@@ -3,6 +3,7 @@ package controller;
 import database.mysql.DBAccess;
 import database.mysql.QuestionDAO;
 import database.mysql.QuizDAO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,9 @@ import model.Question;
 import model.Quiz;
 import view.Main;
 
+//import javax.management.openmbean.CompositeData;
+import java.util.List;
+
 public class CreateUpdateQuestionController {
 
 
@@ -24,6 +28,8 @@ public class CreateUpdateQuestionController {
     private QuestionDAO questionDAO;
     private DBAccess dbAccess;
     private Question question;
+    private QuizDAO quizDAO;
+
     @FXML
     private Label titleLabel;
     @FXML
@@ -45,6 +51,7 @@ public class CreateUpdateQuestionController {
         questionDAO = new QuestionDAO(Main.getDBaccessMySql());
     }
 
+
     // HL - To edit selected customer, all fields are filled with values from the database
 
     public void setup(Question question) {
@@ -56,11 +63,15 @@ public class CreateUpdateQuestionController {
         antwoordOnjuist2Textfield.setText(question.getAnswerWrong2());
         antwoordOnjuist3Textfield.setText(question.getAnswerWrong3());
         quizlist.setPromptText("Wijzig de bijbehorende quiz:");
+        fillComboBoxQuizzes();
     }
 
-//    public void fillComboBoxQuizzes {
-//
-//    }
+    public void fillComboBoxQuizzes (){
+        List<Quiz> allQuizzes = quizDAO.getAll();
+        ObservableList<Quiz> quizObservableList =
+                FXCollections.observableArrayList(allQuizzes);
+        quizlist.setItems(quizObservableList);
+    }
 
     //TJ menu knop terug naar menu
     public void doMenu(ActionEvent actionEvent) {

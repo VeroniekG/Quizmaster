@@ -71,7 +71,6 @@ public class FillOutQuizController {
                         + "\n B: " + antwoordenGeshuffled.get(1)
                         + "\n C: " + antwoordenGeshuffled.get(2)
                         + "\n D: " + antwoordenGeshuffled.get(3));
-
     }
 
     private void checkAnswer (int givenAnswer){
@@ -95,19 +94,23 @@ public class FillOutQuizController {
 
     public void doRegisterA() {
        checkAnswer(0);
+       doNextQuestion();
 
     }
 
     public void doRegisterB() {
         checkAnswer(1);
+        doNextQuestion();
     }
 
     public void doRegisterC() {
         checkAnswer(2);
+        doNextQuestion();
     }
 
     public void doRegisterD() {
         checkAnswer(3);
+        doNextQuestion();
     }
 //
 //    public void printResults (){
@@ -128,7 +131,7 @@ public class FillOutQuizController {
 //    TODO je hoeft maar een correct/incorrect optelsom te maken
 
 
-    public void doNextQuestion(ActionEvent actionEvent) {
+    public void doNextQuestion() {
         if (index < allQuestions.size() - 1) {
             index ++;
             toonAntwoorden(index);
