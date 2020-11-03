@@ -1,5 +1,6 @@
 package controller;
 
+import database.couchdb.QuizResultCouchDBDAO;
 import database.mysql.QuestionDAO;
 import database.mysql.QuizDAO;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import model.Question;
 import model.Quiz;
+import model.QuizResult;
 import view.Main;
 import java.util.*;
 
@@ -48,7 +50,6 @@ public class FillOutQuizController {
         titleLabel.setText("Vraag " + (index + 1));
         toonAntwoorden(index);
     }
-
 
     // Method that retrieves answers and displays them randomly
     public void toonAntwoorden(int index) {
@@ -122,7 +123,6 @@ public class FillOutQuizController {
         gemaakteQuizzes.add(String.valueOf(vraagCorrect));
         gemaakteQuizzes.add(String.valueOf(vraagIncorrect));
     }
-
 
 
 //    TODO je hoeft maar een correct/incorrect optelsom te maken
