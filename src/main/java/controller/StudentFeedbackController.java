@@ -14,12 +14,11 @@ public class StudentFeedbackController {
     private Label feedbackLabel;
     @FXML
     private ListView<QuizResult> feedbackList;
-
+ // uit couchdb ophalen
+    //@AuthorVG - quizresult need to show quiz attempt and result
+    //result = correct answers / given answers
     public void setup(Quiz quiz) {
-
     }
-
-
 
     //TJ menu knop terug naar menu
     public void doMenu(ActionEvent actionEvent) {

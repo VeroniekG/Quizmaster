@@ -16,7 +16,6 @@ public class QuizResultCouchDBDAO {
         gson = new Gson();
     }
 
-
 //@AuthorVG - method to store QuizResults
     public String saveQuizResult(QuizResult quizResult){
         String jsonstring = gson.toJson(quizResult);
@@ -26,5 +25,6 @@ public class QuizResultCouchDBDAO {
         return doc_Id;
     }
 
+    // show quizresult
 
 }

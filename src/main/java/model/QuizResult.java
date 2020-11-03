@@ -1,51 +1,44 @@
 package model;
 
-import java.time.LocalDateTime;
+import controller.FillOutQuizController;
+import database.mysql.QuestionDAO;
+import database.mysql.QuizDAO;
+import database.mysql.UserDAO;
+import model.Question;
+import model.Quiz;
+import view.Main;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+//@AuthorVG - In QuizResult we store: Username, quizname, datum, answersCorrect and answers given by Student.
 public class QuizResult {
-//@AuthorVG - the Quizresult consists of: name of user(student), name of quiz, list of correct answers,
-// list of given answers, dateTime when quiz was completed, how many times same quiz completed.
 
-    private User user;
-    private Quiz quiz;
-    private Question correctAnswers;
-    private String givenAnswersStudent;
-    LocalDateTime dateTime;
-    private int timesCompleted;
+    private User currentUser;
+    private QuizDAO quizName;
+    private int date;
+    private String antwoordCorrect1 = "Amsterdam";
+    private String antwoordCorrect2 = "London";
+    private String gegevenAntwoord1 = "Parijs";
+    private String gegevenAntwoord2 = "Berlijn";
 
-    @Override
-    public String toString() {
-        StringBuilder resultString = new StringBuilder();
-        resultString.append("Quiz result:\n");
-        resultString.append(String.format("Name student: %s %s\n", user.getFirstName(), user.getLastName()));
-        resultString.append(String.format("Quiz name: %s\n", quiz.getQuizName()));
-        resultString.append(String.format("Quiz completed on: %s\n", dateTime));
-        resultString.append(String.format("Your answers: \n", givenAnswersStudent));
-        resultString.append(String.format("Correct answers: \n", correctAnswers));
-        return resultString.toString();
+//lijst met vragen en correcte antwoord
+    // arraylist van Filloutquiz
+
+    public ArrayList<String> getAnswersCorrect(){
+        ArrayList<String> correcteAntwoorden = new ArrayList<String>();
+        correcteAntwoorden.add(antwoordCorrect1);
+        correcteAntwoorden.add(antwoordCorrect2);
+        return correcteAntwoorden;
+    }
+    public ArrayList<String> getAnswersGiven() {
+        ArrayList<String> gegevenAntwoorden = new ArrayList<String>();
+        gegevenAntwoorden.add(gegevenAntwoord1);
+        gegevenAntwoorden.add(gegevenAntwoord2);
+        return gegevenAntwoorden;
+
     }
 
-    public String getGivenAnswersStudent() {
-        return givenAnswersStudent;
-    }
-
-    public void setGivenAnswersStudent(String givenAnswersStudent) {
-        this.givenAnswersStudent = givenAnswersStudent;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public int getTimesCompleted() {
-        return timesCompleted;
-    }
-
-    public void setTimesCompleted(int timesCompleted) {
-        this.timesCompleted = timesCompleted;
-    }
 }
+

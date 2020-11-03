@@ -18,6 +18,7 @@ import view.Main;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 public class FillOutQuizController {
 
@@ -39,7 +40,6 @@ public class FillOutQuizController {
         allQuestions = questionDAO.getAll();
         titleLabel.setText("Vraag " + (index + 1));
         aanroepenAntwoorden(index);
-
     }
 
     public void aanroepenAntwoorden(int index) {
