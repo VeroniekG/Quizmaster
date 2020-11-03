@@ -1,6 +1,7 @@
 package view;
 
 import config.ApplicationSetup;
+import database.mysql.DBAccess;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.User;
@@ -46,6 +47,21 @@ public class Main extends Application {
         );
     }
 
+    public static database.mysql.DBAccess getDBaccessMySql() {
+        String dbName = applicationSetup.getProperties().getProperty("mysql.database.name");
+        String dbUser = applicationSetup.getProperties().getProperty("mysql.database.user");
+        String dbPasword = applicationSetup.getProperties().getProperty("mysql.database.password");
+        //        if (dbAccessMySql == null) {
+        //            dbAccessMySql = new database.mysql.DBAccess(dbName, dbUser, dbPasword);
+        //        }
+        dbAccessMySql = DBAccess.getInstance();
+        return dbAccessMySql;
+    }
+
+    public static database.couchdb.DBAccess getDbAccessCouchDb() {
+        return new database.couchdb.DBAccess();
+    }
+
     public static void getCouchDbConnection() {
         try {
             dbAccessCouchDb.setupConnection();
@@ -80,20 +96,6 @@ public class Main extends Application {
 
     public static void setCurrentUser(User currentUser) {
         Main.currentUser = currentUser;
-    }
-
-    public static database.mysql.DBAccess getDBaccessMySql() {
-        String dbName = applicationSetup.getProperties().getProperty("mysql.database.name");
-        String dbUser = applicationSetup.getProperties().getProperty("mysql.database.user");
-        String dbPasword = applicationSetup.getProperties().getProperty("mysql.database.password");
-        if (dbAccessMySql == null) {
-            dbAccessMySql = new database.mysql.DBAccess(dbName, dbUser, dbPasword);
-        }
-        return dbAccessMySql;
-    }
-
-    public static database.couchdb.DBAccess getDbAccessCouchDb() {
-        return new database.couchdb.DBAccess();
     }
 
 }
