@@ -6,13 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Role;
+import model.Session;
 import model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.Main;
 
 /**
- * TODO: Refactor and remove code duplicates, validation
+ * TODO: Refactor to make use of services and remove code duplicates, validation
  */
 public class CreateUpdateUserController {
 
@@ -22,6 +23,7 @@ public class CreateUpdateUserController {
                     WarningMessage.USER_USERNAME, WarningMessage.USER_PASSWORD};
     private static final ObservableList<Role> ROLE_OPTIONS =
             FXCollections.observableArrayList(Role.class.getEnumConstants());
+    private static final Session session = Session.getInstance();
     private static boolean isValidInput;
     private static boolean userHasUpdate;
     private static String sqlErrorMessage = "";
@@ -101,11 +103,6 @@ public class CreateUpdateUserController {
         textFieldFirstName.getParent().requestFocus();
     }
 
-    public void doMenu() {
-        ManageUsersController.setSelectedUser(user);
-        Main.getSceneManager().showManageUserScene();
-    }
-
     public void doCreateUpdateUser() {
         sqlErrorMessage = "";
         updateFields(); // updates all fields and sets isValidInput
@@ -138,17 +135,6 @@ public class CreateUpdateUserController {
         }
     }
 
-    public void doDeleteUser() {
-        userDAO.deleteOne(user);
-    }
-
-    private boolean isEmptyField(TextField inputField) {
-        if (inputField.getText().isEmpty() || inputField.getText().equals("")) {
-            return true;
-        }
-        return false;
-    }
-
     private void updateFields() {
         boolean validInput = true;
         for (int i = 0; i < inputFields.length; i++) {
@@ -163,6 +149,53 @@ public class CreateUpdateUserController {
         if (sqlErrorMessage == "" || sqlErrorMessage.isEmpty()) { // valid input & no sql error
             isValidInput = validInput;
         }
+    }
+
+    public void updateUser() {
+        User updatedUser = new User.UpdateUser()
+                .withIdUser(user.getIdUser())
+                .withFirstName(inputFields[0].getText())
+                .withLastName(inputFields[1].getText())
+                .withUserName(inputFields[2].getText())
+                .withPassword(inputFields[3].getText())
+                .withRole(comboBoxRole.getSelectionModel().getSelectedItem())
+                .update();
+        if (updatedUser.equals(user)) {
+            userHasUpdate = false;
+        } else {
+            userHasUpdate = true;
+            user = updatedUser;
+        }
+
+    }
+
+    public void doMenu() {
+        //ManageUsersController.setSelectedUser(user);
+        session.setSelectedUser(user);
+        Main.getSceneManager().showManageUserScene();
+    }
+
+    public void showAlert(Operation operation) {
+        String alertMessage = "";
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, alertMessage);
+        alert.setTitle("Meldingvenster");
+        alert.setHeaderText("");
+        switch (operation) {
+            case NONE:
+                alert.setHeaderText("Geen wijzigingen");
+                alertMessage = "Er zijn geen wijzigingen opgeslagen.";
+                break;
+            case CREATE:
+                alert.setHeaderText("Opgeslagen");
+                alertMessage = "Nieuwe gebruiker '" + user.getUserName() + "' is opgeslagen.";
+                break;
+            case UPDATE:
+                alert.setHeaderText("Opgeslagen");
+                alertMessage = "Je wijzigingen zijn opgeslagen.";
+                break;
+        }
+        alert.setContentText(alertMessage);
+        alert.show();
     }
 
     /**
@@ -187,45 +220,15 @@ public class CreateUpdateUserController {
         }
     }
 
-    public void updateUser() {
-        User updatedUser = new User.UpdateUser()
-                .withIdUser(user.getIdUser())
-                .withFirstName(inputFields[0].getText())
-                .withLastName(inputFields[1].getText())
-                .withUserName(inputFields[2].getText())
-                .withPassword(inputFields[3].getText())
-                .withRole(comboBoxRole.getSelectionModel().getSelectedItem())
-                .update();
-        if (updatedUser.equals(user)) {
-            userHasUpdate = false;
-        } else {
-            userHasUpdate = true;
-            user = updatedUser;
+    private boolean isEmptyField(TextField inputField) {
+        if (inputField.getText().isEmpty() || inputField.getText().equals("")) {
+            return true;
         }
-
+        return false;
     }
 
-    public void showAlert(Operation operation) {
-        String alertMessage = "";
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, alertMessage);
-        alert.setTitle("Meldingvenster");
-        alert.setHeaderText("");
-        switch (operation) {
-            case NONE:
-                alert.setHeaderText("Geen wijzigingen");
-                alertMessage = "Er zijn geen wijzigingen opgeslagen.";
-                break;
-            case CREATE:
-                alert.setHeaderText("Opgeslagen");
-                alertMessage = "Nieuwe gebruiker '" + user.getUserName() + "' is opgeslagen.";
-                break;
-            case UPDATE:
-                alert.setHeaderText("Opgeslagen");
-                alertMessage = "Je wijzigingen zijn opgeslagen.";
-                break;
-        }
-        alert.setContentText(alertMessage);
-        alert.show();
+    public void doDeleteUser() {
+        userDAO.deleteOne(user);
     }
 
     public static void setSqlErrorMessage(String message) {

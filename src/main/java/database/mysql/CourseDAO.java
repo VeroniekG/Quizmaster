@@ -1,19 +1,72 @@
 package database.mysql;
 
 import model.Course;
-import model.Quiz;
-import model.Role;
-import model.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
+
+    private static final Logger LOGGER = LogManager.getLogger(CourseDAO.class);
 
     public CourseDAO(DBAccess dbAccess) {
         super(dbAccess);
     }
+
+    public void updateCourse(Course course) {
+        String sql = "Update course Set courseName = ? where idCourse = ?;";
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, course.getCourseName());
+            preparedStatement.setInt(2, course.getIdCourse());
+            executeManipulateStatement();
+        } catch (SQLException sqlException) {
+            System.out.println("SQL error " + sqlException.getMessage());
+        }
+    }
+
+    //@authorVG method delete selected course from DB
+    public void deleteCourse(Course course) {
+        String sql = "DELETE FROM course WHERE idCourse = ?;";
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setInt(1, course.getIdCourse());
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("SQL error" + sqlException.getMessage());
+        }
+    }
+
+    /**
+     * Gets all courses a user is signed up for
+     *
+     * @param idUser an int representing the user-id (idUser).
+     *
+     * @return a List containing Course objects
+     * @author Daniel Leertouwer
+     */
+    public List<Course> getCoursesForUserWithId(int idUser) {
+        List<Course> courses = new ArrayList<>();
+        String sql = String.format("SELECT * FROM Course_User WHERE idUser=%d", idUser);
+        try {
+            setupPreparedStatement(sql);
+            ResultSet resultSet = executeSelectStatement();
+            while (resultSet.next()) {
+                int idCourse = resultSet.getInt("idCourse");
+                Course course = getOneById(idCourse);
+                courses.add(course);
+            }
+        } catch (SQLException sqlException) {
+            LOGGER.error("SQL-error " + sqlException.getMessage());
+        }
+
+        return courses;
+    }
+
     /**
      * author VG
      * Retrieves all course from the database
@@ -67,6 +120,7 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
         }
         return course;
     }
+
     /**
      * Stores a specific course in the database.
      *
@@ -85,29 +139,4 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
         }
     }
 
-    public void updateCourse(Course course){
-        String sql = "Update course Set courseName = ? where idCourse = ?;";
-        try{
-            setupPreparedStatement(sql);
-            preparedStatement.setString(1, course.getCourseName());
-            preparedStatement.setInt(2, course.getIdCourse());
-            executeManipulateStatement();
-        } catch (SQLException sqlException){
-            System.out.println("SQL error " + sqlException.getMessage());
-        }
-    }
-
-    //@authorVG method delete selected course from DB
-    public void deleteCourse(Course course){
-        String sql = "DELETE FROM course WHERE idCourse = ?;";
-        try {
-            setupPreparedStatement(sql);
-            preparedStatement.setInt(1, course.getIdCourse());
-            preparedStatement.executeUpdate();
-        } catch (SQLException sqlException){
-            System.out.println("SQL error" + sqlException.getMessage());
-        }
-    }
-
-    }
-
+}
