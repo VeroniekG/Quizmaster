@@ -51,22 +51,6 @@ public class DBAccess {
         }
     }
 
-    public void init() {
-        databaseName = applicationSetup.getProperties().getProperty("mysql.database.name");
-        mainUser = applicationSetup.getProperties().getProperty("mysql.database.user");
-        mainUserPassword = applicationSetup.getProperties().getProperty("mysql.database.password");
-        loadDriver();
-    }
-
-    public void loadDriver() { // Driver loaded in ApplicationSetup
-        try {
-            Class.forName(MYSQL_DRIVER); // Explicitly load the JDBC-driver.
-            log.trace("Driver successfully loaded.");
-        } catch (ClassNotFoundException driverFout) {
-            log.warn("Driver not found!");
-        }
-    }
-
     /**
      * Gets the JDBC connection object needed to create statements
      *
@@ -102,8 +86,25 @@ public class DBAccess {
     public static DBAccess getInstance() {
         if (dbAccessInstance == null) {
             dbAccessInstance = new DBAccess();
+            dbAccessInstance.init();
         }
         return dbAccessInstance;
+    }
+
+    public void init() {
+        databaseName = applicationSetup.getProperties().getProperty("mysql.database.name");
+        mainUser = applicationSetup.getProperties().getProperty("mysql.database.user");
+        mainUserPassword = applicationSetup.getProperties().getProperty("mysql.database.password");
+        loadDriver();
+    }
+
+    public void loadDriver() { // Driver loaded in ApplicationSetup
+        try {
+            Class.forName(MYSQL_DRIVER); // Explicitly load the JDBC-driver.
+            log.trace("Driver successfully loaded.");
+        } catch (ClassNotFoundException driverFout) {
+            log.warn("Driver not found!");
+        }
     }
 
 }

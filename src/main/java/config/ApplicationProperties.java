@@ -1,5 +1,13 @@
 package config;
 
+/**
+ * Defines all default properties to be used by the application.
+ *
+ * @author Daniel Leertouwer
+ * @version 1.0.2
+ * @see ApplicationSetup
+ * @since 1.0
+ */
 public enum ApplicationProperties {
     MYSQL_DATABASE_NAME("mysql.database.name", "Quizmaster"),
     MYSQL_DATABASE_URL("mysql.database.url", "localhost"),
@@ -24,7 +32,7 @@ public enum ApplicationProperties {
     private String key;
     private String value;
 
-    private ApplicationProperties(String key, String value) {
+    ApplicationProperties(String key, String value) {
         this.key = key;
         this.value = value;
     }

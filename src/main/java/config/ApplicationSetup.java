@@ -1,6 +1,5 @@
 package config;
 
-import database.mysql.DBAccess;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,11 +10,21 @@ import java.util.Properties;
 
 import static config.ApplicationProperties.*;
 
+/**
+ * Sets all default properties to be used by the application, as defined in class
+ * {@link ApplicationProperties}. If a file 'config.properties' exists in the resources root, the
+ * property-values set in this file will override the default values.
+ *
+ * @author Daniel Leertouwer
+ * @version 1.0.5
+ * @see ApplicationSetup
+ * @see Properties
+ * @since 1.0
+ */
 public class ApplicationSetup {
 
     private static final String PROPERTIES_FILE_PATH = "src/main/resources/config.properties";
     private static final Logger LOG = LogManager.getLogger(ApplicationSetup.class);
-    private static DBAccess dbAccess = null;
     private static ApplicationSetup applicationSetupInstance = null;
     private Properties properties;
 
@@ -26,8 +35,6 @@ public class ApplicationSetup {
     public void load() {
         setDefaultProperties();
         setCustomProperties();
-        //setDbAccess();
-        //dbAccess.loadDriver();
     }
 
     private void setDefaultProperties() {
@@ -66,15 +73,6 @@ public class ApplicationSetup {
         LOG.info("Custom properties set.");
     }
 
-    //    private void setDbAccess() {
-    //        String dbName = properties.getProperty("jdbc.database.name");
-    //        String dbUser = properties.getProperty("jdbc.database.user");
-    //        String dbPasword = properties.getProperty("jdbc.database.password");
-    //        if (dbAccess == null) {
-    //            dbAccess = new DBAccess(dbName, dbUser, dbPasword);
-    //        }
-    //    }
-
     private Properties loadPropertiesFile() {
         Properties propertiesFromFile = new Properties();
         try (InputStream fileInputStream = new FileInputStream(PROPERTIES_FILE_PATH)) {
@@ -94,12 +92,9 @@ public class ApplicationSetup {
         return applicationSetupInstance;
     }
 
-    public DBAccess getDbAccess() {
-        return dbAccess;
-    }
-
     public Properties getProperties() {
         return properties;
     }
 
 }
+
