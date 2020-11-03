@@ -1,6 +1,7 @@
 package database.mysql;
 
 import model.Course;
+import model.Quiz;
 import model.Role;
 import model.User;
 
@@ -107,4 +108,6 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
             System.out.println("SQL error" + sqlException.getMessage());
         }
     }
-}
+
+    }
+
