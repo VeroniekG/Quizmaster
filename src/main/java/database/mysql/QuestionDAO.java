@@ -57,9 +57,39 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
     }
 
+    //HL - This method retrieves an arraylist of questions that are part of a certain quiz
+
+    public ArrayList<Question> getQuestionsByQuizId (int quizId){
+        String sql = "SELECT * FROM Question WHERE idQuiz = ?;";
+        ArrayList<Question> result = new ArrayList<>();
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setInt(1, quizId);
+            ResultSet resultSet = executeSelectStatement();
+            Question question;
+            while (resultSet.next()) {
+                int idQuestion = resultSet.getInt("idQuestion");
+                String description = resultSet.getString("description");
+                String answerRight = resultSet.getString("answerRight");
+                String answerWrong1 = resultSet.getString("answerWrong1");
+                String answerWrong2 = resultSet.getString("answerWrong2");
+                String answerWrong3 = resultSet.getString("answerWrong3");
+                int idQuiz = resultSet.getInt("idQuiz");
+                question = new Question(idQuestion, description, answerRight, answerWrong1,
+                        answerWrong2, answerWrong3, idQuiz);
+                result.add(question);
+            }
+        } catch (SQLException exception)
+        { System.out.println("SQL error " + exception.getMessage());
+            }
+            return result;
+        }
+
+
+
     @Override
     public void storeOne(Question type) {
-        String sql = "INSERT INTO Question(description, answerRight, answerWrong1, answerWrong2, answerWrong3) VALUES(?,?,?,?,?) ;";
+        String sql = "INSERT INTO Question(description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz) VALUES(?,?,?,?,?,?) ;";
         try {
             setupPreparedStatementWithKey(sql);
             preparedStatement.setString(1, type.getDescription());
@@ -67,6 +97,7 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             preparedStatement.setString(3, type.getAnswerWrong1());
             preparedStatement.setString(4, type.getAnswerWrong2());
             preparedStatement.setString(5, type.getAnswerWrong3());
+            preparedStatement.setInt(6, type.getIdQuiz);
             int id = executeInsertStatementWithKey();
             type.setIdQuestion(id);
         } catch (SQLException sqlException) {
@@ -85,6 +116,7 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             preparedStatement.setString(4, question.getAnswerWrong2());
             preparedStatement.setString(5, question.getAnswerWrong3());
             preparedStatement.setInt(6, question.getIdQuestion());
+
             executeManipulateStatement();
         } catch (SQLException sqlException){
             System.out.println("SQL error " + sqlException.getMessage());
