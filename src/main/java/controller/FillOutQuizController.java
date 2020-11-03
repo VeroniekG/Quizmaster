@@ -98,8 +98,6 @@ public class FillOutQuizController {
             bijBegin.show();
         }
     }
-
-
         //TJ menu knop terug naar menu
         public void doMenu (ActionEvent actionEvent){
             Main.getSceneManager().showWelcomeScene();

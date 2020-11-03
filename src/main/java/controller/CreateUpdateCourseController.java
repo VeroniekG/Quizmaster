@@ -39,7 +39,8 @@ public class CreateUpdateCourseController {
     @FXML
     TextField courseIdTextfield;
     @FXML
-    MenuButton coordinatorTaskMenuButton;
+    MenuButton coordinatorList;
+
 
     public CreateUpdateCourseController() {
         courseDAO = new CourseDAO(Main.getDBaccessMySql());
@@ -47,22 +48,22 @@ public class CreateUpdateCourseController {
     }
 
     public void setup(Course course) {
-        populateList();
         titleLabel.setText("Wijzig cursus");
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
         courseNameTextfield.setText((String.valueOf(course.getCourseName())));
-
+        populateList();
     }
+
     //@VG-dropdown list coordinators
     public void populateList() {
         List<User> allCoordinators = userDAO.getUserByRole();
         for (User user : allCoordinators) {
-            MenuItem item = new MenuItem(user.getLastName());
+            MenuItem item = new MenuItem(user.getFirstName() +" "+ user.getLastName());
             item.setOnAction(event -> {
                 coordinator = user;
-                coordinatorTaskMenuButton.setText(coordinator.getLastName());
+                coordinatorList.setText(coordinator.getLastName() + coordinator.getFirstName());
             });
-            coordinatorTaskMenuButton.getItems().add(item);
+            coordinatorList.getItems().add(item);
         }
     }
 
