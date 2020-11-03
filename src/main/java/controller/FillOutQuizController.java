@@ -14,7 +14,11 @@ import javafx.scene.input.MouseEvent;
 import model.Question;
 import model.Quiz;
 import view.Main;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class FillOutQuizController {
 
@@ -25,13 +29,8 @@ public class FillOutQuizController {
     @FXML
     private Button doNextQuestion;
 
-    int index = 0;
-    int vraagCorrect = 0;
-    int vraagIncorrect = 0;
-    Question currentQuestion;
-
     ArrayList<Question> allQuestions;
-    ArrayList<String> antwoordenGeshuffled = new ArrayList<>();
+    int index = 0;
 
     QuestionDAO questionDAO = new QuestionDAO(Main.getDBaccessMySql());
     QuizDAO quizDAO = new QuizDAO(Main.getDBaccessMySql());
@@ -40,80 +39,48 @@ public class FillOutQuizController {
     public void setup(Quiz quiz) {
         allQuestions = questionDAO.getAll();
         titleLabel.setText("Vraag " + (index + 1));
-        toonAntwoorden(index);
+        aanroepenAntwoorden(index);
     }
 
-
-    // Method that retrieves answers and displays them randomly
-    public void toonAntwoorden(int index) {
-
+    public void aanroepenAntwoorden(int index) {
+        allQuestions.get(index);
         titleLabel.setText("Vraag " + (index + 1));
 
-        currentQuestion = allQuestions.get(index);
-        antwoordenGeshuffled.clear();
-        antwoordenGeshuffled.add(currentQuestion.getAnswerRight());
-        antwoordenGeshuffled.add(currentQuestion.getAnswerWrong1());
-        antwoordenGeshuffled.add(currentQuestion.getAnswerWrong2());
-        antwoordenGeshuffled.add(currentQuestion.getAnswerWrong3());
+        Question question = allQuestions.get(index);
+
+        ArrayList<String> antwoordenGeshuffled = new ArrayList<>();
+        antwoordenGeshuffled.add(question.getAnswerRight());
+        antwoordenGeshuffled.add(question.getAnswerWrong1());
+        antwoordenGeshuffled.add(question.getAnswerWrong2());
+        antwoordenGeshuffled.add(question.getAnswerWrong3());
 
         Collections.shuffle(antwoordenGeshuffled);
 
-
         questionArea.setText(
-                currentQuestion.getDescription()
+                question.getDescription()
                         + "\n A: " + antwoordenGeshuffled.get(0)
                         + "\n B: " + antwoordenGeshuffled.get(1)
                         + "\n C: " + antwoordenGeshuffled.get(2)
                         + "\n D: " + antwoordenGeshuffled.get(3));
-
     }
 
-
-    private void checkAnswer (int givenAnswer){
-
-        if (antwoordenGeshuffled.get(givenAnswer).equals(currentQuestion.getAnswerRight())){
-            vraagCorrect++;
-//            Alert correct = new Alert(Alert.AlertType.INFORMATION);
-//            correct.setContentText("Correct");
-//            correct.show();
-        } else {
-            vraagIncorrect++;
-//            Alert incorrect = new Alert(Alert.AlertType.INFORMATION);
-//            incorrect.setContentText("Incorrect");
-//            incorrect.show();
-        }
-
-    }
 
     public void doRegisterA() {
-       checkAnswer(0);
     }
 
     public void doRegisterB() {
-        checkAnswer(1);
     }
 
     public void doRegisterC() {
-        checkAnswer(2);
     }
 
     public void doRegisterD() {
-        checkAnswer(3);
     }
-//
-//    public void printResults (){
-//        for (int i = 0; i < quizDAO.getAll().size(); i++) {
-//            System.out.println(currentQuestion);
-//            System.out.println(vraagCorrect);
-//        }
-//
-//    }
-
 
     public void doNextQuestion(ActionEvent actionEvent) {
         if (index < allQuestions.size() - 1) {
-            index ++;
-            toonAntwoorden(index);
+            index += 1;
+            aanroepenAntwoorden(index);
         } else {
             Alert bijEinde = new Alert(Alert.AlertType.INFORMATION);
             bijEinde.setContentText("Dit is de laatste vraag");
@@ -121,20 +88,20 @@ public class FillOutQuizController {
         }
     }
 
-
     public void doPreviousQuestion() {
         if (index > 0) {
             index -= 1;
-            toonAntwoorden(index);
+            aanroepenAntwoorden(index);
         } else {
             Alert bijBegin = new Alert(Alert.AlertType.INFORMATION);
             bijBegin.setContentText("Dit is de eerste vraag");
             bijBegin.show();
         }
     }
-
         //TJ menu knop terug naar menu
         public void doMenu (ActionEvent actionEvent){
             Main.getSceneManager().showWelcomeScene();
         }
+
+
 }
