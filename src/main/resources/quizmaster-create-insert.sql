@@ -118,6 +118,17 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Question`
     AUTO_INCREMENT = 8
     DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE `Quizmaster`.`Question`
+    ADD COLUMN `idQuiz` INT NULL AFTER `idQuestion`,
+    ADD INDEX `idQuiz_idx` (`idQuiz` ASC) VISIBLE;
+;
+ALTER TABLE `Quizmaster`.`Question`
+    ADD CONSTRAINT `idQuiz`
+        FOREIGN KEY (`idQuiz`)
+            REFERENCES `Quizmaster`.`Quiz` (`idQuiz`)
+            ON DELETE NO ACTION
+            ON UPDATE CASCADE;
+
 -- -----------------------------------------------------
 -- Data for table `Quizmaster`.`Question`
 -- -----------------------------------------------------
@@ -156,6 +167,16 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Quiz`
     AUTO_INCREMENT = 1
     DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE `Quizmaster`.`Quiz`
+    ADD COLUMN `idCourse` INT AFTER `idQuiz`,
+    ADD INDEX `idCourse_idx` (`idCourse` ASC) VISIBLE;
+;
+ALTER TABLE `Quizmaster`.`Quiz`
+    ADD CONSTRAINT `idCourse`
+        FOREIGN KEY (`idCourse`)
+            REFERENCES `Quizmaster`.`Course` (`idCourse`)
+            ON DELETE NO ACTION
+            ON UPDATE CASCADE;
 -- -----------------------------------------------------
 -- Data for table `Quizmaster`.`Quiz` ------------- TODO
 -- -----------------------------------------------------
@@ -169,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`StudentGroup`
 (
     `idStudentGroup`   INT         NOT NULL AUTO_INCREMENT,
     `StudentGroupName` VARCHAR(20) NOT NULL,
-    `idCourse`         INT         NOT NULL,
+    `idCourse`         INT         NULL,
     PRIMARY KEY (`idStudentGroup`),
     INDEX `fk_Group_Course_idx` (`idCourse` ASC) VISIBLE,
     CONSTRAINT `fk_Group_Course`
