@@ -53,27 +53,6 @@ public class ApplicationSetup {
         LOG.info("Default application properties set.");
     }
 
-    private Properties loadPropertiesFile() {
-        Properties propertiesFromFile = new Properties();
-        try (InputStream fileInputStream = new FileInputStream(PROPERTIES_FILE_PATH)) {
-            propertiesFromFile.load(fileInputStream);
-            LOG.info("Properties file '" + PROPERTIES_FILE_PATH + "' successfully loaded.");
-        } catch (IOException ioException) {
-            LOG.warn("Error loading properties file! Using default properties.");
-            LOG.info(properties);
-        }
-        return propertiesFromFile;
-    }
-
-    private void setDbAccess() {
-        String dbName = properties.getProperty("jdbc.database.name");
-        String dbUser = properties.getProperty("jdbc.database.user");
-        String dbPasword = properties.getProperty("jdbc.database.password");
-        if (dbAccess == null) {
-            dbAccess = new DBAccess(dbName, dbUser, dbPasword);
-        }
-    }
-
     private void setCustomProperties() {
         Properties propertiesFromFile = loadPropertiesFile();
         properties.forEach(
@@ -85,6 +64,27 @@ public class ApplicationSetup {
                 }
         );
         LOG.info("Custom properties set.");
+    }
+
+    //    private void setDbAccess() {
+    //        String dbName = properties.getProperty("jdbc.database.name");
+    //        String dbUser = properties.getProperty("jdbc.database.user");
+    //        String dbPasword = properties.getProperty("jdbc.database.password");
+    //        if (dbAccess == null) {
+    //            dbAccess = new DBAccess(dbName, dbUser, dbPasword);
+    //        }
+    //    }
+
+    private Properties loadPropertiesFile() {
+        Properties propertiesFromFile = new Properties();
+        try (InputStream fileInputStream = new FileInputStream(PROPERTIES_FILE_PATH)) {
+            propertiesFromFile.load(fileInputStream);
+            LOG.info("Properties file '" + PROPERTIES_FILE_PATH + "' successfully loaded.");
+        } catch (IOException ioException) {
+            LOG.warn("Error loading properties file! Using default properties.");
+            LOG.info(properties);
+        }
+        return propertiesFromFile;
     }
 
     public static ApplicationSetup getInstance() {
