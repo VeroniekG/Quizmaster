@@ -9,7 +9,7 @@ import javafx.scene.control.MenuItem;
 import model.User;
 import view.Main;
 
-import static model.MenuItem.*;
+import static model.UserMenuItem.*;
 
 /**
  * Controller for welcomeScene view (view.fxml.welcomeScene.fxml). Controls data flow and updates
@@ -40,10 +40,6 @@ public class WelcomeController {
     public void setup() {
         setWelcomeText();
         showCurrentUserMenu();
-    }
-
-    public void doLogout() {
-        Main.getSceneManager().showLoginScene();
     }
 
     public void setWelcomeText() {
@@ -102,6 +98,10 @@ public class WelcomeController {
         MenuItem menuItem1 = new MenuItem(MANAGEUSERS.getMenuItemName());
         menuItem1.setOnAction(event -> Main.getSceneManager().showManageUserScene());
         taskMenuButton.getItems().add(menuItem1);
+    }
+
+    public void doLogout() {
+        Main.getSceneManager().showLoginScene();
     }
 
 }
