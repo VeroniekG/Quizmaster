@@ -45,36 +45,47 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Course`
     AUTO_INCREMENT = 13
     DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE `quizmaster`.`course`
+    ADD COLUMN `idCoordinator` INT NOT NULL AFTER `idCourse`,
+    ADD INDEX `idCoordinator_idx` (`idCoordinator` ASC) VISIBLE;
+;
+ALTER TABLE `quizmaster`.`course`
+    ADD CONSTRAINT `idCoordinator`
+        FOREIGN KEY (`idCoordinator`)
+            REFERENCES `quizmaster`.`user` (`idUser`)
+            ON DELETE NO ACTION
+            ON UPDATE CASCADE;
+
 -- -----------------------------------------------------
 -- Data for table `Quizmaster`.`Course`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Quizmaster`;
 
-INSERT INTO Course (idCourse, courseName)
-VALUES (1, 'SkillUp');
-INSERT INTO Course (idCourse, courseName)
-VALUES (2, 'No-Bull Bootcamp');
-INSERT INTO Course (idCourse, courseName)
-VALUES (3, 'Mentee to Mentor');
-INSERT INTO Course (idCourse, courseName)
-VALUES (4, 'Active Achievement');
-INSERT INTO Course (idCourse, courseName)
-VALUES (5, 'Practice to Perfect');
-INSERT INTO Course (idCourse, courseName)
-VALUES (6, 'Strive Training');
-INSERT INTO Course (idCourse, courseName)
-VALUES (7, 'Commission Kings');
-INSERT INTO Course (idCourse, courseName)
-VALUES (8, 'Productivity Today');
-INSERT INTO Course (idCourse, courseName)
-VALUES (9, 'Unbound Opportunities');
-INSERT INTO Course (idCourse, courseName)
-VALUES (10, 'Passion Chasers');
-INSERT INTO Course (idCourse, courseName)
-VALUES (11, 'Limitless Horizons');
-INSERT INTO Course (idCourse, courseName)
-VALUES (12, 'Excalibur Training');
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (1, 'SkillUp', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (2, 'No-Bull Bootcamp', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (3, 'Mentee to Mentor', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (4, 'Active Achievement', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (5, 'Practice to Perfect', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (6, 'Strive Training', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (7, 'Commission Kings', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (8, 'Productivity Today', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (9, 'Unbound Opportunities', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (10, 'Passion Chasers', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (11, 'Limitless Horizons', 3);
+INSERT INTO Course (idCourse, courseName, idCoordinator)
+VALUES (12, 'Excalibur Training', 3);
 
 COMMIT;
 
@@ -98,6 +109,50 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Course_User`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8;
+
+ALTER TABLE `Quizmaster`.`Course_User`
+    ADD PRIMARY KEY (`idUser`, `idCourse`);
+;
+
+-- -----------------------------------------------------
+-- Data for table `Quizmaster`.`Course_User`
+-- -----------------------------------------------------
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('7', '1');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('7', '3');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('7', '5');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('7', '7');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('7', '9');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('7', '11');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('8', '2');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('8', '4');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('8', '6');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('8', '8');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('8', '10');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('8', '12');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('9', '2');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('9', '3');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('9', '7');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('9', '8');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('9', '10');
+INSERT INTO `Quizmaster`.`Course_User` (`idUser`, `idCourse`)
+VALUES ('9', '11');
 
 -- -----------------------------------------------------
 -- Table `Quizmaster`.`Question`
@@ -249,6 +304,15 @@ INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firs
 VALUES ('5', 'User5', 'pwUser5', 'TECHNISCH_BEHEERDER', 'Rinus', 'Radeloos');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
 VALUES ('6', 'Daan', 'pwDaan', 'TECHNISCH_BEHEERDER', 'Daan', 'Banaan');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('7', 'Student1', 'pw1', 'STUDENT', 'Student1', 'Een');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('8', 'Student2', 'pw2', 'STUDENT', 'Student2', 'Twee');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('9', 'Student3', 'pw3', 'STUDENT', 'Student3', 'Drie');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('10', 'Student4', 'pw4', 'STUDENT', 'Student4', 'Vier');
+
 
 COMMIT;
 

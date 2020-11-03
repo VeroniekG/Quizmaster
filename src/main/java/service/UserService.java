@@ -4,6 +4,7 @@ import database.mysql.DAO;
 import database.mysql.DBAccess;
 import database.mysql.UserDAO;
 import javafx.scene.control.TextField;
+import model.Course;
 import model.User;
 
 import java.util.HashMap;
@@ -68,8 +69,24 @@ public class UserService extends Service {
         return inputValidationService.validateInputString(validPassword, passwordInput);
     }
 
+    public void signOutStudentForCourse(Course course) {
+
+    }
+
+    public void signInStudentForCourse(Course course) {
+
+    }
+
     public User getUser() {
         return user;
     }
+
+    //    public List<Course> getSignedInCourseList() {
+    //
+    //    }
+    //
+    //    public List<Course> getSignedOutCourseList() {
+    //
+    //    }
 
 }
