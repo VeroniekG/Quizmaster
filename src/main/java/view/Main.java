@@ -24,7 +24,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         applicationSetup.load();
-        //setLogging();
+        setLogging();
         dbAccessMySql = getDBaccessMySql();
         dbAccessMySql.loadDriver();
         dbAccessCouchDb = getDbAccessCouchDb();

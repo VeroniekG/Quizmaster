@@ -91,22 +91,22 @@ public class CreateUpdateQuestionController {
     private void createQuestion() {
         StringBuilder warningText = new StringBuilder();
         boolean correcteInvoer = true;
-        String vraag = vraagTextfield.getText();
+        String description = vraagTextfield.getText();
         String correctAntwoord = antwoordCorrectTextfield.getText();
         String antwoordOnjuist1 = antwoordOnjuist1Textfield.getText();
         String antwoordOnjuist2 = antwoordOnjuist2Textfield.getText();
         String antwoordOnjuist3 = antwoordOnjuist3Textfield.getText();
+//        int idQuiz = quizlist.getSelectionModel().getSelectedIndex(); //TODO
 
 
-        if (vraag.isEmpty() || correctAntwoord.isEmpty() || antwoordOnjuist1.isEmpty() || antwoordOnjuist2.isEmpty() || antwoordOnjuist3.isEmpty()) {
+        if (description.isEmpty() || correctAntwoord.isEmpty() || antwoordOnjuist1.isEmpty() || antwoordOnjuist2.isEmpty() || antwoordOnjuist3.isEmpty()){
             warningText.append("Alle velden moeten worden ingevuld!\n");
             Alert foutmelding = new Alert(Alert.AlertType.ERROR);
             foutmelding.setContentText(warningText.toString());
             foutmelding.show();
-            correcteInvoer = false;
             question = null;
         } else {
-            question = new Question(vraag, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2,
+            question = new Question(description, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2,
                     antwoordOnjuist3);
         }
     }
