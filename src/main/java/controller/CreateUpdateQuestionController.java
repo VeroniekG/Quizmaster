@@ -11,7 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.MenuItem;
+//import model.MenuItem;
 import model.Question;
 import model.Quiz;
 import view.Main;
@@ -49,21 +49,29 @@ public class CreateUpdateQuestionController {
 
     public CreateUpdateQuestionController() {
         questionDAO = new QuestionDAO(Main.getDBaccessMySql());
+        quizDAO = new QuizDAO(Main.getDBaccessMySql());
     }
 
 
     // HL - To edit selected customer, all fields are filled with values from the database
 
     public void setup(Question question) {
-        titleLabel.setText("Wijzig vraag");
-        vraagnummerTextfield.setText(String.valueOf(question.getIdQuestion()));
-        vraagTextfield.setText(question.getDescription());
-        antwoordCorrectTextfield.setText(question.getAnswerRight());
-        antwoordOnjuist1Textfield.setText(question.getAnswerWrong1());
-        antwoordOnjuist2Textfield.setText(question.getAnswerWrong2());
-        antwoordOnjuist3Textfield.setText(question.getAnswerWrong3());
-        quizlist.setPromptText("Wijzig de bijbehorende quiz:");
-        fillComboBoxQuizzes();
+        if (question != null) {
+            titleLabel.setText("Wijzig vraag");
+            vraagnummerTextfield.setText(String.valueOf(question.getIdQuestion()));
+            vraagTextfield.setText(question.getDescription());
+            antwoordCorrectTextfield.setText(question.getAnswerRight());
+            antwoordOnjuist1Textfield.setText(question.getAnswerWrong1());
+            antwoordOnjuist2Textfield.setText(question.getAnswerWrong2());
+            antwoordOnjuist3Textfield.setText(question.getAnswerWrong3());
+            quizlist.setPromptText("Wijzig de bijbehorende quiz:");
+            fillComboBoxQuizzes();
+        } else {
+            titleLabel.setText("Nieuwe vraag");
+            fillComboBoxQuizzes();
+            quizlist.setPromptText("Selecteer de bijbehorende quiz:");
+
+        }
     }
 
     public void fillComboBoxQuizzes (){

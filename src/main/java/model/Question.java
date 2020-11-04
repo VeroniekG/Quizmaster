@@ -2,10 +2,17 @@ package model;
 
 public class Question {
 
-    public int getIdQuiz;
+    private int idQuiz;
+    private int idQuestion;
+    private String description;
+    private String answerRight;
+    private String answerWrong1;
+    private String answerWrong2;
+    private String answerWrong3;
 
-    public Question(int getIdQuiz, int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
-        this.getIdQuiz = getIdQuiz;
+
+    public Question(int idQuiz, int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
+        this.idQuiz = idQuiz;
         this.idQuestion = idQuestion;
         this.description = description;
         this.answerRight = answerRight;
@@ -14,16 +21,13 @@ public class Question {
         this.answerWrong3 = answerWrong3;
     }
 
-    private int idQuestion;
-    private String description;
-    private String answerRight;
-    private String answerWrong1;
-    private String answerWrong2;
-    private String answerWrong3;
-
     public Question(String question) {
         this.idQuestion = idQuestion;
         this.description = question;
+    }
+
+    public int getIdQuiz() {
+        return idQuiz;
     }
 
     public Question(int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
@@ -100,7 +104,7 @@ public class Question {
     @Override
     public String toString() {
 
-        return description + getIdQuiz;
+        return description;
     }
 }
 

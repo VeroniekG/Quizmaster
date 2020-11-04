@@ -97,7 +97,7 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             preparedStatement.setString(3, type.getAnswerWrong1());
             preparedStatement.setString(4, type.getAnswerWrong2());
             preparedStatement.setString(5, type.getAnswerWrong3());
-            preparedStatement.setInt(6, type.getIdQuiz);
+            preparedStatement.setInt(6, type.getIdQuiz());
             int id = executeInsertStatementWithKey();
             type.setIdQuestion(id);
         } catch (SQLException sqlException) {
@@ -107,7 +107,7 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
     }
 
     public void updateQuestion (Question question){
-        String sql = "Update Question Set description = ?, answerRight = ?, answerWrong1 = ?, answerWrong2 = ?, answerWrong3 = ? where idQuestion = ?;";
+        String sql = "Update Question Set description = ?, answerRight = ?, answerWrong1 = ?, answerWrong2 = ?, answerWrong3 = ?, idQuiz = ? where idQuestion = ?;";
         try{
             setupPreparedStatement(sql);
             preparedStatement.setString(1, question.getDescription());
@@ -115,7 +115,8 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             preparedStatement.setString(3, question.getAnswerWrong1());
             preparedStatement.setString(4, question.getAnswerWrong2());
             preparedStatement.setString(5, question.getAnswerWrong3());
-            preparedStatement.setInt(6, question.getIdQuestion());
+            preparedStatement.setInt(6, question.getIdQuiz());
+            preparedStatement.setInt(7, question.getIdQuestion());
 
             executeManipulateStatement();
         } catch (SQLException sqlException){
