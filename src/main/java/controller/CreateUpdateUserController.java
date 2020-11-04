@@ -152,14 +152,14 @@ public class CreateUpdateUserController {
     }
 
     public void updateUser() {
-        User updatedUser = new User.UpdateUser()
+        User updatedUser = new User.Builder()
                 .withIdUser(user.getIdUser())
                 .withFirstName(inputFields[0].getText())
                 .withLastName(inputFields[1].getText())
                 .withUserName(inputFields[2].getText())
                 .withPassword(inputFields[3].getText())
                 .withRole(comboBoxRole.getSelectionModel().getSelectedItem())
-                .update();
+                .build();
         if (updatedUser.equals(user)) {
             userHasUpdate = false;
         } else {

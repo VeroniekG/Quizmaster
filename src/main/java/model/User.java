@@ -26,13 +26,13 @@ public class User {
         this.role = role;
     }
 
-    public User() {
-    }
-
     public User(int idUser, String firstName, String lastName) {
         this.idUser = idUser;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public User() {
     }
 
     @Override
@@ -115,7 +115,7 @@ public class User {
 
     }
 
-    public static class UpdateUser {
+    public static class Builder {
 
         private int idUser;
         private String userName;
@@ -124,37 +124,37 @@ public class User {
         private String firstName;
         private String lastName;
 
-        public UpdateUser withIdUser(int idUser) {
+        public Builder withIdUser(int idUser) {
             this.idUser = idUser;
             return this;
         }
 
-        public UpdateUser withUserName(String userName) {
+        public Builder withUserName(String userName) {
             this.userName = userName;
             return this;
         }
 
-        public UpdateUser withPassword(String password) {
+        public Builder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public UpdateUser withRole(Role role) {
+        public Builder withRole(Role role) {
             this.role = role;
             return this;
         }
 
-        public UpdateUser withFirstName(String firstName) {
+        public Builder withFirstName(String firstName) {
             this.firstName = firstName;
             return this;
         }
 
-        public UpdateUser withLastName(String lastName) {
+        public Builder withLastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
 
-        public User update() {
+        public User build() {
             User user = new User();
             user.idUser = this.idUser;
             user.firstName = this.firstName;
