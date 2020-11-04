@@ -47,7 +47,6 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
      * @param idUser an int representing the user-id (idUser).
      *
      * @return a List containing Course objects
-     * @author Daniel Leertouwer
      */
     public List<Course> getCoursesForUserWithId(int idUser) {
         List<Course> courses = new ArrayList<>();
@@ -65,6 +64,30 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
         }
 
         return courses;
+    }
+
+    public void deleteCoursesSignedUpForUserWithId(int idCourse, int idUser) {
+        String sql = String.format("DELETE FROM Course_User WHERE idUser=%d AND idCourse=%d",
+                idUser, idCourse);
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("SQL error" + sqlException.getMessage());
+        }
+    }
+
+    public void addCoursesSignedUpForUserWithId(int idCourse, int idUser) {
+        String sql = String.format("INSERT INTO Course_User(idUser, idCourse) VALUES(?, ?)",
+                idUser, idCourse);
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setInt(1, idUser);
+            preparedStatement.setInt(2, idCourse);
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("SQL error" + sqlException.getMessage());
+        }
     }
 
     /**
@@ -140,3 +163,4 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
     }
 
 }
+
