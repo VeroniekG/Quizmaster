@@ -2,37 +2,29 @@ package model;
 
 public class Question {
 
-    public int getIdQuiz;
-
-    public Question(int getIdQuiz, int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
-        this.getIdQuiz = getIdQuiz;
-        this.idQuestion = idQuestion;
-        this.description = description;
-        this.answerRight = answerRight;
-        this.answerWrong1 = answerWrong1;
-        this.answerWrong2 = answerWrong2;
-        this.answerWrong3 = answerWrong3;
-    }
-
     private int idQuestion;
     private String description;
     private String answerRight;
     private String answerWrong1;
     private String answerWrong2;
     private String answerWrong3;
+    private int idQuiz;
 
-    public Question(String question) {
-        this.idQuestion = idQuestion;
-        this.description = question;
-    }
-
-    public Question(int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
+    public Question(int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3, int idQuiz) {
         this.idQuestion = idQuestion;
         this.description = description;
         this.answerRight = answerRight;
         this.answerWrong1 = answerWrong1;
         this.answerWrong2 = answerWrong2;
         this.answerWrong3 = answerWrong3;
+        this.idQuiz = idQuiz;
+    }
+
+    public Question(String description) {
+        this.description = description;
+    }
+
+    public Question() {
     }
 
     public Question(String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
@@ -43,7 +35,8 @@ public class Question {
         this.answerWrong3 = answerWrong3;
     }
 
-    public Question(int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3, int idQuiz) {
+    public int getIdQuiz() {
+        return idQuiz;
     }
 
     public int getIdQuestion() {
@@ -100,7 +93,7 @@ public class Question {
     @Override
     public String toString() {
 
-        return description + getIdQuiz;
+        return description;
     }
 }
 

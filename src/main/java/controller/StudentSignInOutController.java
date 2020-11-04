@@ -9,14 +9,20 @@ import model.Course;
 import service.StudentSignInOutService;
 import view.Main;
 
+/**
+ * Updates view studentSignInOut.fxml
+ *
+ * @author Daniel Leertouwer
+ * @version 1.0.3
+ */
 public class StudentSignInOutController {
 
     private final StudentSignInOutService studentSignInOutService;
 
     @FXML
-    private ListView<Course> signedOutCourseList;
+    private ListView<Course> listViewCoursesSignedOut;
     @FXML
-    private ListView<Course> signedInCourseList;
+    private ListView<Course> listViewCoursesSignedUp;
     @FXML
     private Button buttonSignIn;
     @FXML
@@ -24,47 +30,40 @@ public class StudentSignInOutController {
 
     public StudentSignInOutController() {
         studentSignInOutService = new StudentSignInOutService();
-        signedOutCourseList = new ListView<>();
-        signedInCourseList = new ListView<>();
+        listViewCoursesSignedOut = new ListView<>();
+        listViewCoursesSignedUp = new ListView<>();
     }
 
     public void setup() {
-        studentSignInOutService.createSignedOutCourseList(signedOutCourseList);
-        studentSignInOutService.createSignedInCoursesList(signedInCourseList);
+        studentSignInOutService.setupView(listViewCoursesSignedUp, listViewCoursesSignedOut);
+        listViewCoursesSignedUp.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        listViewCoursesSignedOut.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        // Enable multiselect to sign in/out for multiple courses at once.
-        signedInCourseList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        signedOutCourseList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        //        // Populate the lists
-        //        List<Course> coursesSignedInFor = studentSignInOutService
-        //        .createSignedInCoursesList();
-        //        signedInCourseList = studentSignInOutService.createListView(signedInCourseList,
-        //                coursesSignedInFor);
-        //        List<Course> coursesSignedOutFor = studentSignInOutService
-        //        .createSignedOutCoursesList();
-        //        signedOutCourseList = studentSignInOutService.createListView
-        //        (signedOutCourseList, coursesSignedOutFor)
-
-        //        List<Course> coursesSignedOut = studentSignInOutService
-        //        .createSignedOutCoursesList();
-        //        ObservableList<Course> coursesSignedInObservableList =
-        //                FXCollections.observableArrayList(coursesSignedIn);
-        //        signedInCourseList.setItems(coursesSignedInObservableList);
-        //        ObservableList<Course> coursesSignedOutObservableList =
-        //                FXCollections.observableArrayList(coursesSignedIn);
-        //        signedOutCourseList.setItems(coursesSignedOutObservableList);
     }
 
-    //TJ menu knop terug naar menu
     public void doMenu(ActionEvent actionEvent) {
         Main.getSceneManager().showWelcomeScene();
     }
 
     public void doSignIn() {
+        studentSignInOutService.setSelection(listViewCoursesSignedOut);
+        studentSignInOutService.addSelection();
+        studentSignInOutService.update();
     }
 
     public void doSignOut() {
+        studentSignInOutService.setSelection(listViewCoursesSignedUp);
+        studentSignInOutService.deleteSelection();
+        studentSignInOutService.update();
+    }
+
+    public ListView<Course> getListViewCoursesSignedOut() {
+        return listViewCoursesSignedOut;
+    }
+
+    public ListView<Course> getListViewCoursesSignedUp() {
+        return listViewCoursesSignedUp;
     }
 
 }
+

@@ -49,21 +49,29 @@ public class CreateUpdateQuestionController {
 
     public CreateUpdateQuestionController() {
         questionDAO = new QuestionDAO(Main.getDBaccessMySql());
+        quizDAO = new QuizDAO(Main.getDBaccessMySql());
     }
 
 
     // HL - To edit selected customer, all fields are filled with values from the database
 
     public void setup(Question question) {
-        titleLabel.setText("Wijzig vraag");
-        vraagnummerTextfield.setText(String.valueOf(question.getIdQuestion()));
-        vraagTextfield.setText(question.getDescription());
-        antwoordCorrectTextfield.setText(question.getAnswerRight());
-        antwoordOnjuist1Textfield.setText(question.getAnswerWrong1());
-        antwoordOnjuist2Textfield.setText(question.getAnswerWrong2());
-        antwoordOnjuist3Textfield.setText(question.getAnswerWrong3());
-        quizlist.setPromptText("Wijzig de bijbehorende quiz:");
-        fillComboBoxQuizzes();
+        if (question != null) {
+            titleLabel.setText("Wijzig vraag");
+            vraagnummerTextfield.setText(String.valueOf(question.getIdQuestion()));
+            vraagTextfield.setText(question.getDescription());
+            antwoordCorrectTextfield.setText(question.getAnswerRight());
+            antwoordOnjuist1Textfield.setText(question.getAnswerWrong1());
+            antwoordOnjuist2Textfield.setText(question.getAnswerWrong2());
+            antwoordOnjuist3Textfield.setText(question.getAnswerWrong3());
+            quizlist.setPromptText("Wijzig de bijbehorende quiz:");
+            fillComboBoxQuizzes();
+        } else {
+            titleLabel.setText("Nieuwe vraag");
+            fillComboBoxQuizzes();
+            quizlist.setPromptText("Selecteer de bijbehorende quiz:");
+
+        }
     }
 
     public void fillComboBoxQuizzes (){
@@ -83,22 +91,22 @@ public class CreateUpdateQuestionController {
     private void createQuestion() {
         StringBuilder warningText = new StringBuilder();
         boolean correcteInvoer = true;
-        String vraag = vraagTextfield.getText();
+        String description = vraagTextfield.getText();
         String correctAntwoord = antwoordCorrectTextfield.getText();
         String antwoordOnjuist1 = antwoordOnjuist1Textfield.getText();
         String antwoordOnjuist2 = antwoordOnjuist2Textfield.getText();
         String antwoordOnjuist3 = antwoordOnjuist3Textfield.getText();
+//        int idQuiz = quizlist.getSelectionModel().getSelectedIndex(); //TODO
 
 
-        if (vraag.isEmpty() || correctAntwoord.isEmpty() || antwoordOnjuist1.isEmpty() || antwoordOnjuist2.isEmpty() || antwoordOnjuist3.isEmpty()) {
+        if (description.isEmpty() || correctAntwoord.isEmpty() || antwoordOnjuist1.isEmpty() || antwoordOnjuist2.isEmpty() || antwoordOnjuist3.isEmpty()){
             warningText.append("Alle velden moeten worden ingevuld!\n");
             Alert foutmelding = new Alert(Alert.AlertType.ERROR);
             foutmelding.setContentText(warningText.toString());
             foutmelding.show();
-            correcteInvoer = false;
             question = null;
         } else {
-            question = new Question(vraag, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2,
+            question = new Question(description, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2,
                     antwoordOnjuist3);
         }
     }

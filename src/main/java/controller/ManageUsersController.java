@@ -27,6 +27,7 @@ public class ManageUsersController {
 
     private static final Logger LOGGER = LogManager.getLogger(ManageUsersController.class);
     private static final Session session = Session.getInstance();
+
     public static User selectedUser;
     @FXML
     private ListView<User> userList;

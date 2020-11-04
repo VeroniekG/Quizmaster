@@ -5,34 +5,34 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageQuestionsController">
-    <Label layoutX="200.0" layoutY="44.0" text="Vraagbeheer" underline="true">
+    <Label layoutX="200.0" layoutY="44.0" text="Vraagbeheer">
+        <font>
+            <Font name="Droid Sans" size="18.0" />
+        </font>
+    </Label>
+    <Label layoutX="200.0" layoutY="97.0" text="Selecteer vraag:">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
-    <Label layoutX="200.0" layoutY="109.0" text="Selecteer vraag">
+    <Button fx:id="newQuestionButton" layoutX="197.0" layoutY="355.0" mnemonicParsing="false" onAction="#doCreateQuestion" text="Nieuw" textFill="#484848">
         <font>
-            <Font size="15.0" />
-        </font>
-    </Label>
-    <Button fx:id="newQuestionButton" layoutX="197.0" layoutY="355.0" mnemonicParsing="false" onAction="#doCreateQuestion" text="Nieuw">
-        <font>
-            <Font size="14.0" />
+            <Font name="Lucida Grande" size="14.0" />
         </font>
     </Button>
-    <Button fx:id="updateButton" layoutX="422.0" layoutY="355.0" mnemonicParsing="false" onAction="#doUpdateQuestion" text="Wijzig">
+    <Button fx:id="updateButton" layoutX="422.0" layoutY="355.0" mnemonicParsing="false" onAction="#doUpdateQuestion" text="Wijzig" textFill="#484848">
         <font>
-            <Font size="14.0" />
+            <Font name="Lucida Grande" size="14.0" />
         </font>
     </Button>
-    <Button fx:id="deleteButton" layoutX="624.0" layoutY="355.0" mnemonicParsing="false" onAction="#doDeleteQuestion" text="Verwijder">
+    <Button fx:id="deleteButton" layoutX="624.0" layoutY="355.0" mnemonicParsing="false" onAction="#doDeleteQuestion" text="Verwijder" textFill="#484848">
         <font>
-            <Font size="14.0" />
+            <Font name="Lucida Grande" size="14.0" />
         </font>
     </Button>
-    <Button fx:id="menuButton" layoutX="199.0" layoutY="423.0" mnemonicParsing="false" onAction="#doMenu" text="Menu">
+    <Button fx:id="menuButton" layoutX="199.0" layoutY="423.0" mnemonicParsing="false" onAction="#doMenu" text="Menu" textFill="#484848">
         <font>
-            <Font size="14.0" />
+            <Font name="Lucida Grande" size="14.0" />
         </font>
     </Button>
    <ListView fx:id="questionsList" layoutX="200.0" layoutY="136.0" prefHeight="200.0" prefWidth="500.0" />
