@@ -1,51 +1,38 @@
 package model;
 
+import controller.FillOutQuizController;
+import database.mysql.QuestionDAO;
+import database.mysql.QuizDAO;
+import database.mysql.UserDAO;
+import model.Question;
+import model.Quiz;
+import view.Main;
+
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+//@AuthorVG - In QuizResult we store: Username, quizname, datum, answersCorrect and answers given by Student.
 public class QuizResult {
-//@AuthorVG - the Quizresult consists of: name of user(student), name of quiz, list of correct answers,
-// list of given answers, dateTime when quiz was completed, how many times same quiz completed.
 
-    private User user;
-    private Quiz quiz;
-    private Question correctAnswers;
-    private String givenAnswersStudent;
-    LocalDateTime dateTime;
-    private int timesCompleted;
+    private FillOutQuizController quizController;
+    private Session session;
+    private QuizDAO quizName;
+    LocalDateTime dateQuiz;
 
-    @Override
-    public String toString() {
-        StringBuilder resultString = new StringBuilder();
-        resultString.append("Quiz result:\n");
-        resultString.append(String.format("Name student: %s %s\n", user.getFirstName(), user.getLastName()));
-        resultString.append(String.format("Quiz name: %s\n", quiz.getQuizName()));
-        resultString.append(String.format("Quiz completed on: %s\n", dateTime));
-        resultString.append(String.format("Your answers: \n", givenAnswersStudent));
-        resultString.append(String.format("Correct answers: \n", correctAnswers));
-        return resultString.toString();
+    public void populateDB(){
+
+
     }
 
-    public String getGivenAnswersStudent() {
-        return givenAnswersStudent;
+     //lijst met vragen en correcte antwoord
+    // arraylist van Filloutquiz
+
+
+
     }
 
-    public void setGivenAnswersStudent(String givenAnswersStudent) {
-        this.givenAnswersStudent = givenAnswersStudent;
-    }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public int getTimesCompleted() {
-        return timesCompleted;
-    }
-
-    public void setTimesCompleted(int timesCompleted) {
-        this.timesCompleted = timesCompleted;
-    }
-}

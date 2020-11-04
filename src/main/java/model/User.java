@@ -35,7 +35,6 @@ public class User {
         this.lastName = lastName;
     }
 
-
     @Override
     public String toString() {
         return userName;
