@@ -11,7 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.MenuItem;
+//import model.MenuItem;
 import model.Question;
 import model.Quiz;
 import view.Main;
