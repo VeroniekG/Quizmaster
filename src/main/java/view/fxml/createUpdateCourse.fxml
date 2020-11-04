@@ -32,7 +32,7 @@
             </font>
         </Label>
         <TextField fx:id="courseIdTextfield" disable="true" prefHeight="26.0" prefWidth="141.0" GridPane.columnIndex="1" />
-      <MenuButton fx:id="coordinatorList" mnemonicParsing="false" prefHeight="37.0" prefWidth="190.0" text="Coördinator" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <MenuButton fx:id="coordinatorList" mnemonicParsing="false" prefHeight="37.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <items>
         </items>
          <font>

@@ -1,6 +1,5 @@
 package controller;
 
-import database.couchdb.QuizResultCouchDBDAO;
 import database.mysql.QuestionDAO;
 import database.mysql.QuizDAO;
 import javafx.event.ActionEvent;
@@ -11,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import model.Question;
 import model.Quiz;
-import model.QuizResult;
+import model.Session;
 import view.Main;
 import java.util.*;
 
@@ -19,6 +18,7 @@ public class FillOutQuizController {
 
 
     private Quiz quiz;
+    private static final Session SESSION = Session.getInstance();
 
     @FXML
     private Label titleLabel;
@@ -30,6 +30,7 @@ public class FillOutQuizController {
     int index = 0;
     int vraagCorrect = 0;
     int vraagIncorrect = 0;
+    int numberofQuizmade = 0;
     Question currentQuestion;
 
    List<String> allAnswers;
@@ -139,6 +140,7 @@ public class FillOutQuizController {
 //            Alert bijEinde = new Alert(Alert.AlertType.INFORMATION);
 //            bijEinde.setContentText("Dit is de laatste vraag");
 //            bijEinde.show();
+            numberofQuizmade++;
             Main.getSceneManager().showStudentFeedback(this);
         }
     }
@@ -155,6 +157,12 @@ public class FillOutQuizController {
         }
     }
 
+    public HashMap<String, Integer> getNumberofQuizMadeMap(){
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put(SESSION.getLoggedInUser().getFirstName(), getNumberofQuizmade());
+        return map;
+    }
+
         //TJ menu knop terug naar menu
         public void doMenu (ActionEvent actionEvent){
             Main.getSceneManager().showWelcomeScene();
@@ -166,5 +174,17 @@ public class FillOutQuizController {
 
     public ArrayList<Question> getAllQuestions() {
         return allQuestions;
+    }
+
+    public int getNumberofQuizmade() {
+        return numberofQuizmade;
+    }
+
+    public int getVraagCorrect() {
+        return vraagCorrect;
+    }
+
+    public int getVraagIncorrect() {
+        return vraagIncorrect;
     }
 }

@@ -1,6 +1,7 @@
 package database.mysql;
 
 import model.Course;
+import model.Question;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,11 +19,12 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
     }
 
     public void updateCourse(Course course) {
-        String sql = "Update course Set courseName = ? where idCourse = ?;";
+        String sql = "Update course Set courseName = ?, idCoordinator = ? where idCourse =?;";
         try {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, course.getCourseName());
             preparedStatement.setInt(2, course.getIdCourse());
+            preparedStatement.setInt(3,course.getCoordinatorID());
             executeManipulateStatement();
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
@@ -84,7 +86,8 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
             Course course;
             while (resultSet.next()) {
                 String coursename = resultSet.getString("courseName");
-                course = new Course(coursename);
+                int coordinatorID = resultSet.getInt("idCoordinator");
+                course = new Course(coursename, coordinatorID);
                 course.setIdCourse(resultSet.getInt("idCourse"));
                 courselist.add(course);
             }
@@ -110,7 +113,8 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
             ResultSet resultSet = executeSelectStatement();
             if (resultSet.next()) {
                 String courseName = resultSet.getString("courseName");
-                course = new Course(courseName);
+                int coordinatorID = resultSet.getInt("idCoordinator");
+                course = new Course(courseName,coordinatorID);
                 course.setIdCourse(id);
             } else {
                 System.out.println("Cursus met id " + id + " niet gevonden!");
@@ -128,15 +132,37 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
      */
     @Override
     public void storeOne(Course course) {
-        String sql = "INSERT INTO course(courseName) VALUES(?);";
+        String sql = "INSERT INTO course(courseName, idCoordinator) VALUES(?, ?);";
         try {
             setupPreparedStatementWithKey(sql);
             preparedStatement.setString(1, course.getCourseName());
+            preparedStatement.setInt(2, course.getCoordinatorID());
             int id = executeInsertStatementWithKey();
             course.setIdCourse(id);
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
         }
+    }
+
+    public ArrayList<Course> getCoordinatorsByUserId (int userId){
+        String sql = "SELECT * FROM course WHERE idCoordinator = ?;";
+        ArrayList<Course> result = new ArrayList<>();
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = executeSelectStatement();
+            Course course;
+            while (resultSet.next()) {
+                int idCourse = resultSet.getInt("idCourse");
+                String courseName = resultSet.getString("courseName");
+                int coordinatorID = resultSet.getInt("idCoordinator");
+                course = new Course(idCourse, courseName, coordinatorID);
+                result.add(course);
+            }
+        } catch (SQLException exception)
+        { System.out.println("SQL error " + exception.getMessage());
+        }
+        return result;
     }
 
 }

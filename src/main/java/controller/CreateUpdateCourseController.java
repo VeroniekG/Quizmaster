@@ -45,10 +45,15 @@ public class CreateUpdateCourseController {
     }
 
     public void setup(Course course) {
+        if (course != null){
         titleLabel.setText("Wijzig cursus");
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
         courseNameTextfield.setText((String.valueOf(course.getCourseName())));
-        populateList();
+        coordinatorList.setText(String.valueOf(course.getCoordinatorID()));
+        }else {
+            titleLabel.setText("Nieuwe cursus");
+            populateList();
+        }
     }
 
     //@VG-dropdown list coordinators
@@ -58,7 +63,7 @@ public class CreateUpdateCourseController {
             MenuItem item = new MenuItem(user.getFirstName() +" "+ user.getLastName());
             item.setOnAction(event -> {
                 coordinator = user;
-                coordinatorList.setText(coordinator.getLastName() + coordinator.getFirstName());
+                coordinatorList.setText(coordinator.getFirstName() + coordinator.getLastName());
             });
             coordinatorList.getItems().add(item);
         }

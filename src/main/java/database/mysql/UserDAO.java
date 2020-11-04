@@ -214,7 +214,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>, DAO<User> 
 
     //@VG - retrieve users from DB per specific rol
     public ArrayList<User> getUserByRole() {
-        String sql = "SELECT * FROM user WHERE role ='COORDINATOR'";
+        String sql = "SELECT * FROM user WHERE role = 'COORDINATOR';";
         ArrayList<User> rolelist = new ArrayList<>();
         try {
             setupPreparedStatement(sql);
