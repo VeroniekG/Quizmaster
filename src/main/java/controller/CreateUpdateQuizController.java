@@ -2,6 +2,8 @@ package controller;
 
 import database.mysql.CourseDAO;
 import database.mysql.QuizDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import database.mysql.DBAccess;
 import javafx.event.ActionEvent;
@@ -10,6 +12,8 @@ import model.Course;
 import model.Quiz;
 import model.Role;
 import view.Main;
+
+import java.util.List;
 
 public class  CreateUpdateQuizController {
     @FXML
@@ -28,14 +32,21 @@ public class  CreateUpdateQuizController {
     @FXML
     private TextField quizNameTextfield;
     @FXML
-    ComboBox<Course> comboBoxCourse;
-
+    //ComboBox<Course> comboBoxCourse;
+    public ComboBox comboBoxCourse = new ComboBox();
 
 
     public CreateUpdateQuizController() {
         quizDAO = new QuizDAO(Main.getDBaccessMySql());
         courseDAO =new CourseDAO(Main.getDBaccessMySql());
-        comboBoxCourse = new ComboBox<>();
+        //comboBoxCourse = new ComboBox<>();
+
+    }
+    public void fillComboBoxCourse (){
+        List<Course> allCourses = courseDAO.getAll();
+        ObservableList<Course> courseObservableList =
+                FXCollections.observableArrayList(allCourses);
+        comboBoxCourse.setItems(courseObservableList);
     }
 
     public void setup(Quiz quiz) {
@@ -43,6 +54,7 @@ public class  CreateUpdateQuizController {
         quizIdTextfield.setText(String.valueOf(quiz.getIdQuiz()));
         quizNameTextfield.setText(quizNameTextfield.getSelectedText());
         comboBoxCourse.setValue(comboBoxCourse.getValue());
+        fillComboBoxCourse();
     }
 
     //TJ menu knop terug naar menu

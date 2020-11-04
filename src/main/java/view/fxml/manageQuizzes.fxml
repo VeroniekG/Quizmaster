@@ -4,29 +4,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageQuizzesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageQuizzesController">
     <Label layoutX="14.0" layoutY="14.0" text="Quizbeheer">
         <font>
-            <Font size="18.0" />
+            <Font name="Droid Sans" size="18.0" />
         </font>
     </Label>
-    <Label layoutX="14.0" layoutY="49.0" text="Selecteer quiz">
+    <Label layoutX="14.0" layoutY="49.0" text="Selecteer quiz" textFill="#212121">
         <font>
-            <Font size="18.0" />
+            <Font name="Droid Sans" size="18.0" />
         </font>
     </Label>
     <ListView fx:id="quizlist" layoutX="14.0" layoutY="78.0" prefHeight="200.0" prefWidth="281.0" />
-    <Button fx:id="newQuizButton" layoutX="13.0" layoutY="285.0" mnemonicParsing="false" onAction="#doCreateQuiz" text="Nieuw">
+    <Button fx:id="newQuizButton" layoutX="13.0" layoutY="285.0" mnemonicParsing="false" onAction="#doCreateQuiz" text="Nieuw" textFill="#212121">
         <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
     <Button fx:id="changeButton" layoutX="113.0" layoutY="285.0" mnemonicParsing="false" onAction="#doUpdateQuiz" text="Wijzig">
         <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
-    <Button fx:id="deleteButton" layoutX="217.0" layoutY="285.0" mnemonicParsing="false" onAction="#doDeleteQuiz" text="Verwijder">
+    <Button fx:id="deleteButton" layoutX="115.0" layoutY="329.0" mnemonicParsing="false" onAction="#doDeleteQuiz" text="Verwijder">
         <font>
             <Font size="14.0" />
         </font>
