@@ -2,6 +2,7 @@ package controller;
 
 import database.mysql.CourseDAO;
 import database.mysql.DBAccess;
+import database.mysql.QuestionDAO;
 import database.mysql.QuizDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,6 +25,7 @@ import java.util.List;
 public class CoordinatorDashboardController {
     private QuizDAO quizDAO;
     private CourseDAO courseDAO;
+    private QuestionDAO questionDAO;
     private DBAccess dbAccess;
     private Quiz quiz;
 
@@ -48,7 +50,7 @@ public class CoordinatorDashboardController {
         questionList = new ListView<>();
         courseDAO = new CourseDAO(Main.getDBaccessMySql());
         quizDAO = new QuizDAO(Main.getDBaccessMySql());
-        //QuestionDA
+        questionDAO = new QuestionDAO(Main.getDBaccessMySql());
     }
 
     //@AuthorVG - retrieve courselist from DB
@@ -72,8 +74,12 @@ public class CoordinatorDashboardController {
                     public void changed(ObservableValue<? extends Quiz> observableValue,
                                         Quiz oldQuiz, Quiz newQuiz) {
                         System.out.println("Geselecteerde quiz: " + observableValue + ", " + oldQuiz + ", " + newQuiz);
+                        List<Question> questions = questionDAO.getAll();
+                        for (Question question : questions) {
+                            questionList.getItems().add(question);}
                     }
                 });
+
     }
     public void doNewQuiz(ActionEvent actionEvent) {
         Quiz selectedQuiz = quizList.getSelectionModel().getSelectedItem();
