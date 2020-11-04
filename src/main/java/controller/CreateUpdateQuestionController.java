@@ -11,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-//import model.MenuItem;
 import model.Question;
 import model.Quiz;
 import view.Main;
@@ -49,29 +48,21 @@ public class CreateUpdateQuestionController {
 
     public CreateUpdateQuestionController() {
         questionDAO = new QuestionDAO(Main.getDBaccessMySql());
-        quizDAO = new QuizDAO(Main.getDBaccessMySql());
     }
 
 
     // HL - To edit selected customer, all fields are filled with values from the database
 
     public void setup(Question question) {
-        if (question != null) {
-            titleLabel.setText("Wijzig vraag");
-            vraagnummerTextfield.setText(String.valueOf(question.getIdQuestion()));
-            vraagTextfield.setText(question.getDescription());
-            antwoordCorrectTextfield.setText(question.getAnswerRight());
-            antwoordOnjuist1Textfield.setText(question.getAnswerWrong1());
-            antwoordOnjuist2Textfield.setText(question.getAnswerWrong2());
-            antwoordOnjuist3Textfield.setText(question.getAnswerWrong3());
-            quizlist.setPromptText("Wijzig de bijbehorende quiz:");
-            fillComboBoxQuizzes();
-        } else {
-            titleLabel.setText("Nieuwe vraag");
-            fillComboBoxQuizzes();
-            quizlist.setPromptText("Selecteer de bijbehorende quiz:");
-
-        }
+        titleLabel.setText("Wijzig vraag");
+        vraagnummerTextfield.setText(String.valueOf(question.getIdQuestion()));
+        vraagTextfield.setText(question.getDescription());
+        antwoordCorrectTextfield.setText(question.getAnswerRight());
+        antwoordOnjuist1Textfield.setText(question.getAnswerWrong1());
+        antwoordOnjuist2Textfield.setText(question.getAnswerWrong2());
+        antwoordOnjuist3Textfield.setText(question.getAnswerWrong3());
+        quizlist.setPromptText("Wijzig de bijbehorende quiz:");
+        fillComboBoxQuizzes();
     }
 
     public void fillComboBoxQuizzes (){
@@ -91,22 +82,22 @@ public class CreateUpdateQuestionController {
     private void createQuestion() {
         StringBuilder warningText = new StringBuilder();
         boolean correcteInvoer = true;
-        String description = vraagTextfield.getText();
+        String vraag = vraagTextfield.getText();
         String correctAntwoord = antwoordCorrectTextfield.getText();
         String antwoordOnjuist1 = antwoordOnjuist1Textfield.getText();
         String antwoordOnjuist2 = antwoordOnjuist2Textfield.getText();
         String antwoordOnjuist3 = antwoordOnjuist3Textfield.getText();
-//        int idQuiz = quizlist.getSelectionModel().getSelectedIndex(); //TODO
 
 
-        if (description.isEmpty() || correctAntwoord.isEmpty() || antwoordOnjuist1.isEmpty() || antwoordOnjuist2.isEmpty() || antwoordOnjuist3.isEmpty()){
+        if (vraag.isEmpty() || correctAntwoord.isEmpty() || antwoordOnjuist1.isEmpty() || antwoordOnjuist2.isEmpty() || antwoordOnjuist3.isEmpty()) {
             warningText.append("Alle velden moeten worden ingevuld!\n");
             Alert foutmelding = new Alert(Alert.AlertType.ERROR);
             foutmelding.setContentText(warningText.toString());
             foutmelding.show();
+            correcteInvoer = false;
             question = null;
         } else {
-            question = new Question(description, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2,
+            question = new Question(vraag, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2,
                     antwoordOnjuist3);
         }
     }

@@ -4,15 +4,15 @@ import database.couchdb.DBAccess;
 import database.couchdb.QuizResultCouchDBDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Pair;
 import model.Question;
 import model.Quiz;
 import model.QuizResult;
 import view.Main;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,17 +22,22 @@ public class StudentFeedbackController {
     public ArrayList<Question> feedbackQuestions;
     public ArrayList<String> feedbackAnswers;
     private FillOutQuizController quizcontroller;
+    LocalDateTime dateTime;
 
 
     @FXML
-    private Label feedbackLabel;
+    Label feedbackLabel;
     @FXML
     ListView<String> feedbackList;
+    @FXML
+   TextArea quizList;
+
 
     //@AuthorVG - quizresult shows question, correct answer, answer given
     public void setup(FillOutQuizController quizcontroller) {
         feedbackLabel.setText("Quiz Resultaat");
         this.quizcontroller = quizcontroller;
+        quizList.setText(quizcontroller.getNumberofQuizMadeMap()+ "\t\t" + quizcontroller.getVraagCorrect() + " \t-\t " + quizcontroller.getVraagIncorrect());
         populateList();
     }
 
@@ -42,10 +47,11 @@ public class StudentFeedbackController {
         for (int i = 0; i < feedbackQuestions.size(); i++) {
             Question question = feedbackQuestions.get(i);
             String answer = feedbackAnswers.get(i);
-            feedbackList.getItems().add("Vraag: " + question.getDescription() + " Goede antwoord: " + question.getAnswerRight());
+            feedbackList.getItems().add("Vraag: " + question.getDescription() + " \nGoede antwoord: " + question.getAnswerRight());
             feedbackList.getItems().add("Jouw antwoord: \n" + answer);
         }
     }
+
 
 
     //     QuizResult quizResult = quizResultCouchDBDAO.getQuizResult("1");

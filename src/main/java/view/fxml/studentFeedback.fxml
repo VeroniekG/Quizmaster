@@ -16,4 +16,17 @@
             <Font size="14.0" />
         </font>
     </Button>
+   <TextArea fx:id="quizList" editable="false" layoutX="585.0" layoutY="94.0" prefHeight="84.0" prefWidth="222.0">
+      <font>
+         <Font name="Lucida Bright" size="14.0" />
+      </font></TextArea>
+   <Label layoutX="585.0" layoutY="68.0" text="Quiz gemaakt" />
+   <Label layoutX="676.0" layoutY="34.0" prefHeight="66.0" prefWidth="74.0" text="    Goede&#10;antwoorden">
+      <font>
+         <Font size="10.0" />
+      </font></Label>
+   <Label layoutX="750.0" layoutY="34.0" prefHeight="66.0" prefWidth="74.0" text="    Foute&#10; antwoorden">
+      <font>
+         <Font size="10.0" />
+      </font></Label>
 </AnchorPane>
