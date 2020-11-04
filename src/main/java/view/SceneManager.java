@@ -136,10 +136,10 @@ public class SceneManager {
         controller.setup(quiz);
     }
 
-    public void showStudentFeedback(Quiz quiz) {
+    public void showStudentFeedback(FillOutQuizController quizController) {
         FXMLLoader loader = getScene("/view/fxml/studentFeedback.fxml");
         StudentFeedbackController controller = loader.getController();
-        controller.setup();
+        controller.setup(quizController);
     }
 
     public void showCoordinatorDashboard() {

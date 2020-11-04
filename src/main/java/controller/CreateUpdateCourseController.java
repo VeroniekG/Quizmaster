@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.MenuItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.Course;
-import model.Question;
-import model.Role;
-import model.User;
+import model.*;
 import view.Main;
 
 import java.util.ArrayList;

@@ -7,54 +7,54 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.util.Pair;
 import model.Question;
 import model.Quiz;
 import model.QuizResult;
 import view.Main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentFeedbackController {
     private DBAccess couchDB;
     private QuizResultCouchDBDAO quizResultCouchDBDAO;
-    private ArrayList<Question> feedbackQuestions;
-    private ArrayList<String> feedbackAnswers;
+    public ArrayList<Question> feedbackQuestions;
+    public ArrayList<String> feedbackAnswers;
+    private FillOutQuizController quizcontroller;
 
 
     @FXML
     private Label feedbackLabel;
     @FXML
-    TextField feedbackList;
+    ListView<String> feedbackList;
 
- // uit couchdb ophalen
-    //@AuthorVG - quizresult need to show quiz attempt and result
-    //result = correct answers / given answers
-
-    public void setup() {
-        feedbackQuestions = new FillOutQuizController().getAllQuestions();
-        feedbackAnswers = (ArrayList<String>) new FillOutQuizController().getAllAnswers();
-        for (int i = 0; i < feedbackQuestions.size(); i++) {
-            feedbackQuestions.get(i);
-            System.out.println(feedbackQuestions);
-            System.out.println(feedbackAnswers);
-
-        }
-
-
-
-
-
+    //@AuthorVG - quizresult shows question, correct answer, answer given
+    public void setup(FillOutQuizController quizcontroller) {
+        feedbackLabel.setText("Quiz Resultaat");
+        this.quizcontroller = quizcontroller;
+        populateList();
     }
-    //method get results from couchDB and fill feedbacklist:
-  //  public void populateList(){
-   //     QuizResult quizResult = quizResultCouchDBDAO.getQuizResult("1");
 
-      //  feedbackList
+    public void populateList() {
+        feedbackQuestions = new ArrayList<>(quizcontroller.getAllQuestions());
+        feedbackAnswers = new ArrayList<>(quizcontroller.getAllAnswers());
+        for (int i = 0; i < feedbackQuestions.size(); i++) {
+            Question question = feedbackQuestions.get(i);
+            String answer = feedbackAnswers.get(i);
+            feedbackList.getItems().add("Vraag: " + question.getDescription() + " Goede antwoord: " + question.getAnswerRight());
+            feedbackList.getItems().add("Jouw antwoord: \n" + answer);
+        }
+    }
+
+
+    //     QuizResult quizResult = quizResultCouchDBDAO.getQuizResult("1");
+
 
 
     //TJ menu knop terug naar menu
     public void doMenu(ActionEvent actionEvent) {
         Main.getSceneManager().showWelcomeScene();
     }
-}
 
+}

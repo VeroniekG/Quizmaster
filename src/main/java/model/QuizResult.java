@@ -18,7 +18,7 @@ import java.util.List;
 public class QuizResult {
 
     private FillOutQuizController quizController;
-    User loggedUser;
+    private Session session;
     private QuizDAO quizName;
     LocalDateTime dateQuiz;
 

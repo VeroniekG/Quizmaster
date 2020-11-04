@@ -136,7 +136,7 @@ public class FillOutQuizController {
 //            Alert bijEinde = new Alert(Alert.AlertType.INFORMATION);
 //            bijEinde.setContentText("Dit is de laatste vraag");
 //            bijEinde.show();
-            Main.getSceneManager().showStudentFeedback(quiz);
+            Main.getSceneManager().showStudentFeedback(this);
         }
     }
 
