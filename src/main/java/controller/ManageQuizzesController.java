@@ -46,12 +46,12 @@ public class ManageQuizzesController {
         Main.getSceneManager().showCreateUpdateQuizScene(quiz);
 
     }
-
+    //@TJ updaten van quizzen
     public void doUpdateQuiz(){
         Quiz quiz = quizlist.getSelectionModel().getSelectedItem();
         Main.getSceneManager().showCreateUpdateQuizScene(quiz);
     }
-
+    //
     public void doDeleteQuiz(ActionEvent actionEvent){
         Quiz selectedQuiz  = quizlist.getSelectionModel().getSelectedItem();
         quizlist.getItems().remove(selectedQuiz);
