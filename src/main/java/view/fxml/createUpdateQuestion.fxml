@@ -8,13 +8,13 @@
    <children>
       <Button fx:id="menuButton" layoutX="153.0" layoutY="381.0" mnemonicParsing="false" onAction="#doMenu" text="Menu" textFill="#484848">
          <font>
-            <Font name="Lucida Grande" size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
          </font></Button>
        <Button fx:id="makeButton" layoutX="313.0" layoutY="381.0" mnemonicParsing="false" onAction="#doStoreQuestion" text="Sla op" textFill="#484848">
          <font>
-            <Font name="Lucida Grande" size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
          </font></Button>
-      <GridPane alignment="CENTER" layoutX="75.0" layoutY="125.0" prefHeight="200.0" prefWidth="600.0">
+      <GridPane alignment="CENTER" layoutX="75.0" layoutY="125.0" prefHeight="200.0" prefWidth="600.0" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="125.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="187.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="213.0" />
@@ -32,23 +32,23 @@
          <children>
             <Label contentDisplay="CENTER" text="Vraag" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font name="Lucida Grande" size="14.0" />
+                  <Font name="Droid Sans" size="14.0" />
                </font></Label>
             <Label text="Juist antwoord" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
-                  <Font name="Lucida Grande" size="14.0" />
+                  <Font name="Droid Sans" size="14.0" />
                </font></Label>
             <Label alignment="CENTER" contentDisplay="CENTER" text="Onjuist antwoord" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <font>
-                  <Font name="Lucida Grande" size="14.0" />
+                  <Font name="Droid Sans" size="14.0" />
                </font></Label>
             <Label alignment="CENTER" contentDisplay="CENTER" text="Onjuist antwoord 2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <font>
-                  <Font name="Lucida Grande" size="14.0" />
+                  <Font name="Droid Sans" size="14.0" />
                </font></Label>
             <Label alignment="CENTER" contentDisplay="CENTER" text="Onjuist antwoord 3" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                <font>
-                  <Font name="Lucida Grande" size="14.0" />
+                  <Font name="Droid Sans" size="14.0" />
                </font></Label>
              <Label alignment="CENTER" text="Vraagnummer" GridPane.halignment="CENTER">
                <font>
@@ -62,19 +62,19 @@
             <TextField fx:id="antwoordOnjuist3Textfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label alignment="CENTER" contentDisplay="CENTER" text="Quiz" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                <font>
-                  <Font name="Lucida Grande" size="14.0" />
+                  <Font name="Droid Sans" size="14.0" />
                </font></Label>
             <ComboBox fx:id="quizlist" prefWidth="400.0" promptText="Selecteer de bijbehorende quiz:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label fx:id="titleLabel" layoutX="182.0" layoutY="50.0" text="Nieuwe vraag" textFill="#212121">
          <font>
-            <Font name="Lucida Grande" size="18.0" />
+            <Font name="Droid Sans" size="18.0" />
          </font>
       </Label>
       <Button fx:id="terugKnop" layoutX="447.0" layoutY="381.0" mnemonicParsing="false" onAction="#doBack" text="Terug naar vragenlijst" textFill="#484848">
          <font>
-            <Font name="Lucida Grande" size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
          </font></Button>
    </children>
 </AnchorPane>

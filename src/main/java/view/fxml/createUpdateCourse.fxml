@@ -7,10 +7,10 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateUpdateCourseController">
     <Label fx:id="titleLabel" layoutX="356.0" layoutY="72.0" text="Maak nieuwe cursus">
         <font>
-          <Font size="21.0" />
+          <Font name="Droid Sans" size="18.0" />
         </font>
     </Label>
-    <GridPane layoutX="290.0" layoutY="145.0" prefHeight="165.0" prefWidth="319.0">
+    <GridPane layoutX="290.0" layoutY="145.0" prefHeight="165.0" prefWidth="319.0" AnchorPane.bottomAnchor="289.4" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="290.8" AnchorPane.topAnchor="145.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="97.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="179.0" />
@@ -22,13 +22,13 @@
         </rowConstraints>
         <Label text="Cursusnaam:" GridPane.rowIndex="1">
             <font>
-                <Font size="16.0" />
+                <Font name="Droid Sans" size="14.0" />
             </font>
         </Label>
         <TextField fx:id="courseNameTextfield" prefHeight="38.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label text="Cursusnummer:">
             <font>
-                <Font size="16.0" />
+                <Font name="Droid Sans" size="14.0" />
             </font>
         </Label>
         <TextField fx:id="courseIdTextfield" disable="true" prefHeight="26.0" prefWidth="141.0" GridPane.columnIndex="1" />
@@ -36,19 +36,19 @@
         <items>
         </items>
          <font>
-            <Font size="16.0" />
+            <Font name="Droid Sans" size="14.0" />
          </font>
       </MenuButton>
     </GridPane>
     <Button fx:id="menuButton" layoutX="290.0" layoutY="336.0" mnemonicParsing="false" onAction="#doMenu" prefHeight="38.0" prefWidth="152.0" text="Terug" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="336.0">
         <font>
-          <Font size="15.0" />
+          <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
     <Button fx:id="saveButton" contentDisplay="BOTTOM" layoutX="457.0" layoutY="336.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#doStoreCourse" prefHeight="38.0" prefWidth="152.0" text="Opslaan" AnchorPane.topAnchor="336.0">
         <font>
-          <Font size="15.0" />
+          <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
-   <AnchorPane />
+   <AnchorPane AnchorPane.bottomAnchor="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="900.0" AnchorPane.topAnchor="0.0" />
 </AnchorPane>

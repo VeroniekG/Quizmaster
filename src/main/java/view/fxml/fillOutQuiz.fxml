@@ -7,7 +7,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FillOutQuizController">
     <Label fx:id="titleLabel" layoutX="159.0" layoutY="52.0" text="Vraag 1">
         <font>
-            <Font size="18.0" />
+            <Font name="Droid Sans" size="18.0" />
         </font>
     </Label>
     <TextArea fx:id="questionArea" editable="false" layoutX="159.0" layoutY="109.0" prefHeight="207.0" prefWidth="282.0" promptText="Deze textarea bevat de vraag en de vier antwoorden." />
@@ -17,15 +17,15 @@
       </font></Button>
     <Button layoutX="188.0" layoutY="380.0" mnemonicParsing="false" onAction="#doRegisterB" text="Antwoord B" textFill="#484848">
       <font>
-         <Font size="14.0" />
+         <Font name="Droid Sans" size="14.0" />
       </font></Button>
     <Button layoutX="320.0" layoutY="380.0" mnemonicParsing="false" onAction="#doRegisterC" text="Antwoord C" textFill="#484848">
       <font>
-         <Font size="14.0" />
+         <Font name="Droid Sans" size="14.0" />
       </font></Button>
     <Button layoutX="453.0" layoutY="380.0" mnemonicParsing="false" onAction="#doRegisterD" text="Antwoord D" textFill="#484848">
       <font>
-         <Font size="14.0" />
+         <Font name="Droid Sans" size="14.0" />
       </font></Button>
     <Button layoutX="320.0" layoutY="499.0" mnemonicParsing="false" onAction="#doPreviousQuestion" text="Vorige" textFill="#484848">
       <font>

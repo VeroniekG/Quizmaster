@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateUpdateQuizController">
    <children>
-      <Label fx:id="titleLabel" layoutX="14.0" layoutY="14.0" text="Maak nieuwe Quiz">
+      <Label fx:id="titleLabel" layoutX="106.0" layoutY="33.0" text="Maak nieuwe Quiz" AnchorPane.topAnchor="33.0">
          <font>
             <Font name="Droid Sans" size="18.0" />
          </font></Label>
@@ -40,11 +40,11 @@
       </GridPane>
       <Button fx:id="menuButton" layoutX="124.0" layoutY="182.0" mnemonicParsing="false" onAction="#doMenu" text="Menu">
          <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
          </font></Button>
       <Button fx:id="composeButton" layoutX="201.0" layoutY="182.0" mnemonicParsing="false" onAction="#doStoreQuiz" text="Maak">
          <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
          </font></Button>
    </children>
 </AnchorPane>
