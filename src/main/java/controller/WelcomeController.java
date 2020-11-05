@@ -43,7 +43,7 @@ public class WelcomeController {
     }
 
     public void setWelcomeMenu() {
-        UserMenu menu = welcomeService.createWelcomeMenu(taskMenuButton);
+        UserMenu menu = welcomeService.createWelcomeMenu();
         taskMenuButton.getItems().addAll(menu.getMenuItems());
     }
 

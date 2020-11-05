@@ -13,7 +13,7 @@ import java.util.Map;
  * Interacts with Class CourseDAO to prepare data for use with other services.
  *
  * @author Daniel Leertouwer
- * @version 1.0.1
+ * @version 1.0.2
  * @see CourseDAO
  * @since 1.0
  */
@@ -51,10 +51,10 @@ public class CourseService {
         }
     }
 
-    public void addCourses(List<Course> courseList, int idUser) {
+    public void storeCourses(List<Course> courseList, int idUser) {
         for (Course course : courseList) {
             int idCourse = course.getIdCourse();
-            COURSE_DAO.addCoursesSignedUpForUserWithId(idCourse, idUser);
+            COURSE_DAO.storeCoursesSignedUpForUserWithId(idCourse, idUser);
         }
     }
 

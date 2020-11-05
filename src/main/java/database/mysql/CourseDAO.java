@@ -79,7 +79,7 @@ public class CourseDAO extends AbstractDAO implements GenericDAO<Course> {
         }
     }
 
-    public void addCoursesSignedUpForUserWithId(int idCourse, int idUser) {
+    public void storeCoursesSignedUpForUserWithId(int idCourse, int idUser) {
         String sql = String.format("INSERT INTO Course_User(idUser, idCourse) VALUES(?, ?)",
                 idUser, idCourse);
         try {

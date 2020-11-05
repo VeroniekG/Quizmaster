@@ -4,7 +4,6 @@ import database.mysql.DAO;
 import database.mysql.DBAccess;
 import database.mysql.UserDAO;
 import javafx.scene.control.TextField;
-import model.Course;
 import model.User;
 
 import java.util.HashMap;
@@ -16,7 +15,7 @@ import java.util.Map;
  * by the view controller.
  *
  * @author Daniel Leertouwer
- * @version 1.0.0
+ * @version 1.0.2
  * @see DBAccess
  * @see DAO
  * @see InputValidationService
@@ -27,7 +26,7 @@ public class UserService extends Service {
 
     private static final DBAccess DB_ACCESS = DBAccess.getInstance();
 
-    private final DAO<User> userDAO;
+    private final UserDAO userDAO;
     User user;
 
     public UserService() {
@@ -69,24 +68,8 @@ public class UserService extends Service {
         return inputValidationService.validateInputString(validPassword, passwordInput);
     }
 
-    public void signOutStudentForCourse(Course course) {
-
-    }
-
-    public void signInStudentForCourse(Course course) {
-
-    }
-
     public User getUser() {
         return user;
     }
-
-    //    public List<Course> getSignedInCourseList() {
-    //
-    //    }
-    //
-    //    public List<Course> getSignedOutCourseList() {
-    //
-    //    }
 
 }

@@ -7,7 +7,7 @@ import model.Session;
  * validation.
  *
  * @author Daniel Leertouwer
- * @version 1.0.0
+ * @version 1.0.1
  * @see Session
  * @see InputValidationService
  * @since 1.0
@@ -20,10 +20,6 @@ abstract class Service {
     Service() {
         session = Session.getInstance();
         inputValidationService = new InputValidationService();
-    }
-
-    public Session getSession() {
-        return session;
     }
 
 }

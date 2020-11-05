@@ -1,6 +1,5 @@
 package service;
 
-import javafx.scene.control.MenuButton;
 import model.User;
 import model.UserMenu;
 
@@ -8,7 +7,7 @@ import model.UserMenu;
  * Contains the logic for creating and setting taskmenu and welcome text.
  *
  * @author Daniel Leertouwer
- * @version 1.0.0
+ * @version 1.0.1
  * @see controller.WelcomeController
  * @see model.Session
  * @since 1.0
@@ -23,17 +22,15 @@ public class WelcomeService extends Service {
         menu = new UserMenu();
     }
 
-    public UserMenu createWelcomeMenu(MenuButton menuButton) {
+    public UserMenu createWelcomeMenu() {
         menu.setMenuItemsForUser(loggedInUser);
-        //menuButton.getItems().addAll(menu.getMenuItems());
         return menu;
     }
 
     public String createWelcomeMessage() {
         String name = loggedInUser.getFirstName();
-        String role = loggedInUser.getRole().getRoleName();
-        String welcomeText = String.format("Welkom %s! Je bent ingelogd als %s.", name, role);
-        return welcomeText;
+        String role = loggedInUser.getRole().toString().toLowerCase();
+        return String.format("Welkom %s! Je bent ingelogd als %s.", name, role);
     }
 
     public void invalidateSession() {

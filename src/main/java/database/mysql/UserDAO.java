@@ -22,7 +22,7 @@ import java.util.List;
  * @see User
  * @since 1.0
  */
-public class UserDAO extends AbstractDAO implements GenericDAO<User>, DAO<User> {
+public class UserDAO extends AbstractDAO implements GenericDAO<User>{
 
     private static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
 
@@ -46,7 +46,6 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>, DAO<User> 
      * @see ResultSet
      * @since 1.0
      */
-    @Override
     public User getOneByName(String name) {
         String sql = "SELECT * FROM User WHERE BINARY userName = ?";
         User user = null;
@@ -143,7 +142,6 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>, DAO<User> 
                 String lastName = resultSet.getString("lastName");
                 String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
-                user = new User(idUser, firstName, lastName);
                 user = new User(idUser, firstName, lastName, userName, password, role);
                 usersForRole.add(user);
             }

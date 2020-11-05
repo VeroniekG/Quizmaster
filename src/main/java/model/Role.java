@@ -12,8 +12,8 @@ package model;
  * @since 1.0
  */
 public enum Role {
+
     STUDENT("Student"),
-    DOCENT("Docent"),
     COORDINATOR("Coördinator"),
     ADMINISTRATOR("Administrator"),
     TECHNISCH_BEHEERDER("Technisch beheerder");

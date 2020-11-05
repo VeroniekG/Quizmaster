@@ -32,7 +32,7 @@ public class LoginService extends Service {
         inputFields.add(nameTextField);
         inputFields.add(passwordField);
         Map<String, String> userInputMap = userService.createTextFieldInputMap(inputFields);
-        if (session.getLoggedInUser() == null) { // user not yet logged in
+        if (session.getLoggedInUser() == null) {
             boolean userIsValidated;
             userIsValidated = userService.checkIfUserIsValid(userInputMap);
             if (userIsValidated) {

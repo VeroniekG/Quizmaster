@@ -45,7 +45,6 @@ public class ManageUsersController {
         } else {
             userList.getSelectionModel().select(session.getSelectedUser());
         }
-        //        addEventHandlers();
     }
 
     public void populateList() {
@@ -56,22 +55,11 @@ public class ManageUsersController {
     }
 
     public void selectFirstListItem() {
-        // Select the first item to avoid a NullPointerException
         userList.getSelectionModel().selectFirst();
         updateSelectedUser();
     }
 
-    //    public void addEventHandlers() {
-    //        EventHandler<InputEvent> selectionHandler = inputEvent -> {
-    //            updateSelectedUser();
-    //        };
-    //        userList.addEventHandler(MouseEvent.MOUSE_CLICKED, selectionHandler);
-    //        userList.addEventHandler(TouchEvent.TOUCH_PRESSED, selectionHandler);
-    //        userList.addEventHandler(KeyEvent.KEY_PRESSED, selectionHandler);
-    //    }
-
     public void updateSelectedUser() {
-        //        selectedUser = userList.getSelectionModel().getSelectedItem();
         session.setSelectedUser(userList.getSelectionModel().getSelectedItem());
     }
 
@@ -80,8 +68,6 @@ public class ManageUsersController {
     }
 
     public void doCreateUser() {
-        //        selectedUser = new User("", "", "", "", Role.STUDENT);
-        //        Main.getSceneManager().showCreateUpdateUserScene(selectedUser);
         User user = new User("", "", "", "", Role.STUDENT);
         Main.getSceneManager().showCreateUpdateUserScene(user);
     }
@@ -97,7 +83,6 @@ public class ManageUsersController {
 
     public boolean isNotCurrentUser() {
         boolean isNotCurrentUser = true;
-        //User currentUser = Main.getCurrentUser();
         User currentUser = session.getLoggedInUser();
         if (currentUser.equals(session.getSelectedUser())) {
             isNotCurrentUser = false;
@@ -146,14 +131,6 @@ public class ManageUsersController {
         alert.setHeaderText("Geannuleerd");
         alert.setContentText("Gebruiker niet verwijderd");
         alert.show();
-    }
-
-    //    public static void setSelectedUser(User selectedUser) {
-    //        ManageUsersController.selectedUser = selectedUser;
-    //    }
-
-    private enum ButtonOperation {
-        OK, CANCEL, NONE;
     }
 
 }

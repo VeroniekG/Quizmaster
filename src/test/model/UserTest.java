@@ -28,7 +28,7 @@ class UserTest implements WithAssertions {
         @Test
         @DisplayName("If userName is not set, return null")
         void Should_ReturnNull_When_UserNameIsNotSet() {
-            User underTest = new User(ID_USER, FIRST_NAME, LAST_NAME);
+            User underTest = new User(FIRST_NAME, LAST_NAME, USER_NAME, PASSWORD, ROLE);
             System.out.println(underTest.toString());
             assertThat(underTest.toString()).isEqualTo(null);
         }
@@ -50,7 +50,7 @@ class UserTest implements WithAssertions {
         @Test
         @DisplayName("if o == null, return false")
         void Should_ReturnFalse_When_ObjectComparedIsNull() {
-            User underTest = new User(ID_USER, FIRST_NAME, LAST_NAME);
+            User underTest = new User(FIRST_NAME, LAST_NAME, USER_NAME, PASSWORD, ROLE);
             User o = null;
             assertThat(underTest.equals(o)).isEqualTo(false);
         }

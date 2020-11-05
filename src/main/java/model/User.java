@@ -6,11 +6,11 @@ import java.util.Objects;
 public class User {
 
     private int idUser;
+    private String firstName;
+    private String lastName;
     private String userName;
     private String password;
     private Role role;
-    private String firstName;
-    private String lastName;
 
     public User(int idUser, String firstName, String lastName, String userName, String password,
                 Role role) {
@@ -24,12 +24,6 @@ public class User {
         this.userName = userName;
         this.password = password;
         this.role = role;
-    }
-
-    public User(int idUser, String firstName, String lastName) {
-        this.idUser = idUser;
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
     public User() {
@@ -70,40 +64,20 @@ public class User {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public static class UserNameComparator implements Comparator<User> {
@@ -118,11 +92,12 @@ public class User {
     public static class Builder {
 
         private int idUser;
+        private String firstName;
+        private String lastName;
         private String userName;
         private String password;
         private Role role;
-        private String firstName;
-        private String lastName;
+
 
         public Builder withIdUser(int idUser) {
             this.idUser = idUser;
