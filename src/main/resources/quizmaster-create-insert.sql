@@ -119,20 +119,28 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`Question`
 START TRANSACTION;
 USE `Quizmaster`;
 
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (1, 'Wat is 1+1?', 2, '15', '166', '345', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (2, 'Wat is 2+2?', '4', 'werw', 'ewrw', 'ww', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (3, 'Wat is 3+3?', '6', '345', '533', '353', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (4, 'Wat is 10x5?', '50', 'Peer', '655', '655', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (5, 'Wat is 60/2?', '30 ', '545', 'Sinterklaas', 'Boeien', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (6, 'Wat is de hoofdstad van Nederland?', 'Amsterdam', 'Enschede', 'Rotterdam', 'Urk', 0);
-INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3, idQuiz)
-VALUES (7, 'Hoe is het?', 'Oke', 'Goed', 'Slecht', 'Matig', 0);
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (1, 'Wat is 1+1?', '2', '15', '166', '345');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (2, 'Wat is 2+2?', '4', '6', '12', '64');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (3, 'Wat is 3+3?', '6', '345', '533', '353');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (4, 'Wat is 10x5?', '50', '242', '43', '44');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (5, 'Wat is 60/2?', '30 ', '545', '646', '15');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (6, 'Wat is 8x8?', '64', '234', '242', '667');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (7, 'Wat is 19-5?', '14', '5345', '75', '7');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (8, 'Wat is 19+5?', '24', '42', '2', '5');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (9, 'Wat is 19-7?', '12', '6', '575', '27');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (10, 'Wat is 10x4??', '40', '63', '759', '77');
+INSERT INTO Question (idQuestion, description, answerRight, answerWrong1, answerWrong2, answerWrong3)
+VALUES (11, 'Wat is 5+2?', '7', '54545', '755', '327');
 
 COMMIT;
 
