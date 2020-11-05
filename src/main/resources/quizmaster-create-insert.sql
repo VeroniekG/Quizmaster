@@ -305,7 +305,7 @@ VALUES ('1', 'User1', 'pwUser1', 'STUDENT', 'Piet', 'Kweetniet');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
 VALUES ('2', 'User2', 'pwUser2', 'DOCENT', 'Huub', 'Huub-Barbatruuk');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
-VALUES ('3', 'User3', 'pwUser3', 'COORDINATOR', 'Co', 'Ordinator');
+VALUES ('3', 'User3', 'pwUser3', 'COORDINATOR', 'Co', 'Ordinator0');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
 VALUES ('4', 'User4', 'pwUser4', 'ADMINISTRATOR', 'Ad', 'Ministrator');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
@@ -320,6 +320,12 @@ INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firs
 VALUES ('9', 'Student3', 'pw3', 'STUDENT', 'Student3', 'Drie');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
 VALUES ('10', 'Student4', 'pw4', 'STUDENT', 'Student4', 'Vier');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('11', 'co1', 'pw1', 'COORDINATOR', 'Co', 'Ordinator1');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('12', 'co2', 'pw2', 'COORDINATOR', 'Co', 'Ordinator2');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('13', 'co3', 'pw3', 'COORDINATOR', 'Co', 'Ordinator3');
 
 
 COMMIT;
