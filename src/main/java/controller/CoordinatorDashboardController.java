@@ -51,11 +51,10 @@ public class CoordinatorDashboardController {
     }
 
     //@AuthorVG - retrieve courselist from DB
-    // NOT WORKING YET!!  <------------------------------------------------------------------------- Almost working, quick & dirty
     public void setup() {
         populateList();
         Course selectedCourse = courseList.getSelectionModel().getSelectedItem();
-        setQuizListByCourse(selectedCourse); // <--------------------------------------------------- Magic :-)
+        setQuizListByCourse(selectedCourse);
         courseList.getSelectionModel().getSelectedItem().getIdCourse();
         courseList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Course>() {
@@ -68,6 +67,7 @@ public class CoordinatorDashboardController {
                 });
         Quiz selectedQuiz = quizList.getSelectionModel().getSelectedItem();
         setQuestionsListByQuiz(selectedQuiz);
+        quizList.getSelectionModel().getSelectedItem().getIdQuiz();
         quizList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Quiz>() {
                     @Override
@@ -77,6 +77,7 @@ public class CoordinatorDashboardController {
                         setQuestionsListByQuiz(newQuiz);
                     }
                 });
+
     }
 
     public void doNewQuiz(ActionEvent actionEvent) {
@@ -113,11 +114,13 @@ public class CoordinatorDashboardController {
         List<Quiz> quizzes = quizDAO.getQuizzesForCourseWithId(course.getIdCourse());
         ObservableList<Quiz> quizzesObservableList = FXCollections.observableList(quizzes);
         quizList.setItems(quizzesObservableList);
+        quizList.getSelectionModel().selectFirst();
     }
     public void setQuestionsListByQuiz(Quiz quiz) {
-        List<Question> questions = questionDAO.getQuestionsForQuizWithId(quiz.getIdCourse());
+        List<Question> questions = questionDAO.getQuestionsForQuizWithId(quiz.getIdQuiz());
         ObservableList<Question> questionObservableList = FXCollections.observableList(questions);
         questionList.setItems(questionObservableList);
+        questionList.getSelectionModel().selectFirst();
     }
 }
 
