@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import view.Main;
 
 /**
- * TODO: Refactor to make use of services and remove code duplicates, validation
+ * TODO: Major refactoring of this smelly Mickey Mouse Code,
  */
 public class CreateUpdateUserController {
 
