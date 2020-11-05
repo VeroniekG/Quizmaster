@@ -240,12 +240,12 @@ CREATE TABLE IF NOT EXISTS `Quizmaster`.`QuizResult`
     DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
--- Data for table `Quizmaster`.`Quizresult` ------- TODO
+-- Data for table `Quizmaster`.`Quizresult` ------------
 -- -----------------------------------------------------
 
 
 -- -----------------------------------------------------
--- Table `Quizmaster`.`StudentGroup` -------------- TODO
+-- Table `Quizmaster`.`StudentGroup` -------------------
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Quizmaster`.`StudentGroup`;
 

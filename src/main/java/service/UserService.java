@@ -1,6 +1,5 @@
 package service;
 
-import database.mysql.DAO;
 import database.mysql.DBAccess;
 import database.mysql.UserDAO;
 import javafx.scene.control.TextField;
@@ -17,7 +16,6 @@ import java.util.Map;
  * @author Daniel Leertouwer
  * @version 1.0.2
  * @see DBAccess
- * @see DAO
  * @see InputValidationService
  * @see User
  * @since 1.0

@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Interacts with the User model and maps application calls to the persistence layer. Extends
@@ -22,6 +21,7 @@ import java.util.List;
  * @see User
  * @since 1.0
  */
+@SuppressWarnings("JavaDoc")
 public class UserDAO extends AbstractDAO implements GenericDAO<User>{
 
     private static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
@@ -40,7 +40,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>{
      * @param name the username as a String
      *
      * @return an object of type User
-     * @throws SQLException if the Parameter index is out of range; if a database access error
+     * @exception SQLException if the Parameter index is out of range; if a database access error
      * occurs; if other SQL-errors occur
      * @see #setupPreparedStatement(String sql)
      * @see ResultSet
@@ -157,7 +157,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>{
      * resulting ResultSet to convert the contained values to a corresponding User object
      *
      * @return an ArrayList with objects of type User
-     * @throws SQLException if one or more columnLabels are not valid; if a database access
+     * @exception SQLException if one or more columnLabels are not valid; if a database access
      * error occurs; if other SQL-errors occur
      * @since 1.0
      */
@@ -185,7 +185,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>{
      * resulting ResultSet to convert the contained values to a corresponding User object.
      *
      * @return an object of type User
-     * @throws IllegalArgumentException if the requested user id does not exist
+     * @exception IllegalArgumentException if the requested user id does not exist
      * @throws SQLException if the parameter index is out of range; if a database access error
      * occurs; if other SQL-error occur
      * @see #setupPreparedStatement(String sql)
@@ -218,7 +218,7 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>{
      * user is stored. The {@link #executeInsertStatementWithKey()} executes an insert statement
      * and returns the generated key, which is then set as the user id of the provided User object.
      *
-     * @throws SQLException if the parameter index is out of range; if a database access error
+     * @exception SQLException if the parameter index is out of range; if a database access error
      * occurs; if other SQL-error occur
      * @see #setupPreparedStatementWithKey(String sql)
      * @see #executeInsertStatementWithKey()
