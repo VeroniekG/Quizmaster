@@ -28,9 +28,10 @@ public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
             ResultSet resultSet = executeSelectStatement();
             Quiz quiz;
             while (resultSet.next()){
+                int idQuiz = resultSet.getInt("idQuiz");
+                int idCourse = resultSet.getInt("idCourse");
                 String quizName = resultSet.getString("quizName");
-                quiz = new Quiz(quizName);
-                quiz.setIdQuiz(resultSet.getInt("idQuiz"));
+                quiz = new Quiz(idQuiz, quizName, idCourse);
                 quizlist.add(quiz);
             }
         } catch (SQLException sqlException) {
