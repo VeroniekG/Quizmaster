@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interacts with the User model and maps application calls to the persistence layer. Extends
@@ -124,6 +125,35 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>, DAO<User> 
     }
 
     /**
+     * Finds users with a specific role
+     *
+     * @param role a user role, enum Role
+     * @return a list of users with the provided role
+     */
+    public ArrayList<User> getUsersByRole(Role role) {
+        String sql = "SELECT * FROM user WHERE role = '" + role.name() + "'";
+        ArrayList<User> usersForRole = new ArrayList<>();
+        try {
+            setupPreparedStatement(sql);
+            ResultSet resultSet = executeSelectStatement();
+            User user;
+            while (resultSet.next()) {
+                int idUser = resultSet.getInt("idUser");
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+                String userName = resultSet.getString("userName");
+                String password = resultSet.getString("password");
+                user = new User(idUser, firstName, lastName);
+                user = new User(idUser, firstName, lastName, userName, password, role);
+                usersForRole.add(user);
+            }
+        } catch (SQLException sqlException) {
+            LOGGER.error("SQL-error " + sqlException.getMessage());
+        }
+        return usersForRole;
+    }
+
+    /**
      * Retrieves all users from the database. A PreparedStatement is used to execute a
      * parameterized SQL-query. {@link #setUserWithResultSet(ResultSet)} is called with the
      * resulting ResultSet to convert the contained values to a corresponding User object
@@ -210,27 +240,6 @@ public class UserDAO extends AbstractDAO implements GenericDAO<User>, DAO<User> 
         } catch (SQLException sqlException) {
             LOGGER.error("SQL-error " + sqlException.getMessage());
         }
-    }
-
-    //@VG - retrieve users from DB per specific rol
-    public ArrayList<User> getUserByRole() {
-        String sql = "SELECT * FROM user WHERE role = 'COORDINATOR';";
-        ArrayList<User> rolelist = new ArrayList<>();
-        try {
-            setupPreparedStatement(sql);
-            ResultSet resultSet = executeSelectStatement();
-            User user;
-            while (resultSet.next()) {
-                int idUser = resultSet.getInt("idUser");
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                user = new User(idUser, firstName, lastName);
-                rolelist.add(user);
-            }
-        } catch (SQLException sqlException) {
-            System.out.println("SQL error " + sqlException.getMessage());
-        }
-        return rolelist;
     }
 
 }
