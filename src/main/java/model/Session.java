@@ -7,7 +7,7 @@ package model;
  * already exists within the application.
  *
  * @author Daniel Leertouwer
- * @version 1.0.0
+ * @version 1.0.1
  * @see User
  * @since 1.0
  */

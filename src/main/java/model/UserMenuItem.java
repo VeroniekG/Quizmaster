@@ -9,7 +9,7 @@ import static model.Role.*;
 
 /**
  * UserMenuItem Model Object. Enum of which each value contains a MenuItem, a Role the MenuItem is
- * applicable to and a corresponding eventhandler.
+ * applicable to and a corresponding Eventhandler.
  * TODO: Add submenu-items
  *
  * @author Daniel Leertouwer
@@ -19,6 +19,8 @@ import static model.Role.*;
  * @see view.SceneManager
  * @since 1.0
  */
+
+@SuppressWarnings({"unused", "ReturnPrivateMutableField"})
 public enum UserMenuItem {
 
     STUDENTSIGNINOUT(new MenuItem("In- of uitschrijven cursus"), STUDENT, event -> {

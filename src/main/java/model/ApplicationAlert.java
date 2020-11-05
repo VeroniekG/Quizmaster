@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
  * the alert.
  *
  * @author Daniel Leertouwer
- * @version 1.0.0
+ * @version 1.0.1
  * @see Alert
  * @see javafx.scene.control.Alert.AlertType
  * @see Builder
@@ -41,13 +41,6 @@ public class ApplicationAlert extends Alert {
             this.type = type;
             return this;
         }
-
-        // --Commented out by Inspection START (02/11/2020, 22:27):
-        //        public Builder withTitle(String title) {
-        //            this.title = title;
-        //            return this;
-        //        }
-        // --Commented out by Inspection STOP (02/11/2020, 22:27)
 
         public Builder withHeaderText(String headerText) {
             this.headerText = headerText;

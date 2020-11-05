@@ -34,6 +34,7 @@ public class User {
         return userName;
     }
 
+    @SuppressWarnings({"MethodComplexity", "ObjectComparison"})
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,6 +69,7 @@ public class User {
         return password;
     }
 
+    @SuppressWarnings("ReturnPrivateMutableField")
     public Role getRole() {
         return role;
     }

@@ -17,12 +17,13 @@ import java.util.List;
  */
 public class UserMenu {
 
-    private List<MenuItem> menuItems;
+    private final List<MenuItem> menuItems;
 
     public UserMenu() {
         menuItems = new ArrayList<>();
     }
 
+    @SuppressWarnings("ReturnPrivateMutableField")
     public List<MenuItem> getMenuItems() {
         return menuItems;
     }
@@ -32,7 +33,7 @@ public class UserMenu {
      * UserMenuItem[] userMenuItems is set to contain all possible menu-items, which is then
      * filtered by comparing the user role to the role a specific item is applicable ror. If an item
      * is applicable for the currently logged in user, it is added to ArrayList menuItems after a
-     * corresponding eventhandler is attached.
+     * corresponding EventHandler is attached.
      */
     public void setMenuItemsForUser(User user) {
         Role applicationUserRole = user.getRole();

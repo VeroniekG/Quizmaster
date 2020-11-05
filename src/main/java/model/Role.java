@@ -29,8 +29,4 @@ public enum Role {
         return roleName;
     }
 
-    public String getRoleName() {
-        return roleName.toLowerCase();
-    }
-
 }
