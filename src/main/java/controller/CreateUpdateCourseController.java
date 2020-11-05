@@ -21,9 +21,7 @@ public class CreateUpdateCourseController {
     private CourseDAO courseDAO;
     private Course course;
     private UserDAO userDAO;
-    private Role role;
     private User coordinator;
-    private User user;
 
     @FXML
     Label titleLabel;
@@ -50,12 +48,12 @@ public class CreateUpdateCourseController {
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
         courseNameTextfield.setText((String.valueOf(course.getCourseName())));
         coordinatorList.setText(String.valueOf(course.getCoordinatorID()));
+        populateList();
         }else {
             titleLabel.setText("Nieuwe cursus");
             populateList();
         }
     }
-
     //@VG-dropdown list coordinators
     public void populateList() {
         List<User> allCoordinators = userDAO.getUserByRole();
@@ -68,21 +66,15 @@ public class CreateUpdateCourseController {
             coordinatorList.getItems().add(item);
         }
     }
-
-    //TJ menu knop terug naar menu
-    public void doMenu(ActionEvent actionEvent) {
-        Main.getSceneManager().showManageCoursesScene();
-    }
-
     public void createCourse() {
-        StringBuilder warningtext = new StringBuilder();
         boolean correct = true;
         String coursename = courseNameTextfield.getText();
         if (coursename.isEmpty()) {
-            warningtext.append("Graag een cursusnaam invoeren\n");
-            Alert foutmelding = new Alert(Alert.AlertType.ERROR);
-            foutmelding.setContentText(warningtext.toString());
-            foutmelding.show();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "");
+            alert.setTitle("Meldingvenster");
+            alert.setHeaderText("Waarschuwing");
+           alert.setContentText("Graag een cursusnaam invoeren");
+            alert.show();
             course = null;
         } else {
             course = new Course(coursename);
@@ -96,18 +88,25 @@ public class CreateUpdateCourseController {
             if (courseIdTextfield.getText().isEmpty()) {
                 courseDAO.storeOne(course);
                 courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
-                Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                saved.setContentText("Cursus opgeslagen");
-                saved.show();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
+                alert.setTitle("Meldingvenster");
+                alert.setContentText("Cursus opgeslagen");
+                ;
+                alert.show();
             } else {
                 int id = Integer.parseInt(courseIdTextfield.getText());
                 course.setIdCourse(id);
                 courseDAO.updateCourse(course);
-                Alert updated = new Alert(Alert.AlertType.INFORMATION);
-                updated.setContentText("Cursus is gewijzigd");
-                updated.show();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Meldingvenster");
+                alert.setContentText("Cursus is gewijzigd");
+                alert.show();
             }
         }
+    }
+    //TJ menu knop terug naar menu
+    public void doMenu(ActionEvent actionEvent) {
+        Main.getSceneManager().showManageCoursesScene();
     }
 
 }
