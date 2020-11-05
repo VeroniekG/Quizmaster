@@ -57,9 +57,7 @@ public class SelectQuizForStudentController {
             int idCourse = course.getIdCourse();
             List<Quiz> quizzesForCourse = quizDAO.getQuizzesForCourseWithId(idCourse);
             // De opgehaalde quizzen toevoegen aan de ArrayList met het eindresultaat
-            for (Quiz quiz : quizzesForCourse) {
-                allQuizzesForStudent.add(quiz);
-            }
+            allQuizzesForStudent.addAll(quizzesForCourse);
         }
         return allQuizzesForStudent;
     }

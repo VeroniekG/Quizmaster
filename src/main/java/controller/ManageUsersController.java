@@ -1,5 +1,6 @@
 package controller;
 
+import database.mysql.DBAccess;
 import database.mysql.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,14 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import model.ApplicationAlert;
 import model.Role;
 import model.Session;
 import model.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import view.Main;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,17 +24,16 @@ import java.util.Optional;
  */
 public class ManageUsersController {
 
-    private static final Logger LOGGER = LogManager.getLogger(ManageUsersController.class);
     private static final Session session = Session.getInstance();
+    private static final DBAccess DB_ACCESS = DBAccess.getInstance();
+    private static final UserDAO USER_DAO = new UserDAO(DB_ACCESS);
 
-    public static User selectedUser;
+    @SuppressWarnings("FieldMayBeFinal")
     @FXML
     private ListView<User> userList;
-    private UserDAO userDAO;
 
     public ManageUsersController() {
         userList = new ListView<>();
-        userDAO = new UserDAO(Main.getDBaccessMySql());
     }
 
     public void setup() {
@@ -48,8 +46,8 @@ public class ManageUsersController {
     }
 
     public void populateList() {
-        List<User> allUsers = userDAO.getAll();
-        Collections.sort(allUsers, new User.UserNameComparator());
+        List<User> allUsers = USER_DAO.getAll();
+        allUsers.sort(new User.UserNameComparator());
         ObservableList<User> userObservableList = FXCollections.observableArrayList(allUsers);
         userList.setItems(userObservableList);
     }
@@ -91,11 +89,12 @@ public class ManageUsersController {
     }
 
     private void showAlertCannotUpdate() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Meldingvenster");
-        alert.setHeaderText("Waarschuwing");
-        alert.setContentText("Je bent ingelogd als '" + session.getLoggedInUser().getUserName() + "'. " +
-                "Gebruiker kan niet worden bewerkt of verwijderd!");
+        ApplicationAlert alert = new ApplicationAlert.Builder()
+                .withAlertType(Alert.AlertType.WARNING)
+                .withHeaderText("Waarschuwing")
+                .withContentText("Je bent ingelogd als '" + session.getLoggedInUser().getUserName()
+                        + "'. Gebruiker kan niet worden bewerkt of verwijderd!")
+                .build();
         alert.show();
     }
 
@@ -104,8 +103,8 @@ public class ManageUsersController {
         if (isNotCurrentUser()) {
             Optional<ButtonType> buttonType = showAlertDelete(session.getSelectedUser());
             ButtonType buttonPressed = buttonType.orElse(ButtonType.CANCEL);
-            if (buttonPressed == ButtonType.OK) {
-                userDAO.deleteOne(session.getSelectedUser());
+            if (buttonPressed.equals(ButtonType.OK)) {
+                USER_DAO.deleteOne(session.getSelectedUser());
                 populateList();
                 selectFirstListItem();
             } else {
@@ -121,8 +120,8 @@ public class ManageUsersController {
     private Optional<ButtonType> showAlertDelete(User user) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Weet je het zeker?");
         alert.setTitle("Meldingvenster");
-        alert.setHeaderText("Gebruiker verwijderen?");
-        return alert.showAndWait(); // alert.showAndWait() returns Optional<ButtonType>
+        alert.setHeaderText("Gebruiker '" + user.getUserName() + "' verwijderen?");
+        return alert.showAndWait();
     }
 
     private void showAlertCancelled() {

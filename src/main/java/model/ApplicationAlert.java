@@ -29,9 +29,16 @@ public class ApplicationAlert extends Alert {
     public static class Builder {
 
         private final String title;
-        private Alert.AlertType type;
         private String headerText;
         private String contentText;
+        private Alert.AlertType type;
+
+
+        public Builder(String headerText, String contentText) {
+            this();
+            this.headerText = headerText;
+            this.contentText = contentText;
+        }
 
         public Builder() {
             this.title = ALERT_TITLE;

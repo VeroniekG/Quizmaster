@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -51,16 +50,15 @@ public class LoginController {
     }
 
     public ApplicationAlert createAlert() {
-        ApplicationAlert alert = new ApplicationAlert.Builder()
+        return new ApplicationAlert.Builder()
                 .withAlertType(Alert.AlertType.WARNING)
                 .withHeaderText("Fout bij inloggen")
                 .withContentText("Het inloggen is niet gelukt! Probeer het nog eens.")
                 .build();
-        return alert;
     }
 
     @FXML
-    public void doQuit(ActionEvent event) {
+    public void doQuit() {
         LOGGER.info("Quitting application...");
         System.exit(0);
     }

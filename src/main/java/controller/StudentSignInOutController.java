@@ -13,6 +13,7 @@ import view.Main;
  * @author Daniel Leertouwer
  * @version 1.0.3
  */
+@SuppressWarnings("FieldMayBeFinal")
 public class StudentSignInOutController {
 
     private final StudentSignInOutService studentSignInOutService;
