@@ -41,7 +41,7 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
     @Override
     public Question getOneById(int id) {
-        String sql = "SELECT * FROM course WHERE idQuestion = ?";
+        String sql = "SELECT * FROM question WHERE idQuestion = ?";
         Question question = null;
         try {
             setupPreparedStatement(sql);

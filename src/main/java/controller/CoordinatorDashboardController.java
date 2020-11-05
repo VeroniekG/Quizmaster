@@ -77,7 +77,6 @@ public class CoordinatorDashboardController {
                         setQuestionsListByQuiz(newQuiz);
                     }
                 });
-
     }
 
     public void doNewQuiz(ActionEvent actionEvent) {

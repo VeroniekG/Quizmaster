@@ -32,13 +32,12 @@
             </font>
         </Label>
         <TextField fx:id="courseIdTextfield" disable="true" prefHeight="26.0" prefWidth="141.0" GridPane.columnIndex="1" />
-      <MenuButton fx:id="coordinatorList" mnemonicParsing="false" prefHeight="37.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-        <items>
-        </items>
+      <ComboBox fx:id="comboBoxCoordinator" prefHeight="33.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Coördinator:" GridPane.rowIndex="2">
          <font>
-            <Font size="16.0" />
+            <Font name="Droid Sans" size="14.0" />
          </font>
-      </MenuButton>
+      </Label>
     </GridPane>
     <Button fx:id="menuButton" layoutX="290.0" layoutY="336.0" mnemonicParsing="false" onAction="#doMenu" prefHeight="38.0" prefWidth="152.0" text="Terug" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="336.0">
         <font>

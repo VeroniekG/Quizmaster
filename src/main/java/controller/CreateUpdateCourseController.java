@@ -34,12 +34,13 @@ public class CreateUpdateCourseController {
     @FXML
     TextField courseIdTextfield;
     @FXML
-    MenuButton coordinatorList;
+    ComboBox<User> comboBoxCoordinator;
 
 
     public CreateUpdateCourseController() {
         courseDAO = new CourseDAO(Main.getDBaccessMySql());
         userDAO = new UserDAO(Main.getDBaccessMySql());
+        comboBoxCoordinator = new ComboBox<>();
     }
 
     public void setup(Course course) {
@@ -47,25 +48,16 @@ public class CreateUpdateCourseController {
         titleLabel.setText("Wijzig cursus");
         courseIdTextfield.setText(String.valueOf(course.getIdCourse()));
         courseNameTextfield.setText((String.valueOf(course.getCourseName())));
-        coordinatorList.setText(String.valueOf(course.getCoordinatorID()));
-        populateList();
-        }else {
+            List<User> allCoordinators = userDAO.getUsersByRole(Role.COORDINATOR);
+            ObservableList<User> coordinatorObservableList =
+                    FXCollections.observableArrayList(allCoordinators);
+            comboBoxCoordinator.setItems(coordinatorObservableList);
+        } else {
             titleLabel.setText("Nieuwe cursus");
-            populateList();
+            comboBoxCoordinator.getSelectionModel().selectFirst();
         }
     }
-    //@VG-dropdown list coordinators
-    public void populateList() {
-        List<User> allCoordinators = userDAO.getUsersByRole(Role.COORDINATOR);
-        for (User user : allCoordinators) {
-            MenuItem item = new MenuItem(user.getFirstName() +" "+ user.getLastName());
-            item.setOnAction(event -> {
-                coordinator = user;
-                coordinatorList.setText(coordinator.getFirstName() + coordinator.getLastName());
-            });
-            coordinatorList.getItems().add(item);
-        }
-    }
+
     public void createCourse() {
         boolean correct = true;
         String coursename = courseNameTextfield.getText();
