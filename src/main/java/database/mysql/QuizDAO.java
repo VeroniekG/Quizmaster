@@ -3,10 +3,13 @@ package database.mysql;
 import model.Course;
 import model.Quiz;
 import model.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
 
@@ -95,7 +98,7 @@ public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
         }
     }
 
-    public ArrayList<Quiz> getQuizesForCourse(){
+    public ArrayList<Quiz> getQuizzesForCourse(){
         String sql = "SELECT * FROM quiz WHERE idCourse = ?;";
         ArrayList<Quiz> quizList = new ArrayList<>();
         try{
@@ -111,6 +114,24 @@ public class QuizDAO extends AbstractDAO implements GenericDAO<Quiz> {
             System.out.println("SQL error" + sqlException.getMessage());
         }return quizList;
     }
+
+    public List<Quiz> getQuizzesForCourseWithId(int idCourse) {
+        List<Quiz> quizzes = new ArrayList<>();
+        String sql = String.format("SELECT * FROM Quiz WHERE idCourse=%d", idCourse);
+        try {
+            setupPreparedStatement(sql);
+            ResultSet resultSet = executeSelectStatement();
+            while (resultSet.next()) {
+                int idQuiz = resultSet.getInt("idQuiz");
+                Quiz quiz = getOneById(idQuiz);
+                quizzes.add(quiz);
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("SQL-error " + sqlException.getMessage());
+        }
+        return quizzes;
+    }
+
         //@TJ, match the idQuiz with idCourse
     public Quiz getIdCourse(int idCourse) {
         String sql = "SELECT * FROM quiz WHERE idCourse = ?";

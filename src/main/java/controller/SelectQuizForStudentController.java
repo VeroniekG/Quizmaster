@@ -3,14 +3,20 @@ package controller;
 import database.mysql.CourseDAO;
 import database.mysql.DBAccess;
 import database.mysql.QuizDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import model.Course;
 import model.Quiz;
 import model.Session;
+import model.User;
 import view.Main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SelectQuizForStudentController {
     private static final Session SESSION = Session.getInstance();
@@ -39,13 +45,35 @@ public class SelectQuizForStudentController {
 
     }*/
 
+    public List<Quiz> getQuizzesForStudent(){
+        // Id van ingelogde gebruiker ophalen
+        int idUser = SESSION.getLoggedInUser().getIdUser();
+        // Alle cursussen ophalen waar de gebruiker voor ingeschreven is
+        List<Course> courses = courseDAO.getCoursesForUserWithId(idUser);
+        // Een ArrayList om het resultaat in te bewaren
+        List<Quiz> allQuizzesForStudent = new ArrayList<>();
+        // Voor iedere cursus de bijbehorende quizzen ophalen
+        for (Course course : courses) {
+            int idCourse = course.getIdCourse();
+            List<Quiz> quizzesForCourse = quizDAO.getQuizzesForCourseWithId(idCourse);
+            // De opgehaalde quizzen toevoegen aan de ArrayList met het eindresultaat
+            for (Quiz quiz : quizzesForCourse) {
+                allQuizzesForStudent.add(quiz);
+            }
+        }
+        return allQuizzesForStudent;
+    }
+
 
     // @TJ * public void setup() {} *  origineel,  rest zelf toegevoegd
     public void setup() {
-        ArrayList<Quiz> allQuizzes = quizDAO.getAll();
-        for (Quiz quiz : allQuizzes) {
-            quizList.getItems().add(quiz);
-        }
+//        ArrayList<Quiz> allQuizzes = quizDAO.getAll();
+//        for (Quiz quiz : allQuizzes) {
+//            quizList.getItems().add(quiz);
+//        }
+        ObservableList<Quiz> quizzesObservableList = FXCollections.observableList(getQuizzesForStudent());
+        SortedList<Quiz> quizzesSortedList = new SortedList<>(quizzesObservableList);
+        quizList.setItems(quizzesSortedList);
         quizList.getSelectionModel().selectFirst();
 
     }

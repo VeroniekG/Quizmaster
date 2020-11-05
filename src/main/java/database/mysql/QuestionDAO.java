@@ -87,7 +87,6 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
         }
 
 
-
     @Override
     public void storeOne(Question question) {
         String sql = "INSERT INTO Question(description, answerRight, answerWrong1, answerWrong2, answerWrong3) VALUES(?,?,?,?,?) ;";
@@ -134,6 +133,5 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             System.out.println("SQL error" + sqlException.getMessage());
         }
     }
-
 
 }
