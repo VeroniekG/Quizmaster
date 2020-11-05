@@ -237,12 +237,19 @@ ALTER TABLE `Quizmaster`.`Quiz`
 -- -----------------------------------------------------
 INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (1, 1, 'Wie van de Drie');
 INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (2, 2, 'Weet Ik Veel');
-INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (3, 3, 'Blokken');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (3, 2, 'Blokken');
 INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (4, 4, 'Per Seconde Wijzer');
-INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (5, 5, 'Met het Mes op Tafel');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (5, 1, 'Met het Mes op Tafel');
 INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (6, 6, 'Noem nog eens een kwis');
-INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (7, 7, 'Wie ben ik?');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (7, 4, 'Wie ben ik?');
 INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (8, 8, 'De slimste mens');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (9, 8, 'Bankgiro Miljonairs');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (10, 5, 'Waku Waku');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (11, 5, '2 voor 12');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (12, 3, 'Postcodeloterij');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (13, 3, 'Alles of niets');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (14, 7, 'Lingo');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (15, 7, 'Top Pop');
 
 -- -----------------------------------------------------
 -- Table `Quizmaster`.`StudentGroup` -------------- TODO
