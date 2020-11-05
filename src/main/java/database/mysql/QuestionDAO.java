@@ -1,9 +1,12 @@
 package database.mysql;
 
 import model.Question;
+import model.Quiz;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
@@ -106,9 +109,9 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
     }
 
-    public void updateQuestion (Question question){
+    public void updateQuestion (Question question) {
         String sql = "Update Question Set description = ?, answerRight = ?, answerWrong1 = ?, answerWrong2 = ?, answerWrong3 = ? where idQuestion = ?;";
-        try{
+        try {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, question.getDescription());
             preparedStatement.setString(2, question.getAnswerRight());
@@ -118,10 +121,26 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 //            preparedStatement.setInt(6, question.getIdQuiz());
             preparedStatement.setInt(6, question.getIdQuestion());
             executeManipulateStatement();
-        } catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
         }
     }
+        public List<Question> getQuestionsForQuizWithId(int idQuiz) {
+            List<Question> questions = new ArrayList<>();
+            String sql = String.format("SELECT * FROM Question WHERE idQuiz=%d", idQuiz);
+            try {
+                setupPreparedStatement(sql);
+                ResultSet resultSet = executeSelectStatement();
+                while (resultSet.next()) {
+                    int idQuestion = resultSet.getInt("idQuestion");
+                    Question question = getOneById(idQuestion);
+                    questions.add(question);
+                }
+            } catch (SQLException sqlException) {
+                System.out.println("SQL-error " + sqlException.getMessage());
+            }
+            return questions;
+        }
 
     public void deleteQuestion(Question question){
         String sql = "DELETE FROM question WHERE idQuestion = ?;";
