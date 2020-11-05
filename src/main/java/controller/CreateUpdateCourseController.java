@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import model.*;
 import view.Main;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CreateUpdateCourseController {
@@ -53,7 +53,7 @@ public class CreateUpdateCourseController {
 
     //@VG-dropdown list coordinators
     public void populateList() {
-        List<User> allCoordinators = userDAO.getUserByRole();
+        List<User> allCoordinators = userDAO.getUsersByRole(Role.COORDINATOR);
         for (User user : allCoordinators) {
             MenuItem item = new MenuItem(user.getFirstName() +" "+ user.getLastName());
             item.setOnAction(event -> {

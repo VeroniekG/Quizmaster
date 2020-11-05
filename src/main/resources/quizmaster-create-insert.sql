@@ -262,13 +262,22 @@ VALUES ('1', 'User1', 'pwUser1', 'STUDENT', 'Piet', 'Kweetniet');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
 VALUES ('2', 'User2', 'pwUser2', 'DOCENT', 'Huub', 'Huub-Barbatruuk');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
-VALUES ('3', 'User3', 'pwUser3', 'COORDINATOR', 'Co', 'Ordinator');
+VALUES ('3', 'User3', 'pwUser3', 'COORDINATOR', 'Co', 'Ordinator0');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
 VALUES ('4', 'User4', 'pwUser4', 'ADMINISTRATOR', 'Ad', 'Ministrator');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
 VALUES ('5', 'User5', 'pwUser5', 'TECHNISCH_BEHEERDER', 'Rinus', 'Radeloos');
 INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
 VALUES ('6', 'Daan', 'pwDaan', 'TECHNISCH_BEHEERDER', 'Daan', 'Banaan');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('7', 'Student1', 'pw1', 'STUDENT', 'Student1', 'Een');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('8', 'Student2', 'pw2', 'STUDENT', 'Student2', 'Twee');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('9', 'Student3', 'pw3', 'STUDENT', 'Student3', 'Drie');
+INSERT INTO `Quizmaster`.`User` (`idUser`, `userName`, `password`, `role`, `firstName`, `lastName`)
+VALUES ('10', 'Student4', 'pw4', 'STUDENT', 'Student4', 'Vier');
+
 
 COMMIT;
 
