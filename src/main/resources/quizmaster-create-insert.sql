@@ -208,7 +208,7 @@ VALUES (7, 'Hoe is het?', 'Oke', 'Goed', 'Slecht', 'Matig');
 COMMIT;
 
 -- -----------------------------------------------------
--- Table `Quizmaster`.`Quiz` ---------------------- TODO
+-- Table `Quizmaster`.`Quiz`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Quizmaster`.`Quiz`;
 
@@ -233,8 +233,16 @@ ALTER TABLE `Quizmaster`.`Quiz`
             ON DELETE NO ACTION
             ON UPDATE CASCADE;
 -- -----------------------------------------------------
--- Data for table `Quizmaster`.`Quiz` ------------- TODO
+-- Data for table `Quizmaster`.`Quiz`
 -- -----------------------------------------------------
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (1, 1, 'Wie van de Drie');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (2, 2, 'Weet Ik Veel');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (3, 3, 'Blokken');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (4, 4, 'Per Seconde Wijzer');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (5, 5, 'Met het Mes op Tafel');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (6, 6, 'Noem nog eens een kwis');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (7, 7, 'Wie ben ik?');
+INSERT INTO `quizmaster`.`quiz` (`idQuiz`, `idCourse`, `quizName`) VALUES (8, 8, 'De slimste mens');
 
 -- -----------------------------------------------------
 -- Table `Quizmaster`.`StudentGroup` -------------- TODO
