@@ -7,7 +7,11 @@ public class Quiz {
     protected int idCourse;
 
     public Quiz(int idQuiz, String quizName, int idCourse) {
+        this(quizName, idCourse);
         this.idQuiz = idQuiz;
+    }
+
+    public Quiz(String quizName, int idCourse) {
         this.quizName = quizName;
         this.idCourse = idCourse;
     }

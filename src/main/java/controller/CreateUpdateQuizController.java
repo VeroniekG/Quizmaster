@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import model.Course;
 import model.Quiz;
-import model.Role;
 import view.Main;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class  CreateUpdateQuizController {
     private QuizDAO quizDAO;
     private CourseDAO courseDAO;
     private DBAccess dbAccess;
-    private Quiz quiz;
+    private Quiz currentQuiz;
     @FXML
     private Button composeButton;
     @FXML
@@ -32,29 +31,44 @@ public class  CreateUpdateQuizController {
     @FXML
     private TextField quizNameTextfield;
     @FXML
-    //ComboBox<Course> comboBoxCourse;
-    public ComboBox comboBoxCourse = new ComboBox();
+    private ComboBox<Course> comboBoxCourse;
 
 
     public CreateUpdateQuizController() {
         quizDAO = new QuizDAO(Main.getDBaccessMySql());
         courseDAO =new CourseDAO(Main.getDBaccessMySql());
-        //comboBoxCourse = new ComboBox<>();
+        comboBoxCourse = new ComboBox<>();
 
     }
-    public void fillComboBoxCourse (){
-        List<Course> allCourses = courseDAO.getAll();
-        ObservableList<Course> courseObservableList =
-                FXCollections.observableArrayList(allCourses);
-        comboBoxCourse.setItems(courseObservableList);
-    }
+//    public void fillComboBoxCourse (){
+//        List<Course> allCourses = courseDAO.getAll();
+//        ObservableList<Course> courseObservableList =
+//                FXCollections.observableArrayList(allCourses);
+//        comboBoxCourse.setItems(courseObservableList);
+//    }
+//
+//    public void setup(Quiz quiz) {
+//        titleLabel.setText("Wijzig Quiz");
+//        quizIdTextfield.setText(String.valueOf(quiz.getIdQuiz()));
+//        quizNameTextfield.setText(quizNameTextfield.getSelectedText());
+//        comboBoxCourse.setValue(comboBoxCourse.getValue());
+//        fillComboBoxCourse();
+//    }
 
     public void setup(Quiz quiz) {
+        currentQuiz = quiz;
         titleLabel.setText("Wijzig Quiz");
         quizIdTextfield.setText(String.valueOf(quiz.getIdQuiz()));
-        quizNameTextfield.setText(quizNameTextfield.getSelectedText());
-        comboBoxCourse.setValue(comboBoxCourse.getValue());
-        fillComboBoxCourse();
+        quizNameTextfield.setText(quiz.getQuizName());
+        setComboBoxCourseForQuiz(quiz);
+    }
+
+    public void setComboBoxCourseForQuiz(Quiz quiz) {
+        Course quizForCourse = courseDAO.getOneById(quiz.getIdCourse());
+        List<Course> allCourses = courseDAO.getAll();
+        ObservableList<Course> courseObservableList = FXCollections.observableArrayList(allCourses);
+        comboBoxCourse.setItems(courseObservableList);
+        comboBoxCourse.getSelectionModel().select(quizForCourse);
     }
 
     //TJ menu knop terug naar menu
@@ -72,31 +86,42 @@ public class  CreateUpdateQuizController {
             Alert foutmelding = new Alert(Alert.AlertType.ERROR);
             foutmelding.setContentText(warningtext.toString());
             foutmelding.show();
-            quiz = null;
+            currentQuiz = null;
         } else {
-            quiz = new Quiz(quizname);
+            currentQuiz = new Quiz(quizname);
         }
     }
-    //TJ Methode aangemaakt om quizzen op te slaan
-    public void doStoreQuiz(ActionEvent actionEvent) {
-        createQuiz();
-        if (quiz != null) {
-            if (quizIdTextfield.getText().isEmpty()) {
-                quizDAO.storeOne(quiz);
-                System.out.println(quiz.getIdQuiz());
-                System.out.flush();
-                quizIdTextfield.setText(String.valueOf(quiz.getIdQuiz()));
-                Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                saved.setContentText("Quiz succesvol opgeslagen" + quiz.getIdQuiz());
-                saved.show();
-            } else {
-                int id = Integer.parseInt(quizIdTextfield.getText());
-                quiz.setIdQuiz(id);
-                quizDAO.updateQuiz(quiz);
-                Alert updated = new Alert(Alert.AlertType.INFORMATION);
-                updated.setContentText("Quiz is gewijzigd");
-                updated.show();
-            }
+//    //TJ Methode aangemaakt om quizzen op te slaan
+//    public void doStoreQuiz(ActionEvent actionEvent) {
+//        createQuiz();
+//        if (currentQuiz != null) {
+//            if (quizIdTextfield.getText().isEmpty()) {
+//                quizDAO.storeOne(currentQuiz);
+//                System.out.println(currentQuiz.getIdQuiz());
+//                System.out.flush();
+//                quizIdTextfield.setText(String.valueOf(currentQuiz.getIdQuiz()));
+//                Alert saved = new Alert(Alert.AlertType.INFORMATION);
+//                saved.setContentText("Quiz succesvol opgeslagen" + currentQuiz.getIdQuiz());
+//                saved.show();
+//            } else {
+//                int id = Integer.parseInt(quizIdTextfield.getText());
+//                currentQuiz.setIdQuiz(id);
+//                quizDAO.updateQuiz(currentQuiz);
+//                Alert updated = new Alert(Alert.AlertType.INFORMATION);
+//                updated.setContentText("Quiz is gewijzigd");
+//                updated.show();
+//            }
+//        }
+//    }
+
+    public void doStoreQuiz() {
+        int idCourse = comboBoxCourse.getSelectionModel().getSelectedItem().getIdCourse();
+        if (currentQuiz.getIdQuiz() == 0) {
+            String quizName = quizNameTextfield.getText();
+            currentQuiz = new Quiz(quizName, idCourse);
+            quizDAO.storeOne(currentQuiz);
+        } else {
+            quizDAO.updateQuiz(currentQuiz);
         }
     }
 
