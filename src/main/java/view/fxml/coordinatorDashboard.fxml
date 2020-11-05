@@ -30,27 +30,27 @@
     <ListView fx:id="questionList" layoutX="615.0" layoutY="75.0" prefHeight="200.0" prefWidth="270.0" />
     <Button layoutX="315.0" layoutY="279.0" mnemonicParsing="false" onAction="#doNewQuiz" text="Nieuwe quiz">
         <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
     <Button fx:id="updateButtonQuiz" layoutX="493.0" layoutY="278.0" mnemonicParsing="false" onAction="#doEditQuiz" text="Wijzig quiz">
         <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
     <Button fx:id="newButtonQuestion" layoutX="615.0" layoutY="279.0" mnemonicParsing="false" onAction="#doNewQuestion" text="Nieuwe vraag">
         <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
     <Button fx:id="updateButtonQuestion" layoutX="784.0" layoutY="278.0" mnemonicParsing="false" onAction="#doEditQuestion" text="Wijzig vraag">
         <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
    <Button fx:id="menuButton" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" onAction="#doMenu" text="Menu">
       <font>
-         <Font size="14.0" />
+         <Font name="Droid Sans" size="14.0" />
       </font>
    </Button>
 </AnchorPane>

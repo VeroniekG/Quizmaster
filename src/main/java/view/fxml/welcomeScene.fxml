@@ -4,25 +4,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
-    <Label fx:id="welcomeLabel" layoutX="14.0" layoutY="14.0" text="Welkom gebruiker">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
+    <Label fx:id="welcomeLabel" layoutX="151.0" layoutY="23.0" text="Welkom gebruiker">
         <font>
-            <Font size="18.0" />
+            <Font name="Droid Sans" size="18.0" />
         </font>
     </Label>
     <Label layoutX="14.0" layoutY="72.0" text="Wat wilt u doen">
         <font>
-            <Font size="18.0" />
+            <Font name="Droid Sans" size="16.0" />
         </font>
     </Label>
-    <MenuButton fx:id="taskMenuButton" layoutX="191.0" layoutY="70.0" mnemonicParsing="false" text="Kies taak">
+    <MenuButton fx:id="taskMenuButton" layoutX="178.0" layoutY="70.0" mnemonicParsing="false" text="Kies taak">
         <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </MenuButton>
-    <Button fx:id = "logoutButton" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" onAction="#doLogout" text="Log out">
+    <Button fx:id="logoutButton" layoutX="178.0" layoutY="128.0" mnemonicParsing="false" onAction="#doLogout" text="Log out">
         <font>
-            <Font size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
 </AnchorPane>

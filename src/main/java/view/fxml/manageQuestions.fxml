@@ -12,27 +12,27 @@
     </Label>
     <Label layoutX="200.0" layoutY="97.0" text="Selecteer vraag:">
         <font>
-            <Font size="18.0" />
+            <Font name="Droid Sans" size="18.0" />
         </font>
     </Label>
     <Button fx:id="newQuestionButton" layoutX="197.0" layoutY="355.0" mnemonicParsing="false" onAction="#doCreateQuestion" text="Nieuw" textFill="#484848">
         <font>
-            <Font name="Lucida Grande" size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
     <Button fx:id="updateButton" layoutX="422.0" layoutY="355.0" mnemonicParsing="false" onAction="#doUpdateQuestion" text="Wijzig" textFill="#484848">
         <font>
-            <Font name="Lucida Grande" size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
     <Button fx:id="deleteButton" layoutX="624.0" layoutY="355.0" mnemonicParsing="false" onAction="#doDeleteQuestion" text="Verwijder" textFill="#484848">
         <font>
-            <Font name="Lucida Grande" size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
     <Button fx:id="menuButton" layoutX="199.0" layoutY="423.0" mnemonicParsing="false" onAction="#doMenu" text="Menu" textFill="#484848">
         <font>
-            <Font name="Lucida Grande" size="14.0" />
+            <Font name="Droid Sans" size="14.0" />
         </font>
     </Button>
    <ListView fx:id="questionsList" layoutX="200.0" layoutY="136.0" prefHeight="200.0" prefWidth="500.0" />
