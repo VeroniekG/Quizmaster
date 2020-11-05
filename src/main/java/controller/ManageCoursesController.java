@@ -40,24 +40,24 @@ public class ManageCoursesController {
         courseList.getSelectionModel().selectFirst();
     }
 
-    public void doCreateCourse(ActionEvent actionEvent) {
+    public void doCreateCourse() {
         Main.getSceneManager().showCreateUpdateCourseScene(course);
     }
 
-    public void doUpdateCourse(ActionEvent actionEvent) {
+    public void doUpdateCourse() {
         Course course = courseList.getSelectionModel().getSelectedItem();
         Main.getSceneManager().showCreateUpdateCourseScene(course);
     }
 
     //@authorVG - select item and remove from ListView + use deleteCourse() to remove from DB
-    public void doDeleteCourse(ActionEvent actionEvent) {
+    public void doDeleteCourse() {
         Course selectedCourse = courseList.getSelectionModel().getSelectedItem();
         courseList.getItems().remove(selectedCourse);
         courseDAO.deleteCourse(selectedCourse);
     }
 
     //TJ menu knop terug naar menu
-    public void doMenu(ActionEvent actionEvent) {
+    public void doMenu() {
         Main.getSceneManager().showWelcomeScene();
     }
 

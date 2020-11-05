@@ -44,10 +44,6 @@ public enum UserMenuItem {
             event -> {
                 Main.getSceneManager().showManageCoursesScene();
             }),
-    MANAGEGROUPS(new MenuItem("Groepenbeheer"), ADMINISTRATOR,
-            event -> {
-                Main.getSceneManager().showManageGroupsScene();
-            }),
     MANAGEUSERS(new MenuItem("Gebruikersbeheer"), TECHNISCH_BEHEERDER,
             event -> {
                 Main.getSceneManager().showManageUserScene();

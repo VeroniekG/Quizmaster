@@ -1,6 +1,5 @@
 package model;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 
 public class Course {
 

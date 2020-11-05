@@ -63,9 +63,6 @@ public class CoordinatorDashboardController {
                     public void changed(ObservableValue<? extends Course> observableValue,
                                         Course oldCourse, Course newCourse) {
                         System.out.println("Geselecteerde cursus: " + oldCourse + "-> " + newCourse);
-                        List<Quiz> quizes = quizDAO.getQuizesForCourse();
-                        for (Quiz quiz : quizes) {
-                            quizList.getItems().add(quiz);}
                         }
                 });
         quizList.getSelectionModel().selectedItemProperty().addListener(

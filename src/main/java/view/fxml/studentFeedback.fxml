@@ -5,9 +5,9 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentFeedbackController">
-    <Label fx:id="feedbackLabel" layoutX="288.0" layoutY="14.0" text="Quiz resultaat">
+    <Label fx:id="feedbackLabel" layoutX="288.0" layoutY="14.0" text="Quiz resultaat" textFill="#212121">
         <font>
-            <Font size="18.0" />
+            <Font name="Droid Sans" size="18.0" />
         </font>
     </Label>
     <ListView fx:id="feedbackList" layoutX="146.0" layoutY="45.0" prefHeight="300.0" prefWidth="400.0" />
@@ -20,7 +20,10 @@
       <font>
          <Font name="Lucida Bright" size="14.0" />
       </font></TextArea>
-   <Label layoutX="585.0" layoutY="68.0" text="Quiz gemaakt" />
+   <Label layoutX="585.0" layoutY="68.0" text="Quiz gemaakt">
+      <font>
+         <Font name="Droid Sans" size="10.0" />
+      </font></Label>
    <Label layoutX="676.0" layoutY="34.0" prefHeight="66.0" prefWidth="74.0" text="    Goede&#10;antwoorden">
       <font>
          <Font size="10.0" />
