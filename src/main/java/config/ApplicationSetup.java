@@ -1,6 +1,5 @@
 package config;
 
-import database.mysql.DBAccess;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,11 +10,22 @@ import java.util.Properties;
 
 import static config.ApplicationProperties.*;
 
+/**
+ * Sets all default properties to be used by the application, as defined in class
+ * {@link ApplicationProperties}. If a file 'config.properties' exists in the resources root, the
+ * property-values set in this file will override the default values.
+ *
+ * @author Daniel Leertouwer
+ * @version 1.0.5
+ * @see ApplicationSetup
+ * @see Properties
+ * @since 1.0
+ */
+@SuppressWarnings("ReturnPrivateMutableField")
 public class ApplicationSetup {
 
     private static final String PROPERTIES_FILE_PATH = "src/main/resources/config.properties";
     private static final Logger LOG = LogManager.getLogger(ApplicationSetup.class);
-    private static DBAccess dbAccess = null;
     private static ApplicationSetup applicationSetupInstance = null;
     private Properties properties;
 
@@ -26,22 +36,42 @@ public class ApplicationSetup {
     public void load() {
         setDefaultProperties();
         setCustomProperties();
-        //setDbAccess();
-        //dbAccess.loadDriver();
     }
 
     private void setDefaultProperties() {
         properties = new Properties();
-        properties.setProperty(JDBC_DATABASE_NAME.getKey(), JDBC_DATABASE_NAME.getValue());
-        properties.setProperty(JDBC_DATABASE_URL.getKey(), JDBC_DATABASE_URL.getValue());
-        properties.setProperty(JDBC_DATABASE_USER.getKey(), JDBC_DATABASE_USER.getValue());
-        properties.setProperty(JDBC_DATABASE_PASSWORD.getKey(),
-                JDBC_DATABASE_PASSWORD.getValue());
-        properties.setProperty(JDBC_DATABASE_DRIVER.getKey(),
-                JDBC_DATABASE_DRIVER.getValue());
-        properties.setProperty(JDBC_CONNECTION_SETTINGS.getKey(),
-                JDBC_CONNECTION_SETTINGS.getValue());
-        LOG.warn("Default application properties set.");
+        properties.setProperty(MYSQL_DATABASE_NAME.getKey(), MYSQL_DATABASE_NAME.getValue());
+        properties.setProperty(MYSQL_DATABASE_URL.getKey(), MYSQL_DATABASE_URL.getValue());
+        properties.setProperty(MYSQL_DATABASE_USER.getKey(), MYSQL_DATABASE_USER.getValue());
+        properties.setProperty(MYSQL_DATABASE_PASSWORD.getKey(),
+                MYSQL_DATABASE_PASSWORD.getValue());
+        properties.setProperty(MYSQL_JDBC_DRIVER.getKey(), MYSQL_JDBC_DRIVER.getValue());
+        properties.setProperty(MYSQL_JDBC_CONNECTION_SETTINGS.getKey(),
+                MYSQL_JDBC_CONNECTION_SETTINGS.getValue());
+        properties.setProperty(COUCHDB_DATABASE_NAME.getKey(), COUCHDB_DATABASE_NAME.getValue());
+        properties.setProperty(COUCHDB_DATABASE_URL.getKey(), COUCHDB_DATABASE_URL.getValue());
+        properties.setProperty(COUCHDB_CONNECTION_PORT.getKey(),
+                COUCHDB_CONNECTION_PORT.getValue());
+        properties.setProperty(COUCHDB_CONNECTION_PROTOCOL.getKey(),
+                COUCHDB_CONNECTION_PROTOCOL.getValue());
+        properties.setProperty(COUCHDB_DATABASE_USER.getKey(), COUCHDB_DATABASE_USER.getValue());
+        properties.setProperty(COUCHDB_DATABASE_PASSWORD.getKey(),
+                COUCHDB_DATABASE_PASSWORD.getValue());
+
+        LOG.info("Default application properties set.");
+    }
+
+    private void setCustomProperties() {
+        Properties propertiesFromFile = loadPropertiesFile();
+        properties.forEach(
+                (propertyKey, propertyValue) -> {
+                    if (properties.containsKey(propertyKey)) {
+                        propertyValue = propertiesFromFile.get(propertyKey);
+                    }
+                    properties.replace(propertyKey, propertyValue);
+                }
+        );
+        LOG.info("Custom properties set.");
     }
 
     private Properties loadPropertiesFile() {
@@ -56,29 +86,6 @@ public class ApplicationSetup {
         return propertiesFromFile;
     }
 
-    private void setDbAccess() {
-        String dbName = properties.getProperty("jdbc.database.name");
-        String dbUser = properties.getProperty("jdbc.database.user");
-        String dbPasword = properties.getProperty("jdbc.database.password");
-        if (dbAccess == null) {
-            dbAccess = new DBAccess(dbName, dbUser, dbPasword);
-        }
-    }
-
-    private void setCustomProperties() {
-        Properties propertiesFromFile = loadPropertiesFile();
-        properties.forEach(
-                (propertyKey, propertyValue) -> {
-                    if (properties.containsKey(propertyKey)) {
-                        propertyValue = propertiesFromFile.get(propertyKey);
-                    }
-                    properties.replace(propertyKey, propertyValue);
-                }
-        );
-        LOG.info("Custom properties set.");
-        LOG.info("Properties" + properties);
-    }
-
     public static ApplicationSetup getInstance() {
         if (applicationSetupInstance == null) {
             applicationSetupInstance = new ApplicationSetup();
@@ -86,12 +93,9 @@ public class ApplicationSetup {
         return applicationSetupInstance;
     }
 
-    public DBAccess getDbAccess() {
-        return dbAccess;
-    }
-
     public Properties getProperties() {
         return properties;
     }
 
 }
+

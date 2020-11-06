@@ -1,15 +1,21 @@
 package database.mysql;
 
 import model.Question;
+import model.Quiz;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
     public QuestionDAO(DBAccess dbAccess) {
         super(dbAccess);
     }
+
+
+    //HL - This method retrieves all  questions from the database
 
     @Override
     public ArrayList<Question> getAll() {
@@ -22,12 +28,12 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             while (resultSet.next()) {
                 int idQuestion = resultSet.getInt("idQuestion");
                 String description = resultSet.getString("description");
-                int idAnswer = resultSet.getInt("idAnswer");
                 String answerRight = resultSet.getString("answerRight");
                 String answerWrong1 = resultSet.getString("answerWrong1");
                 String answerWrong2 = resultSet.getString("answerWrong2");
                 String answerWrong3 = resultSet.getString("answerWrong3");
-                question = new Question(idQuestion,description,idAnswer,answerRight,answerWrong1,answerWrong2,answerWrong3);
+                int idQuiz = resultSet.getInt("idQuiz");
+                question = new Question(idQuestion,description,answerRight,answerWrong1,answerWrong2,answerWrong3,idQuiz);
                 questionsList.add(question);
             }
         } catch (SQLException sqlException) {
@@ -36,9 +42,12 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
         return questionsList;
     }
 
+    //HL - This method retrieves a question from the database based on the id number of the question
+
+
     @Override
     public Question getOneById(int id) {
-        String sql = "SELECT * FROM course WHERE idQuestion = ?";
+        String sql = "SELECT * FROM question WHERE idQuestion = ?";
         Question question = null;
         try {
             setupPreparedStatement(sql);
@@ -58,18 +67,79 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
     }
 
+    //HL - This method stores a question in the database
+
+
     @Override
-    public void storeOne(Question type) {
-        String sql = "INSERT INTO question(description) VALUES(?);";
+    public void storeOne(Question question) {
+        String sql = "INSERT INTO Question(description, answerRight, answerWrong1, answerWrong2, answerWrong3) VALUES(?,?,?,?,?) ;";
         try {
             setupPreparedStatementWithKey(sql);
-            preparedStatement.setString(1, type.getDescription());
+            preparedStatement.setString(1, question.getDescription());
+            preparedStatement.setString(2, question.getAnswerRight());
+            preparedStatement.setString(3, question.getAnswerWrong1());
+            preparedStatement.setString(4, question.getAnswerWrong2());
+            preparedStatement.setString(5, question.getAnswerWrong3());
+//            preparedStatement.setInt(6, question.getIdQuiz());
             int id = executeInsertStatementWithKey();
-            type.setIdQuestion(id);
+            question.setIdQuestion(id);
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
         }
 
+    }
+
+    //HL - This method updates a question with input from user
+
+
+    public void updateQuestion (Question question) {
+        String sql = "Update Question Set description = ?, answerRight = ?, answerWrong1 = ?, answerWrong2 = ?, answerWrong3 = ? where idQuestion = ?;";
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, question.getDescription());
+            preparedStatement.setString(2, question.getAnswerRight());
+            preparedStatement.setString(3, question.getAnswerWrong1());
+            preparedStatement.setString(4, question.getAnswerWrong2());
+            preparedStatement.setString(5, question.getAnswerWrong3());
+            preparedStatement.setInt(6, question.getIdQuestion());
+            executeManipulateStatement();
+        } catch (SQLException sqlException) {
+            System.out.println("SQL error " + sqlException.getMessage());
+        }
+    }
+
+    //HL - This method retrieves an arraylist of questions that are part of a certain quiz
+
+
+    public List<Question> getQuestionsForQuizWithId(int idQuiz) {
+            List<Question> questions = new ArrayList<>();
+            String sql = String.format("SELECT * FROM Question WHERE idQuiz=%d", idQuiz);
+            try {
+                setupPreparedStatement(sql);
+                ResultSet resultSet = executeSelectStatement();
+                while (resultSet.next()) {
+                    int idQuestion = resultSet.getInt("idQuestion");
+                    Question question = getOneById(idQuestion);
+                    questions.add(question);
+                }
+            } catch (SQLException sqlException) {
+                System.out.println("SQL-error " + sqlException.getMessage());
+            }
+            return questions;
+        }
+
+    //HL - This method deletes a question from the database
+
+
+    public void deleteQuestion(Question question){
+        String sql = "DELETE FROM question WHERE idQuestion = ?;";
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setInt(1, question.getIdQuestion());
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException){
+            System.out.println("SQL error" + sqlException.getMessage());
+        }
     }
 
 }

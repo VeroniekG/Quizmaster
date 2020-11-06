@@ -12,6 +12,7 @@ package model;
  * @since 1.0
  */
 public enum Role {
+
     STUDENT("Student"),
     DOCENT("Docent"),
     COORDINATOR("Coördinator"),
@@ -20,19 +21,13 @@ public enum Role {
 
     private final String roleName;
 
-    private Role(String roleName) {
+    Role(String roleName) {
         this.roleName = roleName;
     }
 
     @Override
     public String toString() {
-        return "Role{" +
-                "roleName='" + roleName + '\'' +
-                '}';
-    }
-
-    public String getRoleName() {
-        return roleName.toLowerCase();
+        return roleName;
     }
 
 }

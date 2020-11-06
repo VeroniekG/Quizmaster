@@ -1,107 +1,55 @@
 package controller;
 
-import database.mysql.DBAccess;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import model.User;
+import model.UserMenu;
+import service.WelcomeService;
 import view.Main;
 
-import static model.MenuItem.*;
-
 /**
- * Controller for welcomeScene view (view.fxml.welcomeScene.fxml). Controls data flow and updates
- * the view.
+ * Controller for welcomeScene view. Controls data flow and updates the view. The view is set up by
+ * calling method {@link #setup()}, which depends on {@link WelcomeService} for creation of the
+ * taskmenu and welcome message.
  *
- * @author thieh, leertod, geertsv
- * @version 1.0.10
- * @see view.Main
- * @see view.SceneManager
- * @see model.Role
- * @see model.User
+ * @author Huub van Thienen, Daniel Leertouwer
+ * @version 1.0.14
+ * @see WelcomeService
  * @since 1.0
  */
 public class WelcomeController {
 
-    private static final DBAccess dbAccess = Main.getDBaccess();
+    private final WelcomeService welcomeService;
+
+    @FXML
     public Button logoutButton;
     @FXML
-    private Label welcomeLabel;
+    MenuButton taskMenuButton;
     @FXML
-    private MenuButton taskMenuButton;
-    private User currentUser;
+    private Label welcomeLabel;
 
     public WelcomeController() {
-        currentUser = Main.getCurrentUser();
+        welcomeService = new WelcomeService();
     }
 
     public void setup() {
-        setWelcomeText();
-        showCurrentUserMenu();
+        setWelcomeLabel();
+        setWelcomeMenu();
+    }
+
+    public void setWelcomeLabel() {
+        welcomeLabel.setText(welcomeService.createWelcomeMessage());
+    }
+
+    public void setWelcomeMenu() {
+        UserMenu menu = welcomeService.createWelcomeMenu();
+        taskMenuButton.getItems().addAll(menu.getMenuItems());
     }
 
     public void doLogout() {
+        welcomeService.invalidateSession();
         Main.getSceneManager().showLoginScene();
-    }
-
-    public void setWelcomeText() {
-        StringBuilder welcomeText = new StringBuilder("Welkom " + currentUser.getUserName());
-        welcomeText.append("! Je bent ingelogd als " + currentUser.getRole().getRoleName());
-        welcomeLabel.setText(welcomeText.toString());
-    }
-
-    public void showCurrentUserMenu() {
-        switch (currentUser.getRole()) {
-            case STUDENT:
-                showStudentMenu();
-                break;
-            case COORDINATOR:
-                showCoordinatorMenu();
-                break;
-            case ADMINISTRATOR:
-                showAdministratorMenu();
-                break;
-            case TECHNISCH_BEHEERDER:
-                showSystemAdministratorMenu();
-                break;
-            default:
-                showStudentMenu();
-                break;
-        }
-    }
-
-    public void showStudentMenu() {
-        MenuItem menuItem1 = new MenuItem(STUDENTSIGNINOUT.getMenuItemName());
-        menuItem1.setOnAction(event -> Main.getSceneManager().showStudentSignInOutScene());
-        MenuItem menuItem2 = new MenuItem(SELECTQUIZFORSTUDENT.getMenuItemName());
-        menuItem2.setOnAction(event -> Main.getSceneManager().showSelectQuizForStudent());
-        taskMenuButton.getItems().addAll(menuItem1, menuItem2);
-    }
-
-    public void showCoordinatorMenu() {
-        MenuItem menuItem1 = new MenuItem(COORDINATORDASHBOARD.getMenuItemName());
-        menuItem1.setOnAction(event -> Main.getSceneManager().showCoordinatorDashboard());
-        MenuItem menuItem2 = new MenuItem(MANAGEQUIZZES.getMenuItemName());
-        menuItem2.setOnAction(event -> Main.getSceneManager().showManageQuizScene());
-        MenuItem menuItem3 = new MenuItem(MANAGEQUESTIONS.getMenuItemName());
-        menuItem3.setOnAction(event -> Main.getSceneManager().showManageQuestionsScene());
-        taskMenuButton.getItems().addAll(menuItem1, menuItem2, menuItem3);
-    }
-
-    public void showAdministratorMenu() {
-        MenuItem menuItem1 = new MenuItem(MANAGECOURSES.getMenuItemName());
-        menuItem1.setOnAction(event -> Main.getSceneManager().showManageCoursesScene());
-        MenuItem menuItem2 = new MenuItem(MANAGEGROUPS.getMenuItemName());
-        menuItem2.setOnAction(event -> Main.getSceneManager().showManageGroupsScene());
-        taskMenuButton.getItems().addAll(menuItem1, menuItem2);
-    }
-
-    public void showSystemAdministratorMenu() {
-        MenuItem menuItem1 = new MenuItem(MANAGEUSERS.getMenuItemName());
-        menuItem1.setOnAction(event -> Main.getSceneManager().showManageUserScene());
-        taskMenuButton.getItems().add(menuItem1);
     }
 
 }

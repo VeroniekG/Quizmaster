@@ -13,15 +13,22 @@ import java.util.ArrayList;
 
 public class ManageCoursesController {
 
+    @FXML
     public Button newCourseButton;
+    @FXML
     public Button menuButton;
+    @FXML
+    public Button updateButton;
+    @FXML
+    public Button removeButton;
     @FXML
     ListView<Course> courseList;
     private DBAccess dbAccess;
     private CourseDAO courseDAO;
+    private Course course;
 
     public ManageCoursesController() {
-        this.dbAccess = Main.getDBaccess();
+        this.dbAccess = Main.getDBaccessMySql();
         courseDAO = new CourseDAO(dbAccess);
     }
 
@@ -31,22 +38,26 @@ public class ManageCoursesController {
             courseList.getItems().add(course);
         }
         courseList.getSelectionModel().selectFirst();
-
     }
 
     public void doCreateCourse() {
+        Main.getSceneManager().showCreateUpdateCourseScene(course);
     }
 
     public void doUpdateCourse() {
-        this.dbAccess = Main.getDBaccess();
-        this.courseDAO = new CourseDAO(dbAccess);
+        Course course = courseList.getSelectionModel().getSelectedItem();
+        Main.getSceneManager().showCreateUpdateCourseScene(course);
     }
 
+    //@authorVG - select item and remove from ListView + use deleteCourse() to remove from DB
     public void doDeleteCourse() {
+        Course selectedCourse = courseList.getSelectionModel().getSelectedItem();
+        courseList.getItems().remove(selectedCourse);
+        courseDAO.deleteCourse(selectedCourse);
     }
 
     //TJ menu knop terug naar menu
-    public void doMenu(ActionEvent actionEvent) {
+    public void doMenu() {
         Main.getSceneManager().showWelcomeScene();
     }
 

@@ -4,28 +4,43 @@ public class Question {
 
     private int idQuestion;
     private String description;
-    private int idAnswer;
     private String answerRight;
     private String answerWrong1;
     private String answerWrong2;
     private String answerWrong3;
+    private int idQuiz;
 
-    public Question(int idQuestion, String question) {
-        this.idQuestion = idQuestion;
-        this.description = question;
+    //constructors
+
+    public Question() {
     }
 
-    public Question(int idQuestion, String question, int idAnswer, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
-        this.idQuestion = idQuestion;
-        this.description = question;
-        this.idAnswer = idAnswer;
+    public Question(String description) {
+        this.description = description;
+    }
+
+    public Question(String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
+        this.description = description;
         this.answerRight = answerRight;
         this.answerWrong1 = answerWrong1;
         this.answerWrong2 = answerWrong2;
         this.answerWrong3 = answerWrong3;
     }
 
-    public Question(String description) {
+    public Question(int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3, int idQuiz) {
+        this.idQuestion = idQuestion;
+        this.description = description;
+        this.answerRight = answerRight;
+        this.answerWrong1 = answerWrong1;
+        this.answerWrong2 = answerWrong2;
+        this.answerWrong3 = answerWrong3;
+        this.idQuiz = idQuiz;
+    }
+
+    //getters and setters
+
+    public int getIdQuiz() {
+        return idQuiz;
     }
 
     public int getIdQuestion() {
@@ -40,17 +55,6 @@ public class Question {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getIdAnswer() {
-        return idAnswer;
-    }
-
-    public void setIdAnswer(int idAnswer) {
-        this.idAnswer = idAnswer;
-    }
 
     public String getAnswerRight() {
         return answerRight;
@@ -64,33 +68,20 @@ public class Question {
         return answerWrong1;
     }
 
-    public void setAnswerWrong1(String answerWrong1) {
-        this.answerWrong1 = answerWrong1;
-    }
-
     public String getAnswerWrong2() {
         return answerWrong2;
-    }
-
-    public void setAnswerWrong2(String answerWrong2) {
-        this.answerWrong2 = answerWrong2;
     }
 
     public String getAnswerWrong3() {
         return answerWrong3;
     }
 
-    public void setAnswerWrong3(String answerWrong3) {
-        this.answerWrong3 = answerWrong3;
-    }
-
-    //toString
-
+    //HL - toString
 
     @Override
     public String toString() {
 
-        return "Vraag " + idQuestion + ": " + description;
+        return description;
     }
 }
 

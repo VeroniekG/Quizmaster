@@ -76,6 +76,7 @@ public class SceneManager {
         FXMLLoader loader = getScene("/view/fxml/createUpdateCourse.fxml");
         CreateUpdateCourseController controller = loader.getController();
         controller.setup(course);
+
     }
 
     public void showManageGroupsScene() {
@@ -112,6 +113,7 @@ public class SceneManager {
         FXMLLoader loader = getScene("/view/fxml/createUpdateQuestion.fxml");
         CreateUpdateQuestionController controller = loader.getController();
         controller.setup(question);
+
     }
 
     public void showStudentSignInOutScene() {
@@ -132,17 +134,17 @@ public class SceneManager {
         controller.setup(quiz);
     }
 
-    public void showStudentFeedback(Quiz quiz) {
+    public void showStudentFeedback(FillOutQuizController quizController) {
         FXMLLoader loader = getScene("/view/fxml/studentFeedback.fxml");
         StudentFeedbackController controller = loader.getController();
-        controller.setup(quiz);
+        controller.setup(quizController);
     }
 
     public void showCoordinatorDashboard() {
         FXMLLoader loader = getScene("/view/fxml/coordinatorDashboard.fxml");
         CoordinatorDashboardController controller = loader.getController();
-        controller.setup();
-    }
+            controller.setup();
+        }
 
     public void showCreateUpdateQuestionScene() {
         FXMLLoader loader = getScene("/view/fxml/createUpdateQuestionController.fxml");

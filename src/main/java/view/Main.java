@@ -4,22 +4,64 @@ import config.ApplicationSetup;
 import database.mysql.DBAccess;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.User;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.io.IoBuilder;
 
+@SuppressWarnings("ReturnPrivateMutableField")
 public class Main extends Application {
 
     // ApplicationSetup implements a singleton design pattern -> only one instance
     private static final ApplicationSetup applicationSetup = ApplicationSetup.getInstance();
+    private static final Logger LOGGER = LogManager.getRootLogger();
     private static SceneManager sceneManager = null;
     private static Stage primaryStage = null;
-    private static DBAccess dbAccess = null;
-    private static User currentUser = null;
+    private static database.mysql.DBAccess dbAccessMySql;
+    private static database.couchdb.DBAccess dbAccessCouchDb;
 
     public static void main(String[] args) {
         applicationSetup.load();
-        dbAccess = getDBaccess();
-        dbAccess.loadDriver();
+        setLogging();
+        dbAccessMySql = getDBaccessMySql();
+        dbAccessMySql.loadDriver();
+        dbAccessCouchDb = getDbAccessCouchDb();
+        getCouchDbConnection();
         launch(args);
+    }
+
+    public static void setLogging() {
+        // Redirect System.err to logger
+        System.setErr(
+                IoBuilder.forLogger(LogManager.getLogger("system.err"))
+                        .setLevel(Level.WARN)
+                        .buildPrintStream()
+        );
+        // Redirect System.out to logger
+        System.setOut(
+                IoBuilder.forLogger(LogManager.getLogger("system.out"))
+                        .setLevel(Level.INFO)
+                        .buildPrintStream()
+        );
+    }
+
+    @SuppressWarnings("SpellCheckingInspection")
+    public static database.mysql.DBAccess getDBaccessMySql() {
+        dbAccessMySql = DBAccess.getInstance();
+        return dbAccessMySql;
+    }
+
+    public static database.couchdb.DBAccess getDbAccessCouchDb() {
+        return new database.couchdb.DBAccess();
+    }
+
+    public static void getCouchDbConnection() {
+        try {
+            dbAccessCouchDb.setupConnection();
+            LOGGER.info("CouchDB connection open.");
+        } catch (Exception connectionError) {
+            LOGGER.error("CouchDB connection error: " + connectionError.getMessage());
+        }
     }
 
     @Override
@@ -35,28 +77,6 @@ public class Main extends Application {
             sceneManager = new SceneManager(primaryStage);
         }
         return sceneManager;
-    }
-
-    public static Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    public static User getCurrentUser() {
-        return currentUser;
-    }
-
-    public static void setCurrentUser(User currentUser) {
-        Main.currentUser = currentUser;
-    }
-
-    public static DBAccess getDBaccess() {
-        String dbName = applicationSetup.getProperties().getProperty("jdbc.database.name");
-        String dbUser = applicationSetup.getProperties().getProperty("jdbc.database.user");
-        String dbPasword = applicationSetup.getProperties().getProperty("jdbc.database.password");
-        if (dbAccess == null) {
-            dbAccess = new DBAccess(dbName, dbUser, dbPasword);
-        }
-        return dbAccess;
     }
 
 }

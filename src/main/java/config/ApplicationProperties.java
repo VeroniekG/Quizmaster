@@ -1,24 +1,38 @@
 package config;
 
+/**
+ * Defines all default properties to be used by the application.
+ *
+ * @author Daniel Leertouwer
+ * @version 1.0.2
+ * @see ApplicationSetup
+ * @since 1.0
+ */
 public enum ApplicationProperties {
-    JDBC_DATABASE_NAME("jdbc.database.name", "Quizmaster"),
-    JDBC_DATABASE_URL("jdbc.database.url", "localhost"),
-    JDBC_DATABASE_USER("jdbc.database.user", "userQuizmaster"),
-    JDBC_DATABASE_PASSWORD("jdbc.database.password", "pwQuizmaster"),
-    JDBC_DATABASE_DRIVER("jdbc.driver", "com.mysql.cj.jdbc.Driver"),
-    JDBC_CONNECTION_SETTINGS(
-            "jdbc.connection.settings",
+    MYSQL_DATABASE_NAME("mysql.database.name", "Quizmaster"),
+    MYSQL_DATABASE_URL("mysql.database.url", "localhost"),
+    MYSQL_DATABASE_USER("mysql.database.user", "userQuizmaster"),
+    MYSQL_DATABASE_PASSWORD("mysql.database.password", "pwQuizmaster"),
+    MYSQL_JDBC_DRIVER("mysql.jdbc.driver", "com.mysql.cj.jdbc.Driver"),
+    MYSQL_JDBC_CONNECTION_SETTINGS(
+            "mysql.jdbc.connection.settings",
             "?useSSL=false" +
                     "&allowPublicKeyRetrieval=true" +
                     "&useJDBCCompliantTimezoneShift=true" +
                     "&useLegacyDatetimeCode=false" +
                     "&serverTimezone=UTC"
-    );
+    ),
+    COUCHDB_DATABASE_NAME("couchdb.database.name", "quizmaster"),
+    COUCHDB_DATABASE_URL("couchdb.database.url", "localhost"),
+    COUCHDB_CONNECTION_PORT("couchdb.connection.port", "5984"),
+    COUCHDB_CONNECTION_PROTOCOL("couchdb.connection.protocol", "http"),
+    COUCHDB_DATABASE_USER("couchdb.database.user", "admin"),
+    COUCHDB_DATABASE_PASSWORD("couchdb.database.password", "");
 
-    private String key;
-    private String value;
+    private final String key;
+    private final String value;
 
-    private ApplicationProperties(String key, String value) {
+    ApplicationProperties(String key, String value) {
         this.key = key;
         this.value = value;
     }
