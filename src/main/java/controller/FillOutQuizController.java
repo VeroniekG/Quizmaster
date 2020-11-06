@@ -24,8 +24,7 @@ public class FillOutQuizController {
     private Label titleLabel;
     @FXML
     private TextArea questionArea;
-    @FXML
-    private Button doNextQuestion;
+
 
     int index = 0;
     int vraagCorrect = 0;
@@ -33,8 +32,7 @@ public class FillOutQuizController {
     int numberofQuizmade = 0;
     Question currentQuestion;
 
-   List<String> allAnswers;
-
+    List<String> allAnswers;
     ArrayList<Question> allQuestions;
     ArrayList<String> antwoordenGeshuffled = new ArrayList<>();
 
@@ -45,14 +43,14 @@ public class FillOutQuizController {
         allAnswers = new ArrayList<>();
     }
 
-    //HL - show a question and all answers in textarea
+    //HL - this method shows a question and all answers in textarea
     public void setup(Quiz quiz) {
         allQuestions = questionDAO.getAll();
         titleLabel.setText("Vraag " + (index + 1));
         toonAntwoorden(index);
     }
 
-    // Method that retrieves answers and displays them randomly
+    // HL - Method that retrieves answers and displays them randomly
     public void toonAntwoorden(int index) {
 
         titleLabel.setText("Vraag " + (index + 1));
@@ -66,7 +64,6 @@ public class FillOutQuizController {
 
         Collections.shuffle(antwoordenGeshuffled);
 
-
         questionArea.setText(
                 currentQuestion.getDescription()
                         + "\n A: " + antwoordenGeshuffled.get(0)
@@ -75,24 +72,21 @@ public class FillOutQuizController {
                         + "\n D: " + antwoordenGeshuffled.get(3));
     }
 
+    //HL - this method checks if answer correct/incorrect and adds to array answers given
+
+
     private void checkAnswer (int givenAnswer){
 
         if (antwoordenGeshuffled.get(givenAnswer).equals(currentQuestion.getAnswerRight())){
             vraagCorrect++;
-//            Alert correct = new Alert(Alert.AlertType.INFORMATION);
-//            correct.setContentText("Correct");
-//            correct.show();
-
         } else {
             vraagIncorrect++;
-//            Alert incorrect = new Alert(Alert.AlertType.INFORMATION);
-//            incorrect.setContentText("Incorrect");
-//            incorrect.show();
         }
-
         allAnswers.add(antwoordenGeshuffled.get(givenAnswer));
 
     }
+
+    //HL - methods to register answers
 
     public void doRegisterA() {
        checkAnswer(0);
@@ -114,12 +108,7 @@ public class FillOutQuizController {
         checkAnswer(3);
         doNextQuestion();
     }
-//
-//    public void printResults (){
-//
-//        allQuestions;
-//        allAnswers;
-//    }
+
 
     public void numberWrongCorrect (){
         ArrayList<String> gemaakteQuizzes = new ArrayList();
@@ -129,7 +118,6 @@ public class FillOutQuizController {
     }
 
 
-//    TODO je hoeft maar een correct/incorrect optelsom te maken
 
 
     public void doNextQuestion() {
@@ -137,9 +125,9 @@ public class FillOutQuizController {
             index ++;
             toonAntwoorden(index);
         } else {
-//            Alert bijEinde = new Alert(Alert.AlertType.INFORMATION);
-//            bijEinde.setContentText("Dit is de laatste vraag");
-//            bijEinde.show();
+            Alert bijEinde = new Alert(Alert.AlertType.INFORMATION);
+            bijEinde.setContentText("Dit is de laatste vraag");
+            bijEinde.show();
             numberofQuizmade++;
             Main.getSceneManager().showStudentFeedback(this);
         }
@@ -163,10 +151,7 @@ public class FillOutQuizController {
         return map;
     }
 
-        //TJ menu knop terug naar menu
-        public void doMenu (ActionEvent actionEvent){
-            Main.getSceneManager().showWelcomeScene();
-        }
+
 
     public List<String> getAllAnswers() {
         return allAnswers;
@@ -186,5 +171,10 @@ public class FillOutQuizController {
 
     public int getVraagIncorrect() {
         return vraagIncorrect;
+    }
+
+    //TJ menu knop terug naar menu
+    public void doMenu (ActionEvent actionEvent){
+        Main.getSceneManager().showWelcomeScene();
     }
 }

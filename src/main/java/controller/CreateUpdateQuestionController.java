@@ -20,10 +20,7 @@ import java.util.List;
 
 public class CreateUpdateQuestionController {
 
-
-
     @FXML
-    TextField warningText;
     private QuestionDAO questionDAO;
     private DBAccess dbAccess;
     private Question question;
@@ -50,7 +47,6 @@ public class CreateUpdateQuestionController {
         questionDAO = new QuestionDAO(Main.getDBaccessMySql());
     }
 
-
     // HL - To edit selected customer, all fields are filled with values from the database
 
     public void setup(Question question) {
@@ -72,12 +68,7 @@ public class CreateUpdateQuestionController {
         quizlist.setItems(quizObservableList);
     }
 
-    //TJ menu knop terug naar menu
-    public void doMenu(ActionEvent actionEvent) {
-        Main.getSceneManager().showWelcomeScene();
-    }
-
-    // HL - to create a new question
+    // HL - this method creates a new question based on user input
 
     private void createQuestion() {
         StringBuilder warningText = new StringBuilder();
@@ -88,13 +79,11 @@ public class CreateUpdateQuestionController {
         String antwoordOnjuist2 = antwoordOnjuist2Textfield.getText();
         String antwoordOnjuist3 = antwoordOnjuist3Textfield.getText();
 
-
         if (vraag.isEmpty() || correctAntwoord.isEmpty() || antwoordOnjuist1.isEmpty() || antwoordOnjuist2.isEmpty() || antwoordOnjuist3.isEmpty()) {
             warningText.append("Alle velden moeten worden ingevuld!\n");
             Alert foutmelding = new Alert(Alert.AlertType.ERROR);
             foutmelding.setContentText(warningText.toString());
             foutmelding.show();
-            correcteInvoer = false;
             question = null;
         } else {
             question = new Question(vraag, correctAntwoord, antwoordOnjuist1, antwoordOnjuist2,
@@ -102,7 +91,7 @@ public class CreateUpdateQuestionController {
         }
     }
 
-    // HL - Check if current question already exists and create it if it doesn't.
+    // HL - Checks if current question already exists and create it if it doesn't.
 
     public void doStoreQuestion(ActionEvent actionEvent) {
         createQuestion();
@@ -123,12 +112,14 @@ public class CreateUpdateQuestionController {
             }
         }
 
-        //    public void doCreateUpdateQuestion(Question question) {
-        //    }
-
     }
 
     public void doBack(ActionEvent actionEvent) {
         Main.getSceneManager().showManageQuestionsScene();
+    }
+
+    //TJ menu knop terug naar menu
+    public void doMenu(ActionEvent actionEvent) {
+        Main.getSceneManager().showWelcomeScene();
     }
 }
