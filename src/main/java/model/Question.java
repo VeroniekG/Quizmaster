@@ -10,6 +10,23 @@ public class Question {
     private String answerWrong3;
     private int idQuiz;
 
+    //constructors
+
+    public Question() {
+    }
+
+    public Question(String description) {
+        this.description = description;
+    }
+
+    public Question(String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
+        this.description = description;
+        this.answerRight = answerRight;
+        this.answerWrong1 = answerWrong1;
+        this.answerWrong2 = answerWrong2;
+        this.answerWrong3 = answerWrong3;
+    }
+
     public Question(int idQuestion, String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3, int idQuiz) {
         this.idQuestion = idQuestion;
         this.description = description;
@@ -20,20 +37,7 @@ public class Question {
         this.idQuiz = idQuiz;
     }
 
-    public Question(String description) {
-        this.description = description;
-    }
-
-    public Question() {
-    }
-
-    public Question(String description, String answerRight, String answerWrong1, String answerWrong2, String answerWrong3) {
-        this.description = description;
-        this.answerRight = answerRight;
-        this.answerWrong1 = answerWrong1;
-        this.answerWrong2 = answerWrong2;
-        this.answerWrong3 = answerWrong3;
-    }
+    //getters and setters
 
     public int getIdQuiz() {
         return idQuiz;
@@ -51,9 +55,6 @@ public class Question {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getAnswerRight() {
         return answerRight;
@@ -67,26 +68,13 @@ public class Question {
         return answerWrong1;
     }
 
-    public void setAnswerWrong1(String answerWrong1) {
-        this.answerWrong1 = answerWrong1;
-    }
-
     public String getAnswerWrong2() {
         return answerWrong2;
-    }
-
-    public void setAnswerWrong2(String answerWrong2) {
-        this.answerWrong2 = answerWrong2;
     }
 
     public String getAnswerWrong3() {
         return answerWrong3;
     }
-
-    public void setAnswerWrong3(String answerWrong3) {
-        this.answerWrong3 = answerWrong3;
-    }
-
 
     //HL - toString
 

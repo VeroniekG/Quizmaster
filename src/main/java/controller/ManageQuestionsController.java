@@ -28,8 +28,7 @@ public class ManageQuestionsController {
     public Button makeButton;
     @FXML
     ListView<Question> questionsList;
-    @FXML
-    TextField warningText;
+
     private QuestionDAO questionDAO;
     private DBAccess dbAccess;
     private Question question;
@@ -47,11 +46,6 @@ public class ManageQuestionsController {
         questionsList.getSelectionModel().selectFirst();
     }
 
-    //TJ menu knop terug naar menu
-    public void doMenu(ActionEvent actionEvent) {
-        Main.getSceneManager().showWelcomeScene();
-    }
-
     public void doCreateQuestion() {
         Main.getSceneManager().showCreateUpdateQuestionScene(question);
     }
@@ -65,6 +59,11 @@ public class ManageQuestionsController {
         Question selectedQuestion = questionsList.getSelectionModel().getSelectedItem();
         questionsList.getItems().remove(selectedQuestion);
         questionDAO.deleteQuestion(selectedQuestion);
+    }
+
+    //TJ menu knop terug naar menu
+    public void doMenu(ActionEvent actionEvent) {
+        Main.getSceneManager().showWelcomeScene();
     }
 
 }

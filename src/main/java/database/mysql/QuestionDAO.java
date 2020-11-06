@@ -14,6 +14,9 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
         super(dbAccess);
     }
 
+
+    //HL - This method retrieves all  questions from the database
+
     @Override
     public ArrayList<Question> getAll() {
         String sql = "Select * From Question";
@@ -39,6 +42,9 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
         return questionsList;
     }
 
+    //HL - This method retrieves a question from the database based on the id number of the question
+
+
     @Override
     public Question getOneById(int id) {
         String sql = "SELECT * FROM question WHERE idQuestion = ?";
@@ -61,33 +67,7 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
     }
 
-    //HL - This method retrieves an arraylist of questions that are part of a certain quiz
-
-    public ArrayList<Question> getQuestionsByQuizId (int quizId){
-        String sql = "SELECT * FROM Question WHERE idQuiz = ?;";
-        ArrayList<Question> result = new ArrayList<>();
-        try {
-            setupPreparedStatement(sql);
-            preparedStatement.setInt(1, quizId);
-            ResultSet resultSet = executeSelectStatement();
-            Question question;
-            while (resultSet.next()) {
-                int idQuestion = resultSet.getInt("idQuestion");
-                String description = resultSet.getString("description");
-                String answerRight = resultSet.getString("answerRight");
-                String answerWrong1 = resultSet.getString("answerWrong1");
-                String answerWrong2 = resultSet.getString("answerWrong2");
-                String answerWrong3 = resultSet.getString("answerWrong3");
-                int idQuiz = resultSet.getInt("idQuiz");
-                question = new Question(idQuestion, description, answerRight, answerWrong1,
-                        answerWrong2, answerWrong3, idQuiz);
-                result.add(question);
-            }
-        } catch (SQLException exception)
-        { System.out.println("SQL error " + exception.getMessage());
-            }
-            return result;
-        }
+    //HL - This method stores a question in the database
 
 
     @Override
@@ -109,6 +89,9 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
 
     }
 
+    //HL - This method updates a question with input from user
+
+
     public void updateQuestion (Question question) {
         String sql = "Update Question Set description = ?, answerRight = ?, answerWrong1 = ?, answerWrong2 = ?, answerWrong3 = ? where idQuestion = ?;";
         try {
@@ -118,14 +101,17 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             preparedStatement.setString(3, question.getAnswerWrong1());
             preparedStatement.setString(4, question.getAnswerWrong2());
             preparedStatement.setString(5, question.getAnswerWrong3());
-//            preparedStatement.setInt(6, question.getIdQuiz());
             preparedStatement.setInt(6, question.getIdQuestion());
             executeManipulateStatement();
         } catch (SQLException sqlException) {
             System.out.println("SQL error " + sqlException.getMessage());
         }
     }
-        public List<Question> getQuestionsForQuizWithId(int idQuiz) {
+
+    //HL - This method retrieves an arraylist of questions that are part of a certain quiz
+
+
+    public List<Question> getQuestionsForQuizWithId(int idQuiz) {
             List<Question> questions = new ArrayList<>();
             String sql = String.format("SELECT * FROM Question WHERE idQuiz=%d", idQuiz);
             try {
@@ -141,6 +127,9 @@ public class QuestionDAO extends AbstractDAO implements GenericDAO<Question> {
             }
             return questions;
         }
+
+    //HL - This method deletes a question from the database
+
 
     public void deleteQuestion(Question question){
         String sql = "DELETE FROM question WHERE idQuestion = ?;";

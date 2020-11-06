@@ -63,7 +63,7 @@ public class SelectQuizForStudentController {
     }
 
 
-    // @TJ * public void setup() {} *  origineel,  rest zelf toegevoegd
+
     public void setup() {
 //        ArrayList<Quiz> allQuizzes = quizDAO.getAll();
 //        for (Quiz quiz : allQuizzes) {
@@ -81,7 +81,7 @@ public class SelectQuizForStudentController {
         Main.getSceneManager().showWelcomeScene();
     }
 
-    // @TJ *public void doQuiz() {}* origineel, rest zelf toegevoegd
+
     public void doQuiz() {
         Quiz quiz = quizList.getSelectionModel().getSelectedItem();
         Main.getSceneManager().showFillOutQuiz(quiz);}

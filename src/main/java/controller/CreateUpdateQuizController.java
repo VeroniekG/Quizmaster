@@ -91,7 +91,7 @@ public class  CreateUpdateQuizController {
             currentQuiz = new Quiz(quizname);
         }
     }
-//    //TJ Methode aangemaakt om quizzen op te slaan
+//    //TJ Methode aangemaakt om quizzen op te slaan. Als quiz bestaat, update quiz. Anders, nieuwe quiz.
 //    public void doStoreQuiz(ActionEvent actionEvent) {
 //        createQuiz();
 //        if (currentQuiz != null) {
