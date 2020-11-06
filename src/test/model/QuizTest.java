@@ -6,8 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class QuizTest {
 
+
     @Test
     void testToString() {
+        Quiz toStringTest = new Quiz("finalcountdown",15);
+        assertEquals("finalcountdown", toStringTest.toString());
     }
 
     @Test
