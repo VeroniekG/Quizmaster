@@ -29,8 +29,8 @@ public enum ApplicationProperties {
     COUCHDB_DATABASE_USER("couchdb.database.user", "admin"),
     COUCHDB_DATABASE_PASSWORD("couchdb.database.password", "");
 
-    private String key;
-    private String value;
+    private final String key;
+    private final String value;
 
     ApplicationProperties(String key, String value) {
         this.key = key;

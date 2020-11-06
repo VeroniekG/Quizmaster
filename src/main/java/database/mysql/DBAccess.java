@@ -14,8 +14,6 @@ public class DBAccess {
     private static final Logger log = LogManager.getLogger(DBAccess.class);
     private static final String SQL_EXCEPTION = "SQL Exception: ";
     private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
-    //private static final String MYSQL_DRIVER =
-    //        Main.getApplicationConfig().getProperties().getProperty("jdbc.driver");
     private static final String PREFIX_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
     private static final String CONNECTION_SETTINGS = "?useSSL=false" +
             "&allowPublicKeyRetrieval=true" +
@@ -27,12 +25,6 @@ public class DBAccess {
     private String databaseName;
     private String mainUser;
     private String mainUserPassword;
-
-    //    public DBAccess(String databaseName, String mainUser, String mainUserPassword) {
-    //        this.databaseName = databaseName;
-    //        this.mainUser = mainUser;
-    //        this.mainUserPassword = mainUserPassword;
-    //    }
 
     private DBAccess() {
 
